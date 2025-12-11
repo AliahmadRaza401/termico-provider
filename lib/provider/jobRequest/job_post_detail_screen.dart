@@ -1,0 +1,470 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
+import 'package:handyman_provider_flutter/components/cached_image_widget.dart';
+import 'package:handyman_provider_flutter/components/price_widget.dart';
+import 'package:handyman_provider_flutter/main.dart';
+import 'package:handyman_provider_flutter/models/offer_package_model.dart';
+import 'package:handyman_provider_flutter/models/service_model.dart';
+import 'package:handyman_provider_flutter/models/user_data.dart';
+import 'package:handyman_provider_flutter/networks/rest_apis.dart';
+import 'package:handyman_provider_flutter/provider/jobRequest/components/bid_price_dialog.dart';
+import 'package:handyman_provider_flutter/provider/jobRequest/models/post_job_detail_response.dart';
+import 'package:handyman_provider_flutter/provider/offer_package/offer_package_list_screen.dart';
+import 'package:handyman_provider_flutter/utils/constant.dart';
+import 'package:handyman_provider_flutter/utils/model_keys.dart';
+import 'package:nb_utils/nb_utils.dart';
+
+import '../../components/base_scaffold_widget.dart';
+import '../../components/empty_error_state_widget.dart';
+import 'models/bidder_data.dart';
+import 'models/post_job_data.dart';
+
+class JobPostDetailScreen extends StatefulWidget {
+  final PostJobData postJobData;
+
+  JobPostDetailScreen({required this.postJobData});
+
+  @override
+  _JobPostDetailScreenState createState() => _JobPostDetailScreenState();
+}
+
+class _JobPostDetailScreenState extends State<JobPostDetailScreen> {
+  late Future<PostJobDetailResponse> future;
+  OfferPackageStatusModel? offerPackageStatus;
+
+  int page = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  void init() async {
+    appStore.setLoading(true);
+    
+    // Load job detail and offer package status in parallel
+    future = getPostJobDetail(
+        {PostJob.postRequestId: widget.postJobData.id.validate()});
+    
+    // Check offer package status
+    await checkOfferPackageStatus();
+    
+    appStore.setLoading(false);
+    setState(() {});
+  }
+
+  Future<void> checkOfferPackageStatus() async {
+    try {
+      OfferPackageStatusResponse response = await getOfferPackageStatus();
+      offerPackageStatus = response.data;
+      setState(() {});
+    } catch (e) {
+      log('Error checking offer package status: $e');
+      // Continue even if status check fails
+    }
+  }
+
+  Widget titleWidget(
+      {required String title,
+      required String detail,
+      bool isReadMore = false,
+      required TextStyle detailTextStyle}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title.validate(), style: secondaryTextStyle()),
+        8.height,
+        if (isReadMore)
+          ReadMoreText(
+            detail,
+            style: detailTextStyle,
+            colorClickableText: context.primaryColor,
+          )
+        else
+          Text(detail.validate(), style: detailTextStyle),
+        16.height,
+      ],
+    );
+  }
+
+  Widget postJobDetailWidget({required PostJobData data}) {
+    return Container(
+      padding: EdgeInsets.only(left: 16, right: 16, top: 16),
+      width: context.width(),
+      decoration: boxDecorationWithRoundedCorners(
+          backgroundColor: context.cardColor,
+          borderRadius: BorderRadius.all(Radius.circular(16))),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (data.title.validate().isNotEmpty)
+            titleWidget(
+              title: languages.postJobTitle,
+              detail: data.title.validate(),
+              detailTextStyle: boldTextStyle(),
+            ),
+          if (data.address.validate().isNotEmpty)
+            titleWidget(
+              title: 'Address',
+              detail: data.address.validate(),
+              detailTextStyle: boldTextStyle(),
+            ),
+          if (data.description.validate().isNotEmpty)
+            titleWidget(
+              title: languages.postJobDescription,
+              detail: data.description.validate(),
+              detailTextStyle: primaryTextStyle(),
+              isReadMore: true,
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget postJobServiceWidget({required List<ServiceData> serviceList}) {
+    if (serviceList.isEmpty) return Offstage();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        8.height,
+        Text(languages.lblServices, style: boldTextStyle(size: LABEL_TEXT_SIZE))
+            .paddingOnly(left: 16, right: 16),
+        AnimatedListView(
+          itemCount: serviceList.length,
+          padding: EdgeInsets.all(8),
+          shrinkWrap: true,
+          itemBuilder: (_, i) {
+            ServiceData data = serviceList[i];
+
+            return Container(
+              width: context.width(),
+              margin: EdgeInsets.all(8),
+              padding: EdgeInsets.all(8),
+              decoration: boxDecorationWithRoundedCorners(
+                  backgroundColor: context.cardColor,
+                  borderRadius: BorderRadius.all(Radius.circular(16))),
+              child: Row(
+                children: [
+                  CachedImageWidget(
+                    url: data.imageAttachments.validate().isNotEmpty
+                        ? data.imageAttachments!.first.validate()
+                        : "",
+                    fit: BoxFit.cover,
+                    height: 60,
+                    width: 60,
+                    radius: defaultRadius,
+                  ),
+                  16.width,
+                  Text(data.name.validate(),
+                          style: primaryTextStyle(),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis)
+                      .expand(),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget providerWidget(List<BidderData> bidderList) {
+    try {
+      if (bidderList.any((element) => element.providerId == appStore.userId)) {
+        BidderData? bidderData = bidderList
+            .firstWhere((element) => element.providerId == appStore.userId);
+        UserData? user = bidderData.provider;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            16.height,
+            Text(languages.myBid, style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+            16.height,
+            Container(
+              padding: EdgeInsets.all(16),
+              decoration: boxDecorationWithRoundedCorners(
+                  backgroundColor: context.cardColor,
+                  borderRadius: BorderRadius.all(Radius.circular(16))),
+              child: Row(
+                children: [
+                  CachedImageWidget(
+                    url: user!.profileImage.validate(),
+                    fit: BoxFit.cover,
+                    height: 60,
+                    width: 60,
+                    circle: true,
+                  ),
+                  16.width,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Marquee(
+                        directionMarguee: DirectionMarguee.oneDirection,
+                        child: Text(
+                          user.displayName.validate(),
+                          style: boldTextStyle(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      4.height,
+                      PriceWidget(price: bidderData.price.validate()),
+                    ],
+                  ).expand(),
+                ],
+              ),
+            ),
+            16.height,
+          ],
+        ).paddingOnly(left: 16, right: 16);
+      }
+    } catch (e) {
+      print(e);
+    }
+
+    return Offstage();
+  }
+
+  Widget customerWidget(PostJobData? postJobData) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        16.height,
+        Text(languages.lblAboutCustomer,
+            style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+        16.height,
+        Container(
+          padding: EdgeInsets.all(16),
+          decoration: boxDecorationWithRoundedCorners(
+              backgroundColor: context.cardColor,
+              borderRadius: BorderRadius.all(Radius.circular(16))),
+          child: Row(
+            children: [
+              CachedImageWidget(
+                url: postJobData!.customerProfile.validate(),
+                fit: BoxFit.cover,
+                height: 60,
+                width: 60,
+                circle: true,
+              ),
+              16.width,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Marquee(
+                    directionMarguee: DirectionMarguee.oneDirection,
+                    child: Text(
+                      postJobData.customerName.validate(),
+                      style: boldTextStyle(),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  4.height,
+                  Text(
+                      postJobData.status.validate() ==
+                              JOB_REQUEST_STATUS_ACCEPTED
+                          ? languages.jobPrice
+                          : languages.estimatedPrice,
+                      style: secondaryTextStyle()),
+                  4.height,
+                  PriceWidget(price: postJobData.price.validate()),
+                ],
+              ).expand(),
+            ],
+          ),
+        ),
+        16.height,
+      ],
+    ).paddingOnly(left: 16, right: 16);
+  }
+
+  @override
+  void setState(fn) {
+    if (mounted) super.setState(fn);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AppScaffold(
+      appBarTitle: '${widget.postJobData.title}',
+      body: Stack(
+        children: [
+          SnapHelperWidget<PostJobDetailResponse>(
+            future: future,
+            initialData: cachedPostJobList
+                .firstWhere(
+                    (element) =>
+                        element?.$1 == widget.postJobData.id.validate(),
+                    orElse: () => null)
+                ?.$2,
+            onSuccess: (data) {
+              return Stack(
+                children: [
+                  AnimatedScrollView(
+                    padding: EdgeInsets.only(bottom: 60),
+                    physics: AlwaysScrollableScrollPhysics(),
+                    listAnimationType: ListAnimationType.FadeIn,
+                    fadeInConfiguration:
+                        FadeInConfiguration(duration: 2.seconds),
+                    onSwipeRefresh: () async {
+                      page = 1;
+
+                      init();
+                      setState(() {});
+
+                      return await 2.seconds.delay;
+                    },
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          postJobDetailWidget(data: data.postRequestDetail!)
+                              .paddingAll(16),
+                          customerWidget(data.postRequestDetail!),
+                          providerWidget(data.bidderData.validate()),
+                          postJobServiceWidget(
+                              serviceList:
+                                  data.postRequestDetail!.service.validate()),
+                          24.height,
+                        ],
+                      ),
+                    ],
+                  ),
+                  if (data.postRequestDetail!.canBid.validate())
+                    Positioned(
+                      bottom: 16,
+                      left: 16,
+                      right: 16,
+                      child: AppButton(
+                        child: Text(languages.bid,
+                            style: boldTextStyle(color: white)),
+                        color: context.primaryColor,
+                        width: context.width(),
+                        onTap: () async {
+                          // Show loading indicator
+                          appStore.setLoading(true);
+                          setState(() {});
+                          
+                          try {
+                            // Check offer package status before allowing bid
+                            await checkOfferPackageStatus();
+                            
+                            // Hide loading indicator
+                            appStore.setLoading(false);
+                            setState(() {});
+                            
+                            // Validate if user can send offers
+                            if (offerPackageStatus == null) {
+                              toast('Unable to check offer package status. Please try again.', print: true);
+                              return;
+                            }
+                          } catch (e) {
+                            // Hide loading indicator on error
+                            appStore.setLoading(false);
+                            setState(() {});
+                            toast('Error checking offer package status. Please try again.', print: true);
+                            return;
+                          }
+
+                          // Check all cases: no subscription, package ended, or no offers remaining
+                          bool canSendOffer = offerPackageStatus!.canSendOffers;
+                          
+                          if (!canSendOffer) {
+                            String reason = offerPackageStatus!.cannotSendOfferReason;
+                            String toastMessage = '';
+                            String dialogTitle = '';
+                            
+                            if (reason == 'no_subscription') {
+                              toastMessage = 'You do not have an offer package subscription. Please purchase an offer package to send bids.';
+                              dialogTitle = 'No Offer Package Subscription';
+                            } else if (reason == 'package_ended') {
+                              toastMessage = 'Your offer package has ended. Please purchase a new offer package to continue bidding.';
+                              dialogTitle = 'Offer Package Ended';
+                            } else if (reason == 'no_offers_remaining') {
+                              toastMessage = 'You have no remaining offers in your package. Please purchase a new offer package to continue bidding.';
+                              dialogTitle = 'No Offers Remaining';
+                            } else {
+                              toastMessage = 'You cannot send offers at this time. Please purchase an offer package.';
+                              dialogTitle = 'Cannot Send Offers';
+                            }
+                            
+                            // Show toast message
+                            toast(toastMessage, print: true);
+                            
+                            // Show dialog to buy package
+                            showConfirmDialogCustom(
+                              context,
+                              title: dialogTitle,
+                              primaryColor: context.primaryColor,
+                              positiveText: languages.lblBuy,
+                              negativeText: languages.lblCancel,
+                              onAccept: (dialogContext) async {
+                                // Close the dialog first
+                                finish(dialogContext);
+                                
+                                // Wait a moment for dialog to close
+                                await Future.delayed(Duration(milliseconds: 100));
+                                
+                                // Navigate to offer package list screen
+                                bool? result = await OfferPackageListScreen().launch(context);
+                                if (result == true) {
+                                  await checkOfferPackageStatus();
+                                  setState(() {});
+                                }
+                              },
+                              dialogType: DialogType.CONFIRMATION,
+                            );
+                            return;
+                          }
+
+                          // If user has active package and offers remaining, proceed with bid
+                          bool? res = await showInDialog(
+                            context,
+                            contentPadding: EdgeInsets.zero,
+                            hideSoftKeyboard: true,
+                            backgroundColor: context.cardColor,
+                            builder: (_) =>
+                                BidPriceDialog(data: widget.postJobData),
+                          );
+
+                          if (res ?? false) {
+                            // Refresh offer package status after successful bid
+                            await checkOfferPackageStatus();
+                            init();
+                            setState(() {});
+                          }
+                        },
+                      ),
+                    ),
+                ],
+              );
+            },
+            errorBuilder: (error) {
+              return NoDataWidget(
+                title: error,
+                imageWidget: ErrorStateWidget(),
+                retryText: languages.reload,
+                onRetry: () {
+                  page = 1;
+                  appStore.setLoading(true);
+
+                  init();
+                  setState(() {});
+                },
+              );
+            },
+            loadingWidget: LoaderWidget(),
+          ),
+          Observer(
+              builder: (context) => LoaderWidget().visible(appStore.isLoading))
+        ],
+      ),
+    );
+  }
+}
