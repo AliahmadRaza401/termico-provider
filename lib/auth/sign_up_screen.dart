@@ -110,6 +110,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   void initState() {
     super.initState();
+    // Set user type to provider automatically - only provider role supported
+    selectedUserTypeValue = USER_TYPE_PROVIDER;
+    // Initialize commission type list for provider
+    getCommissionType(type: USER_TYPE_PROVIDER).then((value) {
+      commissionTypeList = value.userTypeData.validate();
+      _valueNotifier.notifyListeners();
+    }).catchError((e) {
+      commissionTypeList = [
+        UserTypeData(name: languages.lblSelectCommission, id: -1)
+      ];
+      log(e.toString());
+    });
     getZoneListApi();
   }
 
@@ -319,217 +331,79 @@ class _SignUpScreenState extends State<SignUpScreen> {
           suffix: profile.iconImage(size: 10).paddingAll(14),
         ),
         16.height,
-        // User role text field...
+        // Zone selection for providers (user type is always provider)
         ValueListenableBuilder(
           valueListenable: _valueNotifier,
-          builder: (context, value, child) => Column(
-            children: [
-              DropdownButtonFormField<String>(
-                items: [
-                  DropdownMenuItem(
-                    child: Text(languages.provider, style: primaryTextStyle()),
-                    value: USER_TYPE_PROVIDER,
-                  ),
-                  DropdownMenuItem(
-                    child: Text(languages.handyman, style: primaryTextStyle()),
-                    value: USER_TYPE_HANDYMAN,
-                  ),
-                ],
-                focusNode: userTypeFocus,
-                dropdownColor: context.cardColor,
-                decoration: inputDecoration(context, hint: languages.userRole),
-                value: selectedUserTypeValue,
-                validator: (value) {
-                  if (value == null) return errorThisFieldRequired;
-                  return null;
-                },
-                onChanged: (c) {
-                  hideKeyboard(context);
-                  selectedUserTypeValue = c.validate();
-                  setState(() {});
-
-                  if (selectedProvider != null) {
-                    selectedProvider = null;
-                    setState(() {});
-                  }
-
-                  commissionTypeList.clear();
-                  selectedUserCommissionType = null;
-
-                  getCommissionType(type: selectedUserTypeValue!).then((value) {
-                    commissionTypeList = value.userTypeData.validate();
-                    _valueNotifier.notifyListeners();
-                  }).catchError((e) {
-                    commissionTypeList = [
-                      UserTypeData(name: languages.lblSelectCommission, id: -1)
-                    ];
-                    log(e.toString());
-                  });
-
-                  // ✅ Correct call
-                  if (selectedUserTypeValue == USER_TYPE_PROVIDER) {
-                    getZoneListApi(); // This will update `zoneList`
-                  } else {
-                    _valueNotifier.notifyListeners();
-                  }
-                },
-
+          builder: (context, value, child) => Container(
+            decoration: boxDecorationDefault(
+              color: context.cardColor,
+            ),
+            child: Theme(
+              data: ThemeData(
+                dividerColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                splashFactory: InkSplash.splashFactory,
               ),
-              if (selectedUserTypeValue == USER_TYPE_PROVIDER) ...[
-                12.height,
-                Container(
-                  decoration: boxDecorationDefault(
-                    color: context.cardColor,
-                  ),
-                  child: Theme(
-                    data: ThemeData(
-                      dividerColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      splashFactory: InkSplash.splashFactory,
-                    ),
-                    child: ExpansionTile(
-                      iconColor: context.iconColor,
-                      tilePadding: EdgeInsets.symmetric(horizontal: 16),
-                      childrenPadding: EdgeInsets.symmetric(horizontal: 16),
-                      initiallyExpanded: zoneList.isNotEmpty,
-                      dense: true,
-                      visualDensity: VisualDensity.compact,
-                      title: Text(languages.selectZones, style: secondaryTextStyle()),
-                      onExpansionChanged: (val) {
-                        isZoneTileExpanded = val;
-                        setState(() {});
-                      },
-                      trailing: AnimatedCrossFade(
-                        firstChild: Icon(Icons.arrow_drop_down),
-                        secondChild: Icon(Icons.arrow_drop_up),
-                        crossFadeState: isZoneTileExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-                        duration: 200.milliseconds,
-                      ),
-                      children: zoneList.map((zone) {
-                        bool isSelected = selectedZoneIds.contains(zone.id.toString());
-                        return Container(
-                          margin: EdgeInsets.only(bottom: 8.0),
-                          child: Theme(
-                            data: ThemeData(
-                              splashColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              unselectedWidgetColor: appStore.isDarkMode
-                                  ? context.dividerColor
-                                  : context.iconColor,
-                            ),
-                            child: CheckboxListTile(
-                              checkboxShape: RoundedRectangleBorder(borderRadius: radius(4)),
-                              activeColor: context.primaryColor,
-                              checkColor: appStore.isDarkMode ? context.iconColor : context.cardColor,
-                              contentPadding: EdgeInsets.symmetric(horizontal: 16),
-                              title: Text(zone.name.validate(),
-                                  style: secondaryTextStyle(color: context.iconColor)),
-                              value: isSelected,
-                              onChanged: (val) {
-                                if (val == true) {
-                                  selectedZoneIds.add(zone.id.toString());
-                                } else {
-                                  selectedZoneIds.remove(zone.id.toString());
-                                }
-                                _valueNotifier.notifyListeners();
-                                setState(() {});
-                              },
-                              splashRadius: 0.0,
-                              visualDensity: VisualDensity.compact,
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
+              child: ExpansionTile(
+                iconColor: context.iconColor,
+                tilePadding: EdgeInsets.symmetric(horizontal: 16),
+                childrenPadding: EdgeInsets.symmetric(horizontal: 16),
+                initiallyExpanded: zoneList.isNotEmpty,
+                dense: true,
+                visualDensity: VisualDensity.compact,
+                title: Text(languages.selectZones, style: secondaryTextStyle()),
+                onExpansionChanged: (val) {
+                  isZoneTileExpanded = val;
+                  setState(() {});
+                },
+                trailing: AnimatedCrossFade(
+                  firstChild: Icon(Icons.arrow_drop_down),
+                  secondChild: Icon(Icons.arrow_drop_up),
+                  crossFadeState: isZoneTileExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                  duration: 200.milliseconds,
                 ),
-              ]
-
-            ],
+                children: zoneList.map((zone) {
+                  bool isSelected = selectedZoneIds.contains(zone.id.toString());
+                  return Container(
+                    margin: EdgeInsets.only(bottom: 8.0),
+                    child: Theme(
+                      data: ThemeData(
+                        splashColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        unselectedWidgetColor: appStore.isDarkMode
+                            ? context.dividerColor
+                            : context.iconColor,
+                      ),
+                      child: CheckboxListTile(
+                        checkboxShape: RoundedRectangleBorder(borderRadius: radius(4)),
+                        activeColor: context.primaryColor,
+                        checkColor: appStore.isDarkMode ? context.iconColor : context.cardColor,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                        title: Text(zone.name.validate(),
+                            style: secondaryTextStyle(color: context.iconColor)),
+                        value: isSelected,
+                        onChanged: (val) {
+                          if (val == true) {
+                            selectedZoneIds.add(zone.id.toString());
+                          } else {
+                            selectedZoneIds.remove(zone.id.toString());
+                          }
+                          _valueNotifier.notifyListeners();
+                          setState(() {});
+                        },
+                        splashRadius: 0.0,
+                        visualDensity: VisualDensity.compact,
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
           ),
         ),
-        if (selectedUserTypeValue != USER_TYPE_HANDYMAN) 16.height,
-        if (selectedUserTypeValue == USER_TYPE_HANDYMAN)
-          Container(
-            decoration: boxDecorationDefault(
-                color: context.cardColor, borderRadius: radius()),
-            padding: EdgeInsets.only(
-              top: selectedProvider != null ? 16 : 0,
-              bottom: selectedProvider != null ? 16 : 0,
-              left: selectedProvider != null ? 16 : 0,
-              right: 4,
-            ),
-            margin: EdgeInsets.symmetric(vertical: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                if (selectedProvider != null)
-                  GestureDetector(
-                    onTap: () {
-                      pickProvider();
-                    },
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(languages.selectedProvider,
-                                style: secondaryTextStyle())
-                            .paddingOnly(bottom: 8),
-                        Row(
-                          children: [
-                            CachedImageWidget(
-                              url: selectedProvider!.profileImage.validate(),
-                              height: 24,
-                              circle: true,
-                              fit: BoxFit.cover,
-                            ),
-                            8.width,
-                            Text(
-                              selectedProvider!.displayName.validate(),
-                              style: primaryTextStyle(size: 12),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ).expand(),
-                if (selectedProvider != null)
-                  IconButton(
-                    onPressed: () {
-                      selectedProvider = null;
-                      setState(() {});
-
-                      commissionTypeList.clear();
-                      selectedUserCommissionType = null;
-
-                      getCommissionType(type: selectedUserTypeValue!)
-                          .then((value) {
-                        commissionTypeList = value.userTypeData.validate();
-
-                        _valueNotifier.notifyListeners();
-                      }).catchError((e) {
-                        commissionTypeList = [
-                          UserTypeData(
-                              name: languages.lblSelectCommission, id: -1)
-                        ];
-                        log(e.toString());
-                      });
-                    },
-                    icon: Icon(Icons.close),
-                  )
-                else
-                  TextButton(
-                    onPressed: () async {
-                      pickProvider();
-                    },
-                    child: Text(languages.pickAProviderYou),
-                  ),
-              ],
-            ),
-          ),
+        16.height,
         // Select user type text field...
         ValueListenableBuilder(
           valueListenable: _valueNotifier,
@@ -754,7 +628,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (selectedUserCommissionType == null || selectedUserCommissionType!.id == -1) {
         return toast(languages.pleaseSelectCommission);
       }
-      if (selectedUserTypeValue == USER_TYPE_PROVIDER && selectedZoneIds.isEmpty) {
+      // User type is always provider - check zone selection
+      if (selectedZoneIds.isEmpty) {
         return toast(languages.plzSelectOneZone); 
       }
       formKey.currentState!.save();
@@ -775,29 +650,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
           request[UserKeys.providerId] = selectedProviderId;
         }
 
-        if (selectedUserTypeValue == USER_TYPE_PROVIDER) {
-          request.putIfAbsent(UserKeys.providerTypeId, () => selectedUserCommissionType!.id.toString());
-          if (selectedZoneIds.isNotEmpty) {
-            request[UserKeys.zoneId] = selectedZoneIds.join(',');
-            log('✅ Zone IDs added: ${request[UserKeys.zoneId]}');
-          } else {
-            log('⚠️ selectedZoneIds is empty!');
-          }
+        // User type is always provider - no need to check
+        request.putIfAbsent(UserKeys.providerTypeId, () => selectedUserCommissionType!.id.toString());
+        if (selectedZoneIds.isNotEmpty) {
+          request[UserKeys.zoneId] = selectedZoneIds.join(',');
+          log('✅ Zone IDs added: ${request[UserKeys.zoneId]}');
+        } else {
+          log('⚠️ selectedZoneIds is empty!');
         }
 
         log(request);
-        if(selectedUserTypeValue == USER_TYPE_PROVIDER) {
-          UploadDocumentsScreen(formRequest: request).launch(context, pageRouteAnimation: PageRouteAnimation.SlideBottomTop);
-        }else{
-         await registerUser(request).then((userRegisterData) async {
-          appStore.setLoading(false);
-          toast(userRegisterData.message.validate());
-          push(SignInScreen(), isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
-        }).catchError((e) {
-          toast(e.toString(), print: true);
-          appStore.setLoading(false);
-        });
-        }
+        // Always upload documents for provider registration
+        UploadDocumentsScreen(formRequest: request).launch(context, pageRouteAnimation: PageRouteAnimation.SlideBottomTop);
     }
   }
 }

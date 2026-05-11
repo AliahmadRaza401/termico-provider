@@ -28,8 +28,7 @@ import 'package:handyman_provider_flutter/models/booking_list_response.dart';
 import 'package:handyman_provider_flutter/models/extra_charges_model.dart';
 import 'package:handyman_provider_flutter/models/service_model.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/provider/components/assign_handyman_screen.dart';
-import 'package:handyman_provider_flutter/provider/handyman_info_screen.dart';
+// Handyman screens removed - only provider role supported
 import 'package:handyman_provider_flutter/provider/services/service_detail_screen.dart';
 import 'package:handyman_provider_flutter/screens/cash_management/component/cash_confirm_dialog.dart';
 import 'package:handyman_provider_flutter/screens/cash_management/view/cash_payment_history_screen.dart';
@@ -161,15 +160,37 @@ class BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsBi
   }
 
   Future<void> assignBookingDialog(BuildContext context, int? bookingId, int? addressId) async {
-    AssignHandymanScreen(
-      bookingId: bookingId,
-      serviceAddressId: addressId,
-      onUpdate: () {
+
+      // Directly assign to myself without opening the screen
+    showConfirmDialogCustom(
+      context,
+      title: languages.lblAreYouSureYouWantToAssignToYourself,
+      primaryColor: context.primaryColor,
+      positiveText: languages.lblYes,
+      negativeText: languages.lblCancel,
+      onAccept: (c) async {
+        var request = {
+          CommonKeys.id: bookingId,
+          CommonKeys.handymanId: [appStore.userId.validate()],
+        };
+
         appStore.setLoading(true);
-        init(flag: true);
-        if (appStore.isLoading) appStore.setLoading(false);
+
+        await assignBooking(request).then((res) async {
+          appStore.setLoading(false);
+
+          appStore.setLoading(true);
+          init(flag: true);
+          if (appStore.isLoading) appStore.setLoading(false);
+
+          toast(res.message);
+        }).catchError((e) {
+          appStore.setLoading(false);
+
+          toast(e.toString());
+        });
       },
-    ).launch(context);
+    );
   }
 
   Future<void> updateBooking(BookingDetailResponse bookDetail, String updateReason, String updatedStatus) async {
@@ -410,9 +431,7 @@ class BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsBi
   }
 
   refreshProviderAndHandymanLocation({required String status, required int handymanID}) async {
-    if (status == BookingStatusKeys.onGoing && isUserTypeHandyman) {
-      await setLocation();
-    } else if (status == BookingStatusKeys.onGoing && isUserTypeProvider) {
+    if (status == BookingStatusKeys.onGoing && isUserTypeProvider) {
       if (handymanID == appStore.userId) {
         await setLocation();
       } else if (handymanID != appStore.userId && handymanID != -1) {
@@ -934,8 +953,6 @@ class BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsBi
       } else {
         return handleProvider(res: res);
       }
-    } else if (isUserTypeHandyman) {
-      return handleHandyman(res: res);
     }
 
     return Offstage();
@@ -1215,7 +1232,12 @@ class BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsBi
                   16.width,
                   Row(
                     children: [
-                      Text('${data.qty} * ${data.price.validate()} = ', style: secondaryTextStyle()),
+                      Text(
+                        isAppleReviewFreeMode
+                            ? '${data.qty} * ${languages.lblFree} = '
+                            : '${data.qty} * ${data.price.validate()} = ',
+                        style: secondaryTextStyle(),
+                      ),
                       4.width,
                       PriceWidget(price: '${data.price.validate() * data.qty.validate()}'.toDouble(), size: 16, color: textPrimaryColorGlobal, isBoldText: true),
                     ],
@@ -1269,7 +1291,7 @@ class BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsBi
                   _buildCounterWidget(value: res.data!),
 
                   /// Location Tracking
-                  locationTrackWidget(data: res.data).visible(BookingStatusKeys.onGoing == res.data!.bookingDetail!.status && !isUserTypeHandyman && res.data!.handymanData![0].id != appStore.userId),
+                  locationTrackWidget(data: res.data).visible(BookingStatusKeys.onGoing == res.data!.bookingDetail!.status && isUserTypeProvider && res.data!.handymanData![0].id != appStore.userId),
 
                   /// My Service List
                   if (res.data!.postRequestDetail != null && res.data!.postRequestDetail!.service != null) myServiceList(serviceList: res.data!.postRequestDetail!.service!),
@@ -1320,7 +1342,7 @@ class BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsBi
                     ).paddingOnly(left: 16, right: 16),
 
                   /// About Handyman Card
-                  if (res.data!.handymanData!.isNotEmpty && appStore.userType != USER_TYPE_HANDYMAN)
+                  if (res.data!.handymanData!.isNotEmpty)
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1340,11 +1362,12 @@ class BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsBi
                                       fontWeight: FontWeight.bold,
                                       color: primaryColor, // Adjust color as needed
                                     ),
-                                  ).visible(res.data!.bookingDetail!.canCustomerContact && e.id != appStore.userId).onTap(() {
-                                    {
-                                      HandymanInfoScreen(handymanId: e.id, service: res.data!.service).launch(context).then((value) => null);
-                                    }
-                                  });
+                                  ).visible(res.data!.bookingDetail!.canCustomerContact && e.id != appStore.userId)
+                                  // HandymanInfoScreen removed - only provider role supported
+                                  // .onTap(() {
+                                  //   HandymanInfoScreen(handymanId: e.id, service: res.data!.service).launch(context).then((value) => null);
+                                  // })
+                                  ;
                                 },
                               ).toList(),
                             ),
@@ -1365,9 +1388,10 @@ class BookingDetailScreenState extends State<BookingDetailScreen> with WidgetsBi
                                   bookingDetail: res.data!.bookingDetail!,
                                   bookingInfo: res.data!,
                                 ).onTap(() {
-                                  if (res.data!.bookingDetail!.canCustomerContact && e.id != appStore.userId) {
-                                    HandymanInfoScreen(handymanId: e.id, service: res.data!.service).launch(context).then((value) => null);
-                                  }
+                                  // HandymanInfoScreen removed - only provider role supported
+                                  // if (res.data!.bookingDetail!.canCustomerContact && e.id != appStore.userId) {
+                                  //   HandymanInfoScreen(handymanId: e.id, service: res.data!.service).launch(context).then((value) => null);
+                                  // }
                                 });
                               },
                             ).toList(),

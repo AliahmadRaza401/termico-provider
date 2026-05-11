@@ -6,10 +6,20 @@ import 'package:handyman_provider_flutter/models/caregory_response.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:nb_utils/nb_utils.dart';
 
+/// Fixed request type options for the job filter (backend values: Home / Apartment).
+/// UI text is localized based on these values.
+const List<String> _requestTypeFilterOptions = ['Home', 'Apartment'];
+
 class JobFilterBottomSheet extends StatefulWidget {
   final VoidCallback onApplyFilter;
+  /// Optional extra request types from current job list. Merged with [Home, Apartment].
+  final List<String> availableRequestTypes;
 
-  const JobFilterBottomSheet({Key? key, required this.onApplyFilter}) : super(key: key);
+  const JobFilterBottomSheet({
+    Key? key,
+    required this.onApplyFilter,
+    this.availableRequestTypes = const [],
+  }) : super(key: key);
 
   @override
   State<JobFilterBottomSheet> createState() => _JobFilterBottomSheetState();
@@ -88,7 +98,7 @@ class _JobFilterBottomSheetState extends State<JobFilterBottomSheet> {
                       children: [
                         // Price Range Filter
                         Text(
-                          'Price Range',
+                          languages.jobPrice,
                           style: boldTextStyle(size: 16),
                         ),
                         8.height,
@@ -101,8 +111,8 @@ class _JobFilterBottomSheetState extends State<JobFilterBottomSheet> {
                                 max: 10000,
                                 divisions: 100,
                                 labels: RangeLabels(
-                                  '\$${_priceRange.start.toInt()}',
-                                  '\$${_priceRange.end.toInt()}',
+                                  '${_priceRange.start.toInt()} ${appConfigurationStore.currencySymbol}',
+                                  '${_priceRange.end.toInt()} ${appConfigurationStore.currencySymbol}',
                                 ),
                                 onChanged: (RangeValues values) {
                                   setState(() {
@@ -114,11 +124,11 @@ class _JobFilterBottomSheetState extends State<JobFilterBottomSheet> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    '\$${_priceRange.start.toInt()}',
+                                    '${_priceRange.start.toInt()} ${appConfigurationStore.currencySymbol}',
                                     style: secondaryTextStyle(),
                                   ),
                                   Text(
-                                    '\$${_priceRange.end.toInt()}',
+                                    '${_priceRange.end.toInt()} ${appConfigurationStore.currencySymbol}',
                                     style: secondaryTextStyle(),
                                   ),
                                 ],
@@ -128,17 +138,76 @@ class _JobFilterBottomSheetState extends State<JobFilterBottomSheet> {
                         ),
                         24.height,
 
+                        // Request Type Filter (Home / Apartment) – placed above Category so it’s visible without scrolling
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              languages.lblType,
+                              style: boldTextStyle(size: 16),
+                            ),
+                            Observer(
+                              builder: (_) => Text(
+                                '${filterStore.requestTypeList.length}',
+                                style: secondaryTextStyle(),
+                              ),
+                            ),
+                          ],
+                        ),
+                        16.height,
+                        Observer(
+                          builder: (_) => Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: _requestTypeFilterOptions.map((requestType) {
+                              bool isSelected = filterStore.requestTypeList.contains(requestType);
+
+                              // Localize the visible label while keeping backend values intact
+                              String localizedLabel;
+                              switch (requestType.toLowerCase()) {
+                                case 'home':
+                                  localizedLabel = languages.homeFilter;
+                                  break;
+                                case 'apartment':
+                                  localizedLabel = languages.apartment;
+                                  break;
+                                default:
+                                  localizedLabel = requestType;
+                              }
+
+                              return FilterChip(
+                                label: Text(localizedLabel),
+                                selected: isSelected,
+                                onSelected: (bool selected) {
+                                  if (selected) {
+                                    filterStore.addToRequestTypeList(requestType);
+                                  } else {
+                                    filterStore.removeFromRequestTypeList(requestType);
+                                  }
+                                  setState(() {});
+                                },
+                                selectedColor: context.primaryColor.withOpacity(0.2),
+                                checkmarkColor: context.primaryColor,
+                                labelStyle: TextStyle(
+                                  color: isSelected ? context.primaryColor : null,
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                        24.height,
+
                         // Category Filter
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Category',
+                              languages.hintSelectCategory,
                               style: boldTextStyle(size: 16),
                             ),
                             Observer(
                               builder: (_) => Text(
-                                '${filterStore.categoryId.length} Selected',
+                                '${filterStore.categoryId.length}',
                                 style: secondaryTextStyle(),
                               ),
                             ),
@@ -206,6 +275,7 @@ class _JobFilterBottomSheetState extends State<JobFilterBottomSheet> {
                       });
                       filterStore.resetPriceFilter();
                       filterStore.categoryId.clear();
+                      filterStore.requestTypeList.clear();
                       filterStore.updateFilterFlag();
                       widget.onApplyFilter();
                       finish(context);

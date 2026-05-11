@@ -8,7 +8,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:handyman_provider_flutter/locale/applocalizations.dart';
 import 'package:handyman_provider_flutter/locale/base_language.dart';
-import 'package:handyman_provider_flutter/locale/language_en.dart';
+import 'package:handyman_provider_flutter/locale/language_ro.dart';
 import 'package:handyman_provider_flutter/models/booking_detail_response.dart';
 import 'package:handyman_provider_flutter/models/notification_list_response.dart';
 import 'package:handyman_provider_flutter/models/revenue_chart_data.dart';
@@ -38,7 +38,6 @@ import 'models/booking_status_response.dart';
 import 'models/dashboard_response.dart';
 import 'models/document_list_response.dart';
 import 'models/extra_charges_model.dart';
-import 'models/handyman_dashboard_response.dart';
 import 'models/payment_list_reasponse.dart';
 import 'models/service_model.dart';
 import 'provider/promotional_banner/model/promotional_banner_response.dart';
@@ -50,8 +49,19 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 //region Handle Background Firebase Message
 @pragma('vm:entry-point')
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  log('Message Data : ${message.data}');
-  Firebase.initializeApp();
+  try {
+    await Firebase.initializeApp();
+    log('===== FCM Background =====');
+    log('messageId: ${message.messageId}');
+    log('data: ${message.data}');
+    if (message.notification != null) {
+      log('notification: ${message.notification!.title} / ${message.notification!.body}');
+    }
+    log('=========================');
+  } catch (e, st) {
+    log('firebaseMessagingBackgroundHandler error: $e');
+    log('$st');
+  }
 }
 //endregion
 
@@ -76,14 +86,13 @@ InAppPurchaseService inAppPurchaseService=InAppPurchaseService();
 //region
 
 //region Global Variables
-Languages languages = LanguageEn();
+Languages languages = LanguageRo();
 List<RevenueChartData> chartData = [];
 List<ExtraChargesModel> chargesList = [];
 //endregion
 
 //region Cached Response Variables for Dashboard Tabs
 DashboardResponse? cachedProviderDashboardResponse;
-HandymanDashBoardResponse? cachedHandymanDashboardResponse;
 List<BookingData>? cachedBookingList;
 List<PaymentData>? cachedPaymentList;
 List<NotificationData>? cachedNotifications;
@@ -91,7 +100,6 @@ List<BookingStatusResponse>? cachedBookingStatusDropdown;
 List<(int serviceId, ServiceDetailResponse)?> listOfCachedData = [];
 List<BookingDetailResponse> cachedBookingDetailList = [];
 List<(int postJobId, PostJobDetailResponse)?> cachedPostJobList = [];
-List<UserData>? cachedHandymanList;
 List<TotalData>? cachedTotalDataList;
 List<WalletHistory>? cachedWalletList;
 List<BankHistory>? cachedBankList;
@@ -108,17 +116,14 @@ void main() async {
   await initialize();
 
   if (!isDesktop) {
-    Firebase.initializeApp().then((value) {
-      if (kReleaseMode) {
-        FlutterError.onError =
-            FirebaseCrashlytics.instance.recordFlutterFatalError;
-      }
-
-      /// Subscribe Firebase Topic
-      subscribeToFirebaseTopic();
-    }).catchError((e) {
-      log(e.toString());
-    });
+    await Firebase.initializeApp();
+    if (kReleaseMode) {
+      FlutterError.onError =
+          FirebaseCrashlytics.instance.recordFlutterFatalError;
+    }
+    // Must be registered before runApp() so background messages are received.
+    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    subscribeToFirebaseTopic();
   }
  HttpOverrides.global = MyHttpOverrides();
 
@@ -126,8 +131,13 @@ void main() async {
 
   localeLanguageList = languageList();
 
-  appStore.setLanguage(
-      getStringAsync(SELECTED_LANGUAGE_CODE, defaultValue: DEFAULT_LANGUAGE));
+  // First run / no language saved: use Romanian as main and default language
+  String langCode = getStringAsync(SELECTED_LANGUAGE_CODE, defaultValue: '');
+  if (langCode.isEmpty || !['en', 'ro', 'ru'].contains(langCode)) {
+    langCode = DEFAULT_LANGUAGE;
+    await setValue(SELECTED_LANGUAGE_CODE, langCode);
+  }
+  await appStore.setLanguage(langCode);
 
   runApp(MyApp());
 }

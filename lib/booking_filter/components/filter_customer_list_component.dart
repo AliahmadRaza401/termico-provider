@@ -31,16 +31,13 @@ class _FilterCustomerListComponentState extends State<FilterCustomerListComponen
   }
 
   Future<void> init() async {
-
-    future = getHandyman(
-      page: page,
-      list: customerList,
-      userTypeHandyman: IS_USER,
-      lastPageCallback: (b) {
-        isLastPage = b;
-      },
-    ).then((value) {
-      customerList = value.validate();
+    // Use getAllUserList for customers (users) - only provider role supported
+    future = getAllUserList(userType: IS_USER, perPage: PER_PAGE_ITEM.toString()).then((response) {
+      List<UserData> list = response.data.validate();
+      if (page == 1) customerList.clear();
+      customerList.addAll(list);
+      isLastPage = list.length < PER_PAGE_ITEM;
+      
       customerList.forEach((element) {
         if (filterStore.customerId.contains(element.id)) {
           element.isSelected = true;

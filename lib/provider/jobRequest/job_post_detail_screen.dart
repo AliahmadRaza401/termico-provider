@@ -11,6 +11,7 @@ import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/provider/jobRequest/components/bid_price_dialog.dart';
 import 'package:handyman_provider_flutter/provider/jobRequest/models/post_job_detail_response.dart';
 import 'package:handyman_provider_flutter/provider/offer_package/offer_package_list_screen.dart';
+import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -107,7 +108,7 @@ class _JobPostDetailScreenState extends State<JobPostDetailScreen> {
             ),
           if (data.address.validate().isNotEmpty)
             titleWidget(
-              title: 'Address',
+              title: languages.lblAddress,
               detail: data.address.validate(),
               detailTextStyle: boldTextStyle(),
             ),
@@ -118,6 +119,66 @@ class _JobPostDetailScreenState extends State<JobPostDetailScreen> {
               detailTextStyle: primaryTextStyle(),
               isReadMore: true,
             ),
+          if (data.requestType.validate().isNotEmpty)
+            titleWidget(
+              title: languages.lblType,
+              detail: data.requestType.validate(),
+              detailTextStyle: boldTextStyle(),
+            ),
+          if (data.expiryDays != null)
+            titleWidget(
+              title: languages.lblExpiryDays,
+              detail: languages.lblDaysRemaining(data.expiryDays!),
+              detailTextStyle: boldTextStyle(
+                color: data.isExpired ? Colors.red : context.primaryColor,
+              ),
+            ),
+          if (data.expiryDays != null) ...[
+            8.height,
+            Row(
+              children: [
+                if (data.isExpired)
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: Colors.red.withOpacity(0.1),
+                      borderRadius: radius(8),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.error_outline, color: Colors.red, size: 16),
+                        8.width,
+                        Text(
+                          languages.lblExpired,
+                          style: boldTextStyle(color: Colors.red, size: 12),
+                        ),
+                      ],
+                    ),
+                  )
+                else if (data.remainingDays != null)
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: context.primaryColor.withOpacity(0.1),
+                      borderRadius: radius(8),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.access_time, color: context.primaryColor, size: 16),
+                        8.width,
+                        Text(
+                          languages.lblDaysRemaining(data.remainingDays!),
+                          style: boldTextStyle(color: context.primaryColor, size: 12),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
+            16.height,
+          ],
         ],
       ),
     );
@@ -213,7 +274,10 @@ class _JobPostDetailScreenState extends State<JobPostDetailScreen> {
                         ),
                       ),
                       4.height,
-                      PriceWidget(price: bidderData.price.validate()),
+                      PriceWidget(
+                        price: bidderData.price.validate(),
+                        isFreeService: isAppleReviewFreeMode,
+                      ),
                     ],
                   ).expand(),
                 ],
@@ -273,7 +337,10 @@ class _JobPostDetailScreenState extends State<JobPostDetailScreen> {
                           : languages.estimatedPrice,
                       style: secondaryTextStyle()),
                   4.height,
-                  PriceWidget(price: postJobData.price.validate()),
+                  PriceWidget(
+                    price: postJobData.price.validate(),
+                    isFreeService: isAppleReviewFreeMode,
+                  ),
                 ],
               ).expand(),
             ],
@@ -326,6 +393,27 @@ class _JobPostDetailScreenState extends State<JobPostDetailScreen> {
                         children: [
                           postJobDetailWidget(data: data.postRequestDetail!)
                               .paddingAll(16),
+                          if (data.postRequestDetail!.isExpired)
+                            Container(
+                              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                              padding: EdgeInsets.all(16),
+                              decoration: boxDecorationWithRoundedCorners(
+                                backgroundColor: Colors.red.withOpacity(0.1),
+                                borderRadius: BorderRadius.all(Radius.circular(16)),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.error_outline, color: Colors.red, size: 24),
+                                  12.width,
+                                  Expanded(
+                                    child: Text(
+                                      languages.lblJobExpiredMessage,
+                                      style: primaryTextStyle(color: Colors.red),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           customerWidget(data.postRequestDetail!),
                           providerWidget(data.bidderData.validate()),
                           postJobServiceWidget(
@@ -336,7 +424,7 @@ class _JobPostDetailScreenState extends State<JobPostDetailScreen> {
                       ),
                     ],
                   ),
-                  if (data.postRequestDetail!.canBid.validate())
+                  if (data.postRequestDetail!.canBid.validate() && !data.postRequestDetail!.isExpired)
                     Positioned(
                       bottom: 16,
                       left: 16,
@@ -361,46 +449,40 @@ class _JobPostDetailScreenState extends State<JobPostDetailScreen> {
                             
                             // Validate if user can send offers
                             if (offerPackageStatus == null) {
-                              toast('Unable to check offer package status. Please try again.', print: true);
+                              toast('${languages.somethingWentWrong} ${languages.pleaseTryAgain}', print: true);
                               return;
                             }
                           } catch (e) {
                             // Hide loading indicator on error
                             appStore.setLoading(false);
                             setState(() {});
-                            toast('Error checking offer package status. Please try again.', print: true);
+                            toast('${languages.somethingWentWrong} ${languages.pleaseTryAgain}', print: true);
                             return;
                           }
 
                           // Check all cases: no subscription, package ended, or no offers remaining
-                          bool canSendOffer = offerPackageStatus!.canSendOffers;
+                          bool canSendOffer = isAppleReviewFreeMode
+                              ? true
+                              : offerPackageStatus!.canSendOffers;
                           
                           if (!canSendOffer) {
                             String reason = offerPackageStatus!.cannotSendOfferReason;
-                            String toastMessage = '';
-                            String dialogTitle = '';
                             
+                            // Use existing localized messages based on reason
                             if (reason == 'no_subscription') {
-                              toastMessage = 'You do not have an offer package subscription. Please purchase an offer package to send bids.';
-                              dialogTitle = 'No Offer Package Subscription';
+                              toast(languages.noSubscriptionPlan, print: true);
                             } else if (reason == 'package_ended') {
-                              toastMessage = 'Your offer package has ended. Please purchase a new offer package to continue bidding.';
-                              dialogTitle = 'Offer Package Ended';
+                              toast(languages.lblPlanExpired, print: true);
                             } else if (reason == 'no_offers_remaining') {
-                              toastMessage = 'You have no remaining offers in your package. Please purchase a new offer package to continue bidding.';
-                              dialogTitle = 'No Offers Remaining';
+                              toast(languages.noSubscriptionSubTitle, print: true);
                             } else {
-                              toastMessage = 'You cannot send offers at this time. Please purchase an offer package.';
-                              dialogTitle = 'Cannot Send Offers';
+                              toast(languages.somethingWentWrong, print: true);
                             }
-                            
-                            // Show toast message
-                            toast(toastMessage, print: true);
                             
                             // Show dialog to buy package
                             showConfirmDialogCustom(
                               context,
-                              title: dialogTitle,
+                              title: languages.lblJobOfferPackages,
                               primaryColor: context.primaryColor,
                               positiveText: languages.lblBuy,
                               negativeText: languages.lblCancel,
@@ -423,6 +505,12 @@ class _JobPostDetailScreenState extends State<JobPostDetailScreen> {
                             return;
                           }
 
+                          // Double-check expiry before opening bid dialog (safety check)
+                          if (data.postRequestDetail!.isExpired) {
+                            toast(languages.lblJobExpiredMessage, print: true);
+                            return;
+                          }
+
                           // If user has active package and offers remaining, proceed with bid
                           bool? res = await showInDialog(
                             context,
@@ -430,7 +518,7 @@ class _JobPostDetailScreenState extends State<JobPostDetailScreen> {
                             hideSoftKeyboard: true,
                             backgroundColor: context.cardColor,
                             builder: (_) =>
-                                BidPriceDialog(data: widget.postJobData),
+                                BidPriceDialog(data: data.postRequestDetail!),
                           );
 
                           if (res ?? false) {

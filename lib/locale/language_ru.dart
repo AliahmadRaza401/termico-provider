@@ -2,2530 +2,2618 @@ import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguageRu extends Languages {
   @override
-  String planAboutToExpire(int days) =>
-      'Your Plan Is About to Expire In $days Days';
+  String planAboutToExpire(int days) => 'Ваш план истекает через $days дн.';
 
   @override
-  String get appName => 'Tehnico Provider';
+  String get appName => 'Провайдер';
 
   @override
-  String get provider => 'Provider';
+  String get provider => 'Провайдер';
 
   @override
-  String get lblShowingOnly4Handyman => 'Showing Only 4 Handyman';
+  String get lblShowingOnly4Handyman => 'Показано только 4 мастера';
 
   @override
-  String get lblRecentlyOnlineHandyman => 'Recently Online Handyman';
+  String get lblRecentlyOnlineHandyman => 'Недавно был(а) онлайн';
 
   @override
-  String get lblStartDrive => 'Start Drive';
+  String get lblStartDrive => 'Начать поездку';
 
   @override
-  String get handyman => 'Handyman';
+  String get handyman => 'Мастер';
 
   @override
-  String get signIn => 'Sign In';
+  String get signIn => 'Войти';
 
   @override
-  String get signUp => 'Sign Up';
+  String get signUp => 'Регистрация';
 
   @override
-  String get hintFirstNameTxt => 'First Name';
+  String get hintFirstNameTxt => 'Имя';
 
   @override
-  String get hintLastNameTxt => 'Last Name';
+  String get hintLastNameTxt => 'Фамилия';
 
   @override
-  String get hintContactNumberTxt => 'Contact Number';
+  String get hintContactNumberTxt => 'Контактный номер';
 
   @override
-  String get hintEmailAddressTxt => 'Email Address';
+  String get hintEmailAddressTxt => 'Адрес электронной почты';
 
   @override
-  String get hintUserNameTxt => 'User Name';
+  String get hintUserNameTxt => 'Имя пользователя';
 
   @override
-  String get hintReenterPasswordTxt => 'Re-enter Password';
+  String get hintReenterPasswordTxt => 'Повторите пароль';
 
   @override
-  String get confirm => 'Confirm';
+  String get confirm => 'Подтвердить';
 
   @override
-  String get forgotPassword => 'Forgot Password?';
+  String get forgotPassword => 'Забыли пароль?';
 
   @override
-  String get alreadyHaveAccountTxt => 'Already have an Account';
+  String get alreadyHaveAccountTxt => 'Уже есть аккаунт';
 
   @override
-  String get rememberMe => 'Remember Me';
+  String get rememberMe => 'Запомнить меня';
 
   @override
-  String get forgotPasswordTitleTxt => 'Enter your email address';
+  String get forgotPasswordTitleTxt => 'Введите адрес электронной почты';
 
   @override
-  String get resetPassword => 'Reset Password';
+  String get resetPassword => 'Сбросить пароль';
 
   @override
-  String get editProfile => 'Edit profile';
+  String get editProfile => 'Редактировать профиль';
 
   @override
-  String get saveChanges => 'Save Changes';
+  String get saveChanges => 'Сохранить изменения';
 
   @override
-  String get camera => 'Camera';
+  String get camera => 'Камера';
 
   @override
-  String get language => 'App Language';
+  String get language => 'Язык приложения';
 
   @override
-  String get appTheme => 'App Theme';
+  String get appTheme => 'Тема приложения';
 
   @override
-  String get bookingHistory => 'Booking History';
+  String get bookingHistory => 'История бронирований';
 
   @override
-  String get logout => 'Logout';
+  String get logout => 'Выйти';
 
   @override
   String get afterLogoutTxt =>
-      'Do you want to logout from the app? You can always logged in again!';
+      'Вы хотите выйти из приложения? Вы всегда можете войти снова!';
 
   @override
-  String get chooseTheme => 'Choose the App Theme';
+  String get chooseTheme => 'Выберите тему приложения';
 
   @override
-  String get selectCountry => 'Select Country';
+  String get selectCountry => 'Выберите страну';
 
   @override
-  String get selectState => 'Select State';
+  String get selectState => 'Выберите регион';
 
   @override
-  String get selectCity => 'Select City';
+  String get selectCity => 'Выберите город';
 
   @override
-  String get changePassword => 'Change Password';
+  String get changePassword => 'Изменить пароль';
 
   @override
-  String get passwordNotMatch => "Password does not match";
+  String get passwordNotMatch => "Пароли не совпадают";
 
   @override
-  String get doNotHaveAccount => "Don't have an account?";
+  String get doNotHaveAccount => "Нет аккаунта?";
 
   @override
-  String get hintNewPasswordTxt => "New Password";
+  String get hintNewPasswordTxt => "Новый пароль";
 
   @override
-  String get hintOldPasswordTxt => "Old Password";
+  String get hintOldPasswordTxt => "Старый пароль";
 
   @override
-  String get review => 'Reviews';
+  String get review => 'Отзывы';
 
   @override
-  String get notification => 'Notifications';
+  String get notification => 'Уведомления';
 
   @override
-  String get accept => 'Accept';
+  String get notificationCategories => 'Категории уведомлений';
 
   @override
-  String get decline => 'Decline';
+  String get accept => 'Принять';
 
   @override
-  String get noDataFound => 'No Data Found';
+  String get decline => 'Отклонить';
 
   @override
-  String get pending => 'Pending';
+  String get noDataFound => 'Данные не найдены';
 
   @override
-  String get darkMode => 'Dark Mode';
+  String get pending => 'В ожидании';
 
   @override
-  String get lightMode => 'Light Mode';
+  String get darkMode => 'Тёмная тема';
 
   @override
-  String get systemDefault => 'System Mode';
+  String get lightMode => 'Светлая тема';
+
+  @override
+  String get systemDefault => 'Системная тема';
 
   @override
   String get confirmationRequestTxt =>
-      'Are you sure want to perform this action?';
+      'Вы уверены, что хотите выполнить это действие?';
 
   @override
-  String get notAvailable => 'Not Available';
+  String get notAvailable => 'Недоступно';
 
   @override
-  String get lblGallery => "Gallery";
+  String get lblGallery => "Галерея";
 
   @override
-  String get cantLogin => "Can't Login";
+  String get cantLogin => "Не удаётся войти";
 
   @override
-  String get pleaseContactAdmin => 'Please contact with Admin';
+  String get pleaseContactAdmin => 'Пожалуйста, свяжитесь с администратором';
 
   @override
-  String get lblOk => 'Ok';
+  String get lblOk => 'Ок';
 
   @override
-  String get paymentStatus => 'Payment Status';
+  String get paymentStatus => 'Статус оплаты';
 
   @override
-  String get paymentMethod => 'Payment Method ';
+  String get paymentMethod => 'Способ оплаты ';
 
   @override
-  String get hintAddress => 'Enter Address';
+  String get hintAddress => 'Введите адрес';
 
   @override
-  String get quantity => 'Quantity';
+  String get quantity => 'Количество';
 
   @override
-  String get lblYes => 'Yes';
+  String get lblYes => 'Да';
 
   @override
-  String get lblNo => 'No';
+  String get lblNo => 'Нет';
 
   @override
-  String get lblReason => 'Reason';
+  String get lblReason => 'Причина';
 
   @override
-  String get lblSelectHandyman => 'Please Select Handyman';
+  String get lblSelectHandyman => 'Пожалуйста, выберите мастера';
 
   @override
-  String get lblAssign => 'Assign';
+  String get lblAssign => 'Назначить';
 
   @override
-  String get lblCall => 'Call';
+  String get lblCall => 'Позвонить';
 
   @override
-  String get lblAssignHandyman => 'Assign Handyman';
+  String get lblAssignHandyman => 'Назначить мастера';
 
   @override
-  String get lblAssigned => 'Assigned';
+  String get lblAssigned => 'Назначено';
 
   @override
-  String get viewAll => 'View all';
+  String get viewAll => 'Посмотреть все';
 
   @override
-  String get lblMonthlyRevenue => 'Monthly Revenue';
+  String get lblMonthlyRevenue => 'Ежемесячная выручка';
 
   @override
-  String get lblRevenue => 'Revenue';
+  String get lblRevenue => 'Выручка';
 
   @override
-  String get lblAddHandyman => "Add Handyman";
+  String get lblAddHandyman => "Добавить мастера";
 
   @override
-  String get lblBooking => 'Bookings';
+  String get lblBooking => 'Бронирования';
 
   @override
-  String get lblTotalBooking => 'Total Bookings';
+  String get lblTotalBooking => 'Всего бронирований';
 
   @override
-  String get lblTotalService => 'Total Service';
+  String get lblTotalService => 'Всего услуг';
 
   @override
-  String get lblTotalHandyman => 'Total Handyman';
+  String get lblTotalHandyman => 'Всего мастеров';
 
   @override
-  String get monthlyEarnings => 'Monthly Earnings';
+  String get monthlyEarnings => 'Ежемесячный доход';
 
   @override
-  String get lblPayment => 'Payments';
+  String get lblPayment => 'Платежи';
 
   @override
-  String get lblBookingID => 'Booking ID';
+  String get lblBookingID => 'ID бронирования';
 
   @override
-  String get lblPaymentID => 'Payment ID';
+  String get lblPaymentID => 'ID платежа';
 
   @override
-  String get lblAmount => 'Amount';
+  String get lblAmount => 'Сумма';
 
   @override
-  String get hintAddService => 'Add Service';
+  String get hintAddService => 'Добавить услугу';
 
   @override
-  String get hintServiceName => 'Service Name';
+  String get hintServiceName => 'Название услуги';
 
   @override
-  String get hintSelectCategory => 'Select Category';
+  String get hintSelectCategory => 'Выберите категорию';
 
   @override
-  String get hintSelectType => 'Select Type';
+  String get hintSelectType => 'Выберите тип';
 
   @override
-  String get hintSelectStatus => 'Select Status';
+  String get hintSelectStatus => 'Выберите статус';
 
   @override
-  String get hintPrice => 'Price';
+  String get hintPrice => 'Цена';
 
   @override
-  String get hintDiscount => 'Discount';
+  String get hintDiscount => 'Скидка';
 
   @override
-  String get hintDuration => 'Duration';
+  String get hintDuration => 'Длительность';
 
   @override
-  String get hintDescription => 'Description';
+  String get hintDescription => 'Описание';
 
   @override
-  String get hintSetAsFeature => 'Set as Feature';
+  String get hintSetAsFeature => 'Сделать избранным';
 
   @override
-  String get hintAdd => 'Add';
+  String get hintAdd => 'Добавить';
 
   @override
-  String get hintChooseImage => 'Choose Image';
+  String get hintChooseImage => 'Выберите изображение';
 
   @override
-  String get customer => 'Customer';
+  String get customer => 'Клиент';
 
   @override
-  String get lblProfile => 'Profile';
+  String get lblProfile => 'Профиль';
 
   @override
-  String get lblAllHandyman => "Handyman List";
+  String get lblAllHandyman => "Список мастеров";
 
   @override
-  String get lblTime => 'Time';
+  String get lblTime => 'Время';
 
   @override
-  String get lblMyService => 'My Services';
+  String get lblMyService => 'Мои услуги';
 
   @override
-  String get lblAllService => 'All Service';
+  String get lblAllService => 'Все услуги';
 
   @override
-  String get lblChat => 'Chat';
+  String get lblChat => 'Чат';
 
   @override
-  String get selectAddress => 'Select Service Addresses';
+  String get selectAddress => 'Выберите адреса обслуживания';
 
   @override
-  String get btnSave => 'Save';
+  String get btnSave => 'Сохранить';
 
   @override
-  String get editAddress => 'Edit Service Address';
+  String get editAddress => 'Редактировать адрес обслуживания';
 
   @override
-  String get lblUpdate => 'Update';
+  String get lblUpdate => 'Обновить';
 
   @override
-  String get lblEdit => 'Edit';
+  String get lblEdit => 'Редактировать';
 
   @override
-  String get lblDelete => 'Delete';
+  String get lblDelete => 'Удалить';
 
   @override
-  String get lblServiceAddress => 'Service Addresses';
+  String get lblServiceAddress => 'Адреса обслуживания';
 
   @override
-  String get lblServices => 'Services';
+  String get lblServices => 'Услуги';
 
   @override
-  String get lblEditService => 'Edit Service';
+  String get lblEditService => 'Редактировать услугу';
 
   @override
   String get selectImgNote =>
-      'Note: You can upload images with \'jpg\', \'png\', \'jpeg\' extensions & you can select multiple images';
+      'Примечание: вы можете загружать изображения с расширениями \'jpg\', \'png\', \'jpeg\' и выбирать несколько изображений';
 
   @override
-  String get lblDurationHr => 'Duration : Hours';
+  String get lblDurationHr => 'Длительность: Часы';
 
   @override
-  String get lblDurationMin => 'Duration : Minute';
+  String get lblDurationMin => 'Длительность: Минуты';
 
   @override
   String get lblWaitForAcceptReq =>
-      'Please wait for admin to accept your request';
+      'Пожалуйста, дождитесь, пока администратор примет ваш запрос';
 
   @override
-  String get lblAddServiceAddress => 'Add Service Address';
+  String get lblAddServiceAddress => 'Добавить адрес обслуживания';
 
   @override
-  String get errorPasswordLength => 'Password length should be more than';
+  String get errorPasswordLength => 'Длина пароля должна быть больше';
 
   @override
-  String get hintPassword => 'Password';
+  String get hintPassword => 'Пароль';
 
   @override
-  String get hintRequired => 'This field is required';
+  String get hintRequired => 'Это поле обязательно';
 
   @override
-  String get lblUnAuthorized => "Demo user cannot be granted for this action";
+  String get lblUnAuthorized => "Демо-пользователю недоступно это действие";
 
   @override
-  String get btnVerifyId => "Verify Your Id";
+  String get btnVerifyId => "Подтвердите вашу личность";
 
   @override
   String get confirmationUpload =>
-      "Are you sure you want to upload this document?";
+      "Вы уверены, что хотите загрузить этот документ?";
 
   @override
-  String get toastSuccess => "Provider Document has been save successfully";
+  String get toastSuccess => "Документ провайдера успешно сохранён";
 
   @override
-  String get lblSelectDoc => "Select Document";
+  String get lblSelectDoc => "Выберите документ";
 
   @override
-  String get lblAddDoc => "Add Documents";
+  String get lblAddDoc => "Добавить документы";
 
   @override
-  String get lblRateUs => "Rate us";
+  String get lblRateUs => "Оцените нас";
 
   @override
-  String get lblTermsAndConditions => 'Terms & Conditions';
+  String get lblTermsAndConditions => 'Условия использования';
 
   @override
-  String get lblPrivacyPolicy => "Privacy Policy";
+  String get lblPrivacyPolicy => "Политика конфиденциальности";
 
   @override
-  String get lblHelpAndSupport => 'Help & Support';
+  String get lblHelpAndSupport => 'Помощь и поддержка';
 
   @override
-  String get lblAbout => "About";
+  String get lblAbout => "О приложении";
 
   @override
-  String get lblProviderType => "Provider Type";
+  String get lblProviderType => "Тип провайдера";
 
   @override
-  String get lblMyCommission => "My Commission";
+  String get lblMyCommission => "Моя комиссия";
 
   @override
-  String get lblTaxes => "Taxes";
+  String get lblTaxes => "Налоги";
 
   @override
-  String get lblTaxName => "Tax Name";
+  String get lblTaxName => "Название налога";
 
   @override
-  String get lblMyTax => "My Tax";
+  String get lblMyTax => "Мой налог";
 
   @override
-  String get lblLoginTitle => "Hello Again !";
+  String get lblLoginTitle => "С возвращением!";
 
   @override
   String get lblLoginSubtitle =>
-      "Welcome Back, You Have Been Missed For A Long Time";
+      "Мы скучали по вам. С возвращением!";
 
   @override
-  String get lblSignupTitle => "Hello User !";
+  String get lblSignupTitle => "Здравствуйте!";
 
   @override
-  String get lblSignupSubtitle => "Create Your Account for Better Experience";
+  String get lblSignupSubtitle => "Создайте аккаунт для лучшего опыта";
 
   @override
-  String get lblSignup => "Sign Up";
+  String get lblSignup => "Регистрация";
 
   @override
-  String get lblUserType => "User Type";
+  String get lblUserType => "Тип пользователя";
 
   @override
-  String get lblPurchaseCode => "Purchase Full Source Code";
+  String get lblPurchaseCode => "Купить полный исходный код";
 
   @override
-  String get lblRating => "Rating";
+  String get lblRating => "Рейтинг";
 
   @override
-  String get lblOff => "Off";
+  String get lblOff => "Скидка";
 
   @override
-  String get lblHr => "hr";
+  String get lblHr => "ч";
 
   @override
-  String get lblDate => "Date";
+  String get lblDate => "Дата";
 
   @override
-  String get lblAboutHandyman => "About Handyman";
+  String get lblAboutHandyman => "О мастере";
 
   @override
-  String get lblAboutCustomer => "About Customer";
+  String get lblAboutCustomer => "О клиенте";
 
   @override
-  String get lblPaymentDetail => "Payment Detail";
+  String get lblPaymentDetail => "Детали оплаты";
 
   @override
   String get lblId => "ID";
 
   @override
-  String get lblMethod => "Method";
+  String get lblMethod => "Метод";
 
   @override
-  String get lblStatus => "Status";
+  String get lblStatus => "Статус";
 
   @override
-  String get lblPriceDetail => "Price Detail";
+  String get lblPriceDetail => "Детали цены";
 
   @override
-  String get lblSubTotal => "Sub Total";
+  String get lblSubTotal => "Промежуточный итог";
 
   @override
-  String get lblTax => "Tax";
+  String get lblTax => "Налог";
 
   @override
-  String get lblCoupon => "Coupon";
+  String get lblCoupon => "Купон";
 
   @override
-  String get lblTotalAmount => "Total Amount";
+  String get lblTotalAmount => "Итоговая сумма";
 
   @override
-  String get lblOnBasisOf => "On basis of";
+  String get lblOnBasisOf => "На основании";
 
   @override
-  String get lblCheckStatus => "Check Status";
+  String get lblCheckStatus => "Проверить статус";
 
   @override
-  String get lblCancel => "Cancel";
+  String get lblCancel => "Отмена";
 
   @override
-  String get lblUnreadNotification => "Unread Notification";
+  String get lblUnreadNotification => "Непрочитанные уведомления";
 
   @override
-  String get lblMarkAllAsRead => "Mark all as Read";
+  String get lblMarkAllAsRead => "Отметить всё как прочитанное";
 
   @override
-  String get lblCloseAppMsg => "Press back again to exit app";
+  String get lblCloseAppMsg => "Нажмите «Назад» ещё раз, чтобы выйти";
 
   @override
-  String get lblAddress => "Address";
+  String get lblAddress => "Адрес";
 
   @override
-  String get lblType => "Type";
+  String get lblType => "Тип";
 
   @override
-  String get lblHandymanType => "Handyman Type";
+  String get lblHandymanType => "Тип мастера";
 
   @override
-  String get lblFixed => "Fixed";
+  String get lblFixed => "Фиксированная";
 
   @override
-  String get lblHello => "Hello";
+  String get lblHello => "Здравствуйте";
 
   @override
-  String get lblWelcomeBack => "Welcome back!";
+  String get lblWelcomeBack => "С возвращением!";
 
   @override
-  String get lblNoReviewYet => "No Review Yet";
+  String get lblNoReviewYet => "Отзывов пока нет";
 
   @override
-  String get lblWaitingForResponse => "Waiting for response";
+  String get lblWaitingForResponse => "Ожидание ответа";
 
   @override
-  String get lblConfirmPayment => "Confirm Payment";
+  String get lblConfirmPayment => "Подтвердить оплату";
 
   @override
-  String get lblDelivered => "Delivered";
+  String get lblDelivered => "Доставлено";
 
   @override
-  String get lblDay => "Day";
+  String get lblDay => "День";
 
   @override
-  String get lblYear => "Year";
+  String get lblYear => "Год";
 
   @override
-  String get lblExperience => "Experience";
+  String get lblExperience => "Опыт";
 
   @override
-  String get lblOf => "(s) of";
+  String get lblOf => "(шт.) из";
 
   @override
-  String get lblSelectAddress => "Select Address";
+  String get lblSelectAddress => "Выберите адрес";
 
   @override
-  String get lblOppS => "Opps";
+  String get lblOppS => "Упс";
 
   @override
   String get lblNoInternet =>
-      "Something wrong with your connection, Please try again.";
+      "Проблемы с подключением. Пожалуйста, попробуйте снова.";
 
   @override
-  String get lblRetry => "RETRY";
+  String get lblRetry => "ПОВТОРИТЬ";
 
   @override
-  String get lblServiceStatus => "Service Status";
+  String get lblServiceStatus => "Статус услуги";
 
   @override
-  String get lblMemberSince => "Member Since";
+  String get lblMemberSince => "С нами с";
 
   @override
-  String get lblDeleteAddress => "Delete Address";
+  String get lblDeleteAddress => "Удалить адрес";
 
   @override
-  String get lblDeleteAddressMsg => "Do you want to delete this address?";
+  String get lblDeleteAddressMsg => "Вы хотите удалить этот адрес?";
 
   @override
-  String get lblChoosePaymentMethod => "Choose Payment Method";
+  String get lblChoosePaymentMethod => "Выберите способ оплаты";
 
   @override
-  String get lblNoPayments => "No Payments";
+  String get lblNoPayments => "Платежей нет";
 
   @override
-  String lblPayWith(String title) => "Do you want to pay with $title?";
+  String lblPayWith(String title) => "Оплатить через $title?";
 
   @override
-  String get lblProceed => "Proceed";
+  String get lblProceed => "Продолжить";
 
   @override
-  String get lblPricingPlan => "Pricing Plan";
+  String get lblPricingPlan => "Тарифный план";
 
   @override
-  String get lblSelectPlan => "Ready to get started?";
+  String get lblSelectPlan => "Готовы начать?";
 
   @override
-  String get lblMakePayment => "Make Payment";
+  String get lblMakePayment => "Оплатить";
 
   @override
-  String get lblRestore => "Restore";
+  String get lblRestore => "Восстановить";
 
   @override
-  String get lblForceDelete => "Force Delete";
+  String get lblForceDelete => "Принудительно удалить";
 
   @override
-  String get lblActivated => "Activated";
+  String get lblActivated => "Активировано";
 
   @override
-  String get lblDeactivated => "Deactivated";
+  String get lblDeactivated => "Деактивировано";
 
   @override
-  String get lblNoDescriptionAvailable => "No Description Available";
+  String get lblNoDescriptionAvailable => "Описание недоступно";
 
   @override
-  String get lblFAQs => "FAQs";
+  String get lblFAQs => "FAQ";
 
   @override
-  String get lblGetDirection => "Get Direction";
+  String get lblGetDirection => "Построить маршрут";
 
   @override
-  String get lblDeleteTitle => "Oh No, You Are Leaving!";
+  String get lblDeleteTitle => "Ой, вы уходите!";
 
   @override
-  String get lblDeleteSubTitle => "Do you want to logout?";
+  String get lblDeleteSubTitle => "Вы хотите выйти?";
 
   @override
-  String get lblUpcomingServices => "Upcoming Services";
+  String get lblUpcomingServices => "Предстоящие услуги";
 
   @override
-  String get lblTodayServices => "Today's Bookings";
+  String get lblTodayServices => "Бронирования на сегодня";
 
   @override
-  String get lblPlanExpired => "Opps! Plan Expired";
+  String get lblPlanExpired => "Упс! План истёк";
 
   @override
-  String get lblPlanSubTitle => "Your Previous Plan Is Expired";
+  String get lblPlanSubTitle => "Ваш предыдущий план истёк";
 
   @override
-  String get btnTxtBuyNow => "Buy Now";
+  String get btnTxtBuyNow => "Купить сейчас";
 
   @override
-  String get lblChooseYourPlan => "Choose Your Plan";
+  String get lblChooseYourPlan => "Выберите план";
 
   @override
-  String get lblRenewSubTitle => "Buy new plan to get new service bookings";
+  String get lblRenewSubTitle =>
+      "Купите новый план, чтобы получать новые бронирования";
 
   @override
-  String get lblReminder => "Reminder";
+  String get lblReminder => "Напоминание";
 
   @override
-  String get lblRenew => "Renew";
+  String get lblRenew => "Продлить";
 
   @override
-  String get lblCurrentPlan => "Current Plan";
+  String get lblCurrentPlan => "Текущий план";
 
   @override
-  String get lblValidTill => "Valid Till";
+  String get lblValidTill => "Действителен до";
 
   @override
-  String get lblSearchHere => "Search here...";
+  String get lblSearchHere => "Поиск...";
 
   @override
-  String get lblEarningList => "Earning List";
+  String get lblEarningList => "Список доходов";
 
   @override
-  String get lblSubscriptionTitle => "Do want to cancel current plan?";
+  String get lblSubscriptionTitle => "Отменить текущий план?";
 
   @override
-  String get lblPlan => "Plan";
+  String get lblPlan => "План";
 
   @override
-  String get lblCancelPlan => "Cancel Plan";
+  String get lblCancelPlan => "Отменить план";
 
   @override
-  String get lblSubscriptionHistory => "Subscription History";
+  String get lblSubscriptionHistory => "История подписок";
 
   @override
-  String get lblTrashHandyman => "Handyman has been Trash successfully";
+  String get lblTrashHandyman => "Мастер успешно перемещён в корзину";
 
   @override
-  String get lblPlsSelectAddress => "Please Selected Address";
+  String get lblPlsSelectAddress => "Пожалуйста, выберите адрес";
 
   @override
-  String get lblPlsSelectCategory => "Please Selected Category";
+  String get lblPlsSelectCategory => "Пожалуйста, выберите категорию";
 
   @override
-  String get lblEnterHours => "Enter Hours Up To 24 Hours";
+  String get lblEnterHours => "Введите часы (до 24)";
 
   @override
-  String get lblEnterMinute => "Enter Minute Up To 60 Minute";
+  String get lblEnterMinute => "Введите минуты (до 60)";
 
   @override
-  String get lblSelectSubCategory => "Select SubCategory";
+  String get lblSelectSubCategory => "Выберите подкатегорию";
 
   @override
-  String get lblServiceProof => "Service Proof";
+  String get lblServiceProof => "Подтверждение услуги";
 
   @override
-  String get lblTitle => "Title";
+  String get lblTitle => "Заголовок";
 
   @override
-  String get lblAddImage => "Add Image";
+  String get lblAddImage => "Добавить изображение";
 
   @override
-  String get lblSubmit => "Submit";
+  String get lblSubmit => "Отправить";
 
   @override
-  String get lblWalletHistory => "Wallet History";
+  String get lblWalletHistory => "История кошелька";
 
   @override
-  String get lblServiceRatings => "Service Ratings";
+  String get lblServiceRatings => "Оценки услуг";
 
   @override
-  String get lblWallet => "Wallet";
+  String get lblWallet => "Кошелёк";
 
   @override
-  String get lblSelectCommission => "Select Commission";
+  String get lblSelectCommission => "Выберите комиссию";
 
   @override
-  String get lblIAgree => "I agree to the";
+  String get lblIAgree => "Я согласен с";
 
   @override
-  String get lblTermsOfService => "Terms of Service";
+  String get lblTermsOfService => "Условиями обслуживания";
 
   @override
-  String get lblLoginAgain => "Please Login Again";
+  String get lblLoginAgain => "Пожалуйста, войдите снова";
 
   @override
-  String get lblTermCondition => "Please accept terms and condition";
+  String get lblTermCondition => "Пожалуйста, примите условия";
 
   @override
-  String get lblServiceTotalTime => "Service Total Time";
+  String get lblServiceTotalTime => "Общее время услуги";
 
   @override
-  String get lblHelpLineNum => "Helpline Number";
+  String get lblHelpLineNum => "Номер службы поддержки";
 
   @override
-  String get lblReasonCancelling => "Reason for cancelling this booking";
+  String get lblReasonCancelling =>
+      "Причина отмены этого бронирования";
 
   @override
-  String get lblReasonRejecting => "Reason for rejecting this booking";
+  String get lblReasonRejecting =>
+      "Причина отклонения этого бронирования";
 
   @override
-  String get lblFailed => "Reason why this booking is failed";
+  String get lblFailed => "Причина, по которой бронирование не удалось";
 
   @override
-  String get lblDesignation => "Designation";
+  String get lblDesignation => "Должность";
 
   @override
-  String get lblHandymanIsOffline => "Handyman is Offline";
+  String get lblHandymanIsOffline => "Мастер офлайн";
 
   @override
-  String get lblDoYouWantToRestore => "Do you want to Restore?";
+  String get lblDoYouWantToRestore => "Восстановить?";
 
   @override
   String get lblDoYouWantToDeleteForcefully =>
-      "Do you want to delete Forcefully?";
+      "Удалить принудительно?";
 
   @override
-  String get lblDoYouWantToDelete => "Do you want to delete?";
+  String get lblDoYouWantToDelete => "Удалить?";
 
   @override
-  String get lblPleaseEnterMobileNumber => "Please Enter Mobile Number";
+  String get lblPleaseEnterMobileNumber =>
+      "Пожалуйста, введите номер телефона";
 
   @override
-  String get lblDangerZone => "Danger Zone";
+  String get lblDangerZone => "Опасная зона";
 
   @override
-  String get lblDeleteAccount => "Delete Account";
+  String get lblDeleteAccount => "Удалить аккаунт";
 
   @override
   String get lblDeleteAccountConformation =>
-      "Your account will be deleted permanently. Your Data will not be Restored Again.";
+      "Ваш аккаунт будет удалён навсегда. Данные восстановить невозможно.";
 
   @override
-  String get lblUnderMaintenance => "Under Maintenance...";
+  String get lblUnderMaintenance => "Техническое обслуживание...";
 
   @override
-  String get lblCatchUpAfterAWhile => "Catch Up After A While";
+  String get lblCatchUpAfterAWhile => "Вернитесь позже";
 
   @override
-  String get lblRecheck => "Recheck";
+  String get lblRecheck => "Проверить снова";
 
   @override
-  String get lblTrialFor => "Trial For";
+  String get lblTrialFor => "Пробный период";
 
   @override
-  String get lblDays => "Day(s)";
+  String get lblDays => "Дн.";
 
   @override
-  String get lblFreeTrial => "Free Trial";
+  String get lblFreeTrial => "Бесплатная проба";
 
   @override
-  String get lblAtLeastOneImage => "Choose at-least One Image";
+  String get lblAtLeastOneImage => "Выберите хотя бы одно изображение";
 
   @override
-  String get lblService => "Service";
+  String get lblService => "Услуга";
 
   @override
-  String get lblNewUpdate => "New Update";
+  String get lblNewUpdate => "Новое обновление";
 
   @override
-  String get lblOptionalUpdateNotify => "Optional Update Notify";
+  String get lblOptionalUpdateNotify => "Уведомление об опциональном обновлении";
 
   @override
-  String get lblAnUpdateTo => "An Update to ";
+  String get lblAnUpdateTo => "Обновление для ";
 
   @override
   String get lblIsAvailableWouldYouLike =>
-      "is available. Would you like to update?";
+      "доступно. Хотите обновить?";
 
   @override
   String lblAreYouSureYouWantToAssignThisServiceTo(String name) =>
-      "Do you want to assign this service to $name?";
+      "Назначить эту услугу пользователю $name?";
 
   @override
   String get lblAreYouSureYouWantToAssignToYourself =>
-      "Do you want to Assign to yourself?";
+      "Назначить себе?";
 
   @override
-  String get lblAssignToMyself => "Assign to Myself";
+  String get lblAssignToMyself => "Назначить себе";
 
   @override
-  String get lblFree => "Free";
+  String get lblFree => "Бесплатно";
 
   @override
-  String get lblMyProvider => "My Provider";
+  String get lblMyProvider => "Мой провайдер";
 
   @override
-  String get lblAvailableStatus => "Available Status";
+  String get lblAvailableStatus => "Статус доступности";
 
   @override
-  String get lblYouAre => "You are";
+  String get lblYouAre => "Вы";
 
   @override
-  String get lblEmailIsVerified => "Email is verified";
+  String get lblEmailIsVerified => "Email подтверждён";
 
   @override
-  String get lblHelp => "Help";
+  String get lblHelp => "Помощь";
 
   @override
-  String get lblAddYourCountryCode => "Add your country code";
+  String get lblAddYourCountryCode => "Добавьте код страны";
 
   @override
-  String get lblRegistered => "registered";
+  String get lblRegistered => "зарегистрирован(а)";
 
   @override
-  String get lblRequiredAfterCountryCode => "required after country code";
+  String get lblRequiredAfterCountryCode => "обязательно после кода страны";
 
   @override
-  String get lblExtraCharges => "Extra Charges";
+  String get lblExtraCharges => "Дополнительные расходы";
 
   @override
-  String get lblAddExtraCharges => "Add Extra Charges";
+  String get lblAddExtraCharges => "Добавить доп. расходы";
 
   @override
-  String get lblCompleted => "Complete";
+  String get lblCompleted => "Завершено";
 
   @override
-  String get lblAddExtraChargesDetail => "Add Charges Detail";
+  String get lblAddExtraChargesDetail => "Детали дополнительных расходов";
 
   @override
-  String get lblEnterExtraChargesDetail => "Enter Charges Detail";
+  String get lblEnterExtraChargesDetail => "Введите детали расходов";
 
   @override
-  String get lblTotalCharges => "Total Extra Charges";
+  String get lblTotalCharges => "Итого доп. расходы";
 
   @override
-  String get lblSuccessFullyAddExtraCharges => "SuccessFully Add Extra Charges";
+  String get lblSuccessFullyAddExtraCharges =>
+      "Дополнительные расходы успешно добавлены";
 
   @override
-  String get lblChargeName => "Charge Detail";
+  String get lblChargeName => "Деталь расхода";
 
   @override
-  String get lblPrice => "Price";
+  String get lblPrice => "Цена";
 
   @override
-  String get lblEnterAmount => "Enter Amount";
+  String get lblEnterAmount => "Введите сумму";
 
   @override
-  String get lblHourly => "Hourly";
+  String get lblHourly => "Почасовая";
 
   @override
-  String get noBookingTitle => "No Booking Found";
+  String get noBookingTitle => "Бронирования не найдены";
 
   @override
   String get noBookingSubTitle =>
-      "Looks like your customer haven't book your services yet";
+      "Похоже, клиенты ещё не бронировали ваши услуги";
 
   @override
-  String get noNotificationTitle => "It Looks A Bit Empty Here";
+  String get noNotificationTitle => "Здесь пока пусто";
 
   @override
   String get noNotificationSubTitle =>
-      "We'll notify you once we have something for you";
+      "Мы сообщим вам, когда появится что-то новое";
 
   @override
-  String get noHandymanAvailable => "Handyman Not Available";
+  String get noHandymanAvailable => "Мастер недоступен";
 
   @override
-  String get noHandymanYet => "No Handyman Yet";
+  String get noHandymanYet => "Мастеров пока нет";
 
   @override
   String get noHandymanSubTitle =>
-      "Please check and handyman status active first";
+      "Проверьте, что статус мастера активен";
 
   @override
-  String get noServiceFound => "No Service Found";
+  String get noServiceFound => "Услуги не найдены";
 
   @override
   String get noServiceSubTitle =>
-      "Hurry Up! Add services for customer and expand your work";
+      "Добавьте услуги и расширяйте свою работу";
 
   @override
-  String get noServiceAddressTitle => "Service Address Not Found";
+  String get noServiceAddressTitle => "Адрес обслуживания не найден";
 
   @override
   String get noServiceAddressSubTitle =>
-      "Add your service address first then it will appear here";
+      "Добавьте адрес обслуживания, и он появится здесь";
 
   @override
-  String get noSubscriptionPlan => "No Subscription Plan Here";
+  String get noSubscriptionPlan => "Здесь нет тарифных планов";
 
   @override
-  String get noSubscriptionFound => "No Subscription Found";
+  String get noSubscriptionFound => "Подписки не найдены";
 
   @override
-  String get noSubscriptionSubTitle => "You haven't subscribe any subscription";
+  String get noSubscriptionSubTitle =>
+      "Вы ещё не оформили подписку";
 
   @override
-  String get noTexesFound => 'لم يتم العثور على تكساس';
+  String get noTexesFound => 'Налоги не найдены';
 
   @override
-  String get noWalletHistoryTitle => "No Wallet History Found";
+  String get noWalletHistoryTitle => "История кошелька не найдена";
 
   @override
   String get noWalletHistorySubTitle =>
-      "You didn't top-up yet. Top-up your wallet to see here";
+      "Вы ещё не пополняли кошелёк. Пополните, чтобы увидеть историю";
 
   @override
-  String get noExtraChargesHere => "No Extra Charges Here";
+  String get noExtraChargesHere => "Доп. расходов нет";
 
   @override
-  String get getYourFirstReview => "Get your first review";
+  String get getYourFirstReview => "Получите свой первый отзыв";
 
   @override
   String get ratingViewAllSubtitle =>
-      "Capture high-quality product reviews for your service";
+      "Собирайте качественные отзывы о ваших услугах";
 
   @override
-  String get noDocumentFound => "No Document Found";
+  String get noDocumentFound => "Документы не найдены";
 
   @override
-  String get noDocumentSubTitle => "No document for verify";
+  String get noDocumentSubTitle => "Нет документа для проверки";
 
   @override
-  String get noConversation => "No Conversation";
+  String get noConversation => "Нет переписок";
 
   @override
-  String get jobRequestList => 'Job Request List';
+  String get jobRequestList => 'Список заявок';
 
   @override
-  String get bidList => 'Bid List';
+  String get bidList => 'Список ставок';
 
   @override
-  String get bid => 'Bid';
+  String get bid => 'Отправить предложение';
 
   @override
-  String get postJobTitle => 'Post Job Title';
+  String get postJobTitle => 'Название работы';
 
   @override
-  String get postJobDescription => 'Post Job Description';
+  String get postJobDescription => 'Описание работы';
 
   @override
-  String get jobPrice => 'Job Price';
+  String get jobPrice => 'Цена работы';
 
   @override
-  String get estimatedPrice => 'Estimated Price';
+  String get estimatedPrice => 'Оценочная цена';
 
   @override
-  String get assignedProvider => 'Assigned Provider';
+  String get assignedProvider => 'Назначенный провайдер';
 
   @override
-  String get giveYourEstimatePriceHere => 'Give your estimate price here';
+  String get giveYourEstimatePriceHere => 'Укажите здесь вашу оценочную цену';
 
   @override
-  String get pleaseEnterValidBidPrice => 'Please enter valid Bid price';
+  String get pleaseEnterValidBidPrice =>
+      'Пожалуйста, введите корректную цену ставки';
 
   @override
   String get yourPriceShouldNotBeLessThan =>
-      'Your price should not be less than';
+      'Ваша цена не должна быть меньше';
 
   @override
-  String get enterBidPrice => 'Enter Bid Price';
+  String get enterBidPrice => 'Введите цену ставки';
 
   @override
-  String get myBid => 'My Bid';
+  String get myBid => 'Моя ставка';
 
   @override
-  String get inputMustBeNumberOrDigit => 'Input must be number or digit';
+  String get lblExpired => 'Истёк';
 
   @override
-  String get requiredAfterCountryCode => 'required after country code';
+  String lblDaysLeft(int days) {
+    if (days == 1) return '$days день осталось';
+    if (days >= 2 && days <= 4) return '$days дня осталось';
+    return '$days дней осталось';
+  }
 
   @override
-  String get thisSlotIsNotAvailable => 'This Slot is not available';
+  String lblDaysRemaining(int days) {
+    if (days == 1) return '$days день осталось';
+    if (days >= 2 && days <= 4) return '$days дня осталось';
+    return '$days дней осталось';
+  }
 
   @override
-  String get notes => 'Notes:';
+  String get lblExpiryDays => 'Дни до истечения';
 
   @override
-  String get timeSlotsNotes1 => 'Time Slots are only for Providers.';
+  String lblExpiryDaysFormat(int days) {
+    if (days == 1) return 'Истечение: $days день';
+    if (days >= 2 && days <= 4) return 'Истечение: $days дня';
+    return 'Истечение: $days дней';
+  }
+
+  @override
+  String get lblJobExpiredMessage => 'Этот запрос на работу истёк и больше не доступен для ставок.';
+
+  @override
+  String get lblBiddingNotAvailable => 'Ставки недоступны для этого запроса на работу.';
+
+  @override
+  String get inputMustBeNumberOrDigit => 'Введите число';
+
+  @override
+  String get requiredAfterCountryCode => 'обязательно после кода страны';
+
+  @override
+  String get thisSlotIsNotAvailable => 'Этот слот недоступен';
+
+  @override
+  String get notes => 'Примечания:';
+
+  @override
+  String get timeSlotsNotes1 => 'Слоты времени доступны только провайдерам.';
 
   @override
   String get timeSlotsNotes2 =>
-      'You can set Time Slot availability for each Service.';
+      'Вы можете настроить доступность слотов времени для каждой услуги.';
 
   @override
   String get timeSlotsNotes3 =>
-      'Customer will be able to see the Time Slots only when you enable it in a particular Service.';
+      'Клиент увидит слоты времени только когда вы включите их для конкретной услуги.';
 
   @override
-  String get noSlotsAvailable => 'No Slots Available';
+  String get noSlotsAvailable => 'Нет доступных слотов';
 
   @override
-  String get timeSlots => 'Time Slots';
+  String get timeSlots => 'Слоты времени';
 
   @override
-  String get selectYourDay => 'Select Your Day';
+  String get selectYourDay => 'Выберите день';
 
   @override
-  String get chooseTime => 'Choose Time';
+  String get chooseTime => 'Выберите время';
 
   @override
-  String get copyTo => 'Copy To';
+  String get copyTo => 'Копировать в';
 
   @override
   String get pleaseWaitWhileWeChangeTheStatus =>
-      'Please wait while we change the status';
+      'Пожалуйста, подождите, пока мы изменяем статус';
 
   @override
-  String get myTimeSlots => 'My Time Slots';
+  String get myTimeSlots => 'Мои слоты времени';
 
   @override
-  String get day => 'Day';
+  String get day => 'День';
 
   @override
-  String get pleaseSelectServiceAddresses => 'Please Select Service Addresses';
+  String get pleaseSelectServiceAddresses =>
+      'Пожалуйста, выберите адреса обслуживания';
 
   @override
-  String get pleaseSelectImages => 'Please Select images';
+  String get pleaseSelectImages => 'Пожалуйста, выберите изображения';
 
   @override
-  String get timeSlotAvailable => 'Time Slot Available';
+  String get timeSlotAvailable => 'Слот доступен';
 
   @override
   String get doesThisServicesContainsTimeslot =>
-      'Does this services contains timeslot';
+      'Содержит ли эта услуга слоты времени';
 
   @override
   String get pleaseEnterTheDefaultTimeslotsFirst =>
-      'Please enter the default timeslots First';
+      'Пожалуйста, сначала введите слоты по умолчанию';
 
   @override
-  String get chooseAction => 'Choose Action';
+  String get chooseAction => 'Выберите действие';
 
   @override
-  String get chooseImage => 'Choose Image';
+  String get chooseImage => 'Выберите изображение';
 
   @override
-  String get removeImage => 'Remove Image';
+  String get removeImage => 'Удалить изображение';
 
   @override
-  String get availableAt => 'Available Location';
+  String get availableAt => 'Доступная локация';
 
   @override
-  String get clearChat => 'Clear chat';
+  String get clearChat => 'Очистить чат';
 
   @override
-  String get internetNotAvailable => 'Your internet appears to be offline';
+  String get internetNotAvailable => 'Похоже, у вас нет интернет-соединения';
 
   @override
-  String get pleaseTryAgain => 'Please try again';
+  String get pleaseTryAgain => 'Пожалуйста, попробуйте снова';
 
   @override
-  String get somethingWentWrong => 'Something Went Wrong';
+  String get somethingWentWrong => 'Что-то пошло не так';
 
   @override
-  String get upcomingBookings => 'Upcoming Bookings';
+  String get upcomingBookings => 'Предстоящие бронирования';
 
   @override
-  String get postJob => 'Post Job';
+  String get postJob => 'Опубликовать работу';
 
   @override
-  String get categoryBasedPackage => 'Category based Package';
+  String get categoryBasedPackage => 'Пакет по категории';
 
   @override
   String get subTitleOfSelectService =>
-      'The feature allows you to select single or multiple services from a single category';
+      'Функция позволяет выбрать одну или несколько услуг из одной категории';
 
   @override
-  String get enabled => 'Enabled';
+  String get enabled => 'Включено';
 
   @override
-  String get disabled => 'Disabled';
+  String get disabled => 'Отключено';
 
   @override
-  String get doYouWantTo => 'Do you want to';
+  String get doYouWantTo => 'Хотите';
 
   @override
-  String get enable => 'enable';
+  String get enable => 'включить';
 
   @override
-  String get disable => 'disable';
+  String get disable => 'отключить';
 
   @override
-  String get package => 'Package';
+  String get package => 'Пакет';
 
   @override
-  String get packages => 'Packages';
+  String get packages => 'Пакеты';
 
   @override
-  String get packageService => 'Package Service';
+  String get packageService => 'Услуга пакета';
 
   @override
   String get confirmationRemovePackage =>
-      'Do want remove this service from the package?';
+      'Удалить эту услугу из пакета?';
 
   @override
-  String get packageName => 'Package Name';
+  String get packageName => 'Название пакета';
 
   @override
-  String get selectService => 'Select Service';
+  String get selectService => 'Выберите услугу';
 
   @override
-  String get packageDescription => 'Package Description';
+  String get packageDescription => 'Описание пакета';
 
   @override
-  String get packagePrice => 'Package Price';
+  String get packagePrice => 'Цена пакета';
 
   @override
-  String get startDate => 'Start Date';
+  String get startDate => 'Дата начала';
 
   @override
-  String get endDate => 'End Date';
+  String get endDate => 'Дата окончания';
 
   @override
-  String get pleaseSelectService => 'Please Select Service';
+  String get pleaseSelectService => 'Пожалуйста, выберите услугу';
 
   @override
-  String get pleaseEnterTheEndDate => 'Please enter the end date';
+  String get pleaseEnterTheEndDate => 'Пожалуйста, введите дату окончания';
 
   @override
-  String get editPackage => 'Edit Package';
+  String get editPackage => 'Редактировать пакет';
 
   @override
-  String get addPackage => 'Add Package';
+  String get addPackage => 'Добавить пакет';
 
   @override
-  String get areYouSureWantToDeleteThe => 'Are you sure want to delete the';
+  String get areYouSureWantToDeleteThe => 'Вы уверены, что хотите удалить';
 
   @override
-  String get packageNotAvailable => 'Package Not Available';
+  String get packageNotAvailable => 'Пакет недоступен';
 
   @override
-  String get includedInThisPackage => 'Included in this Package';
+  String get includedInThisPackage => 'Входит в этот пакет';
 
   @override
   String get packageServicesWillAppearHere =>
-      'Package services will appear here';
+      'Услуги пакета появятся здесь';
 
   @override
   String get showingFixPriceServices =>
-      'Showing fix price Services (Excluded Hourly Services)';
+      'Показаны услуги с фиксированной ценой (почасовые услуги исключены)';
 
   @override
-  String get pleaseSelectTheCategory => 'Please Select The Category';
+  String get pleaseSelectTheCategory => 'Пожалуйста, выберите категорию';
 
   @override
-  String get lblInvalidTransaction => 'Invalid Transaction';
+  String get lblInvalidTransaction => 'Недействительная транзакция';
 
   @override
   String get youWillGetTheseServicesWithThisPackage =>
-      'You will get these services with this package';
+      'Вы получите эти услуги с этим пакетом';
 
   @override
-  String get lblSearchFullAddress => 'Search Full Address';
+  String get lblSearchFullAddress => 'Поиск полного адреса';
 
   @override
-  String get lblPleaseSelectCity => 'Please select the city';
+  String get lblPleaseSelectCity => 'Пожалуйста, выберите город';
 
   @override
-  String get lblChooseOneImage => 'Choose at-least one image';
+  String get lblChooseOneImage => 'Выберите хотя бы одно изображение';
 
   @override
-  String get lblNoTransactionFound => 'No Transaction Found';
+  String get lblNoTransactionFound => 'Транзакции не найдены';
 
   @override
   String get lblSubTitleNoTransaction =>
-      'Nothing found in your history yet. Complete services first and then get payment';
+      'Пока ничего не найдено в вашей истории. Завершите услуги и затем получите оплату';
 
   @override
-  String get lblCheckOutWithCinetPay => 'Checkout with CinetPay';
+  String get lblCheckOutWithCinetPay => 'Оплатить через CinetPay';
 
   @override
   String get yourPaymentFailedPleaseTryAgain =>
-      'Your payment failed please try again';
+      'Оплата не прошла. Пожалуйста, попробуйте снова';
 
   @override
   String get yourPaymentHasBeenMadeSuccessfully =>
-      'Your payment has been made successfully';
+      'Оплата успешно выполнена';
 
   @override
-  String get lblTransactionFailed => 'Transaction Failed';
+  String get lblTransactionFailed => 'Транзакция не удалась';
 
   @override
-  String get lblTransactionCancelled => 'Transaction cancelled';
+  String get lblTransactionCancelled => 'Транзакция отменена';
 
   @override
   String get lblStripeTestCredential =>
-      'Testing Credential cannot pay more then 500';
+      'Тестовые данные Stripe не могут оплатить более 500';
 
   @override
-  String get lblSuccessFullyActivated => 'is successfully activated';
+  String get lblSuccessFullyActivated => 'успешно активирован(а)';
 
   @override
-  String get lblNoTaxesFound => 'No Taxes Found';
+  String get lblNoTaxesFound => 'Налоги не найдены';
 
   @override
   String get lblConfirmationForDeleteMsg =>
-      'Do you want to delete the message?';
+      'Вы хотите удалить сообщение?';
 
   @override
-  String get lblImage => 'Image';
+  String get lblImage => 'Изображение';
 
   @override
-  String get lblVideo => 'Video';
+  String get lblVideo => 'Видео';
 
   @override
-  String get lblAudio => 'Audio';
+  String get lblAudio => 'Аудио';
 
   @override
-  String get lblMessage => 'Message';
+  String get lblMessage => 'Сообщение';
 
   @override
-  String get chatCleared => 'Chat Cleared';
+  String get chatCleared => 'Чат очищен';
 
   @override
-  String get lblNoEarningFound => 'No Earning Found';
+  String get lblNoEarningFound => 'Доход не найден';
 
   @override
-  String get lblNoUserFound => 'No User Found';
+  String get lblNoUserFound => 'Пользователь не найден';
 
   @override
-  String get lblTokenExpired => 'Token Expired';
+  String get lblTokenExpired => 'Токен истёк';
 
   @override
-  String get lblFailedToLoadPredictions => 'Failed to load predictions';
+  String get lblFailedToLoadPredictions => 'Не удалось загрузить подсказки';
 
   @override
-  String get personalInfo => 'Personal Info';
+  String get personalInfo => 'Личная информация';
 
   @override
-  String get essentialSkills => 'Essential Skills';
+  String get essentialSkills => 'Ключевые навыки';
 
   @override
-  String get knownLanguages => 'Known Languages';
+  String get knownLanguages => 'Знание языков';
 
   @override
-  String get addEssentialSkill => 'Add Essential Skill';
+  String get addEssentialSkill => 'Добавить ключевой навык';
 
   @override
-  String get addKnownLanguage => 'Add Known Language';
+  String get addKnownLanguage => 'Добавить язык';
 
   @override
-  String get authorBy => 'Author By';
+  String get authorBy => 'Автор';
 
   @override
-  String get views => 'Views';
+  String get views => 'Просмотры';
 
   @override
-  String get deleteBlogTitle => 'Do want to delete this blog?';
+  String get deleteBlogTitle => 'Удалить этот блог?';
 
   @override
-  String get enterBlogTitle => 'Enter your blog title';
+  String get enterBlogTitle => 'Введите заголовок блога';
 
   @override
-  String get updateBlog => 'Update Blog';
+  String get updateBlog => 'Обновить блог';
 
   @override
-  String get addBlog => 'Add Blog';
+  String get addBlog => 'Добавить блог';
 
   @override
-  String get blogs => 'Blogs';
+  String get blogs => 'Блоги';
 
   @override
-  String get noBlogsFound => 'No Blogs Found';
+  String get noBlogsFound => 'Блоги не найдены';
 
   @override
-  String get aboutYou => 'About you';
+  String get aboutYou => 'О себе';
 
   @override
-  String get pleaseAddKnownLanguage => 'Please add known language';
+  String get pleaseAddKnownLanguage => 'Пожалуйста, добавьте язык';
 
   @override
-  String get pleaseAddEssentialSkill => 'Please add essential skill';
+  String get pleaseAddEssentialSkill => 'Пожалуйста, добавьте навык';
 
   @override
-  String get published => 'Published';
+  String get published => 'Опубликовано';
 
   @override
-  String get clearChatMessage => 'Do you want to clear this chat?';
+  String get clearChatMessage => 'Очистить этот чат?';
 
   @override
-  String get all => 'All';
+  String get all => 'Все';
 
   @override
-  String get accepted => 'Accepted';
+  String get accepted => 'Принято';
 
   @override
-  String get onGoing => 'On Going';
+  String get onGoing => 'В процессе';
 
   @override
-  String get inProgress => 'In Progress';
+  String get inProgress => 'В работе';
 
   @override
-  String get hold => 'Hold';
+  String get hold => 'На удержании';
 
   @override
-  String get cancelled => 'Cancelled';
+  String get cancelled => 'Отменено';
 
   @override
-  String get rejected => 'Rejected';
+  String get rejected => 'Отклонено';
 
   @override
-  String get failed => 'Failed';
+  String get failed => 'Не удалось';
 
   @override
-  String get completed => 'Completed';
+  String get completed => 'Завершено';
 
   @override
-  String get pendingApproval => 'Pending Approval';
+  String get pendingApproval => 'Ожидает одобрения';
 
   @override
-  String get waiting => 'Waiting';
+  String get waiting => 'Ожидание';
 
   @override
-  String get paid => 'Paid';
+  String get paid => 'Оплачено';
 
   @override
-  String get advancePaid => 'Advance Paid';
+  String get advancePaid => 'Аванс оплачен';
 
   @override
-  String get advancePayAmountPer => 'Advance Pay Amount (%)';
+  String get advancePayAmountPer => 'Сумма аванса (%)';
 
   @override
-  String get enablePrePayment => 'Enable Pre-Payment';
+  String get enablePrePayment => 'Включить предоплату';
 
   @override
   String get enablePrePaymentMessage =>
-      'This enables the service to be paid for in advance';
+      'Это позволяет оплачивать услугу заранее';
 
   @override
-  String get invalidInput => 'Invalid input';
+  String get invalidInput => 'Неверный ввод';
 
   @override
-  String get remainingAmount => 'Remaining Amount';
+  String get remainingAmount => 'Оставшаяся сумма';
 
   @override
-  String get advancePayment => 'Advance Payment';
+  String get advancePayment => 'Предоплата';
 
   @override
-  String get valueConditionMessage => 'Value should be in 0 to 99';
+  String get valueConditionMessage => 'Значение должно быть от 0 до 99';
 
   @override
   String get withExtraAndAdvanceCharge =>
-      'With Extra charge and Advance payment';
+      'С доп. расходами и предоплатой';
 
   @override
-  String get withExtraCharge => 'With Extra Charge';
+  String get withExtraCharge => 'С доп. расходами';
 
   @override
-  String get min => 'min';
+  String get min => 'мин';
 
   @override
-  String get hour => 'hour';
+  String get hour => 'час';
 
   @override
-  String get lblChangeCountry => "Change Country";
+  String get lblChangeCountry => "Сменить страну";
 
   @override
-  String get lblExample => "Example";
+  String get lblExample => "Пример";
 
   @override
-  String get active => 'Active';
+  String get active => 'Активный';
 
   @override
-  String get inactive => 'Inactive';
+  String get inactive => 'Неактивный';
 
   @override
-  String get use24HourFormat => 'Use 24-hour format?';
+  String get use24HourFormat => 'Использовать 24-часовой формат?';
 
   @override
-  String get successfullyActivated => 'is successfully activated';
+  String get successfullyActivated => 'успешно активирован(а)';
 
   @override
-  String get providerHome => 'Provider Home';
+  String get providerHome => 'Главная (Провайдер)';
 
   @override
-  String get handymanHome => 'Handyman Home';
+  String get handymanHome => 'Главная (Мастер)';
 
   @override
-  String get home => 'Home';
+  String get home => 'Главная';
 
   @override
-  String get selectPlanSubTitle => 'Choose a plan tailored to your needs';
+  String get homeFilter => 'Дом';
 
   @override
-  String get userRole => 'User Role';
+  String get apartment => 'Квартира';
 
   @override
-  String get paymentHistory => 'Payment History';
+  String get onboardingTitle1 => 'Создайте аккаунт';
+  @override
+  String get onboardingText1 => 'Зарегистрируйтесь или войдите быстро. Заполните профиль, чтобы публиковать заявки и легко общаться с мастерами.';
+  @override
+  String get onboardingTitle2 => 'Оставьте заявку и получайте предложения';
+  @override
+  String get onboardingText2 => 'Опишите, что нужно, укажите адрес и ориентировочную цену. Мастера рядом пришлют предложения, вы выберете подходящий вариант.';
+  @override
+  String get onboardingTitle3 => 'Выберите мастера и следите за бронированием';
+  @override
+  String get onboardingText3 => 'Сравните предложения, выберите мастера и подтвердите дату и время. Следите за статусом заказа в реальном времени, общайтесь в чате или по звонку.';
+  @override
+  String get providerInstructionsTitle => 'Инструкция для мастеров';
+  @override
+  String get providerInstructionsText => 'Просматривайте заявки рядом, отправляйте своё предложение и ведите бронирование до завершения. Ознакомьтесь с кратким гидом для удобной работы в приложении.';
+  @override
+  String get readInstructions => 'Читать инструкцию';
+  @override
+  String get skip => 'Пропустить';
+  @override
+  String get next => 'Далее';
 
   @override
-  String get theService => 'the service';
+  String get selectPlanSubTitle => 'Выберите план, подходящий вашим потребностям';
 
   @override
-  String get selectDuration => 'Select Duration';
+  String get userRole => 'Роль пользователя';
 
   @override
-  String get thisServiceMayTake => 'This service may take';
+  String get paymentHistory => 'История платежей';
+
+  @override
+  String get theService => 'услугу';
+
+  @override
+  String get selectDuration => 'Выберите длительность';
+
+  @override
+  String get thisServiceMayTake => 'Эта услуга может занять';
 
   @override
   String get priceAmountValidationMessage =>
-      'Price amount should be greater than 0';
+      'Сумма должна быть больше 0';
 
   @override
-  String get lblFeatureBlog => 'This is featured Blog';
+  String get lblFeatureBlog => 'Это избранный блог';
 
   @override
   String get changePasswordTitle =>
-      'Your new password must be different from previous used password';
+      'Новый пароль должен отличаться от ранее использованного';
 
   @override
   String get forgotPasswordSubtitle =>
-      'A reset password link will be sent to the above entered email address';
+      'Ссылка для сброса пароля будет отправлена на указанный email';
 
   @override
-  String get badRequest => '400: Bad Request';
+  String get badRequest => '400: Неверный запрос';
 
   @override
-  String get forbidden => '403: Forbidden';
+  String get forbidden => '403: Доступ запрещён';
 
   @override
-  String get pageNotFound => '404: Page Not Found';
+  String get pageNotFound => '404: Страница не найдена';
 
   @override
-  String get tooManyRequests => '429: Too Many Requests';
+  String get tooManyRequests => '429: Слишком много запросов';
 
   @override
-  String get internalServerError => '500: Internal Server Error';
+  String get internalServerError => '500: Внутренняя ошибка сервера';
 
   @override
-  String get badGateway => '502: Bad Gateway';
+  String get badGateway => '502: Ошибка шлюза';
 
   @override
-  String get serviceUnavailable => '503: Service Unavailable';
+  String get serviceUnavailable => '503: Сервис недоступен';
 
   @override
-  String get gatewayTimeout => '504: Gateway Timeout';
+  String get gatewayTimeout => '504: Время ожидания истекло';
 
   @override
-  String get requested => 'Requested';
+  String get requested => 'Запрошено';
 
   @override
-  String get assigned => 'Assigned';
+  String get assigned => 'Назначено';
 
   @override
-  String get reload => 'Reload';
+  String get reload => 'Перезагрузить';
 
   @override
-  String get noConversationSubTitle => "You didn't made any conversation yet";
+  String get noConversationSubTitle => "Вы ещё не начинали переписку";
 
   @override
   String get noServiceAccordingToCoordinates =>
-      'Could not find any result for the supplied address or coordinates';
+      'Не удалось найти результат для указанного адреса или координат';
 
   @override
-  String get isNotValid => 'is not valid';
+  String get isNotValid => 'не является корректным';
 
   @override
-  String get unlimited => 'Unlimited';
+  String get unlimited => 'Без ограничений';
 
   @override
-  String get upTo => 'upto';
+  String get upTo => 'до';
 
   // NEW
   @override
-  String get amountToBeReceived => "Amount to be received";
+  String get amountToBeReceived => "Сумма к получению";
 
   @override
-  String get yourCashPaymentForBookingId => "Your Cash Payment for";
+  String get yourCashPaymentForBookingId => "Ваш наличный платёж за";
 
   @override
-  String get isAcceptedAsOn => "is Accepted as on";
+  String get isAcceptedAsOn => "принят по состоянию на";
 
   @override
-  String get sendCashToProvider => "Send Cash to Provider";
+  String get sendCashToProvider => "Отправить наличные провайдеру";
 
   @override
-  String get sendCashToAdmin => "Send Cash to Admin";
+  String get sendCashToAdmin => "Отправить наличные администратору";
 
   @override
-  String get cashPaymentApproval => "Cash Payment Approval";
+  String get cashPaymentApproval => "Подтверждение наличной оплаты";
 
   @override
-  String get approvedByHandyman => "Approved by Handyman";
+  String get approvedByHandyman => "Одобрено мастером";
 
   @override
-  String get sentToProvider => "Sent to Provider";
+  String get sentToProvider => "Отправлено провайдеру";
 
   @override
-  String get pendingByProvider => "Pending by Provider";
+  String get pendingByProvider => "Ожидает у провайдера";
 
   @override
-  String get approvedByProvider => "Approved by Provider";
+  String get approvedByProvider => "Одобрено провайдером";
 
   @override
-  String get pendingByAdmin => "Pending by Admin";
+  String get pendingByAdmin => "Ожидает у администратора";
 
   @override
-  String get approvedByAdmin => "Approved by Admin";
+  String get approvedByAdmin => "Одобрено администратором";
 
   @override
-  String get sentToAdmin => "Sent to Admin";
+  String get sentToAdmin => "Отправлено администратору";
 
   @override
-  String get ofTransfer => "of Transfer";
+  String get ofTransfer => "перевода";
 
   @override
-  String get refNumber => "Ref. Number";
+  String get refNumber => "Реф. номер";
 
   @override
-  String get todaySEarning => "Today's Earning";
+  String get todaySEarning => "Доход за сегодня";
 
   @override
-  String get cash => "Cash";
+  String get cash => "Наличные";
 
   @override
-  String get bank => "Bank";
+  String get bank => "Банк";
 
   @override
-  String get handymanApprovedTheRequest => "Handyman approved the request";
+  String get handymanApprovedTheRequest => "Мастер одобрил запрос";
 
   @override
-  String get requestSentToTheProvider => "Request sent to the provider";
+  String get requestSentToTheProvider => "Запрос отправлен провайдеру";
 
   @override
-  String get requestSentToTheAdmin => "Request sent to the admin";
+  String get requestSentToTheAdmin => "Запрос отправлен администратору";
 
   @override
   String get requestPendingWithTheProvider =>
-      "Request pending with the provider";
+      "Запрос ожидает у провайдера";
 
   @override
-  String get providerApprovedTheRequest => "Provider approved the request";
+  String get providerApprovedTheRequest => "Провайдер одобрил запрос";
 
   @override
-  String get requestPendingWithTheAdmin => "Request pending with the admin";
+  String get requestPendingWithTheAdmin =>
+      "Запрос ожидает у администратора";
 
   @override
-  String get adminApprovedTheRequest => "Admin approved the request";
+  String get adminApprovedTheRequest => "Администратор одобрил запрос";
 
   @override
-  String get today => "Today";
+  String get today => "Сегодня";
 
   @override
-  String get yesterday => "Yesterday";
+  String get yesterday => "Вчера";
 
   @override
-  String get customDate => "Custom Date";
+  String get customDate => "Своя дата";
 
   @override
-  String get totalCash => "Total Cash in Hand";
+  String get totalCash => "Всего наличных на руках";
 
   @override
-  String get tomorrow => "Tomorrow";
+  String get tomorrow => "Завтра";
 
   @override
-  String get cashList => "Cash List";
+  String get cashList => "Список наличных";
 
   @override
-  String get sortBy => "Sort by";
+  String get sortBy => "Сортировать по";
 
   @override
-  String get noPaymentsFounds => "No Payments founds";
+  String get noPaymentsFounds => "Платежи не найдены";
 
   @override
-  String get cashBalance => "Cash Balance";
+  String get cashBalance => "Баланс наличных";
 
   @override
-  String get close => "Close";
+  String get close => "Закрыть";
 
   @override
-  String get retryPaymentDetails => "Retry Payment Details";
+  String get retryPaymentDetails => "Повторить детали платежа";
 
   @override
-  String get totalAmountToPay => "Total Amount to Pay";
+  String get totalAmountToPay => "Итого к оплате";
 
   @override
-  String get from => "From";
+  String get from => "От";
 
   @override
-  String get booking => "Booking";
+  String get booking => "Бронирование";
 
   @override
-  String get choosePaymentMethod => "Choose Payment Method";
+  String get choosePaymentMethod => "Выберите способ оплаты";
 
   @override
-  String get sendToAdmin => "Send To Admin";
+  String get sendToAdmin => "Отправить администратору";
 
   @override
-  String get sendToProvider => "Send to Provider";
+  String get sendToProvider => "Отправить провайдеру";
 
   @override
-  String get detailsOfTheBank => "Details of the bank";
+  String get detailsOfTheBank => "Детали банка";
 
   @override
   String get selectABankTransferMoneyAndEnterTheReferenceIDInTheTextFieldBelow =>
-      "Select a bank, transfer money, and enter the reference ID in the text field below.";
+      "Выберите банк, переведите деньги и введите ID ссылки в поле ниже.";
 
   @override
-  String get noBanksAvailable => "No banks available";
+  String get noBanksAvailable => "Нет доступных банков";
 
   @override
   String get chooseCashOrContactAdminForBankInformation =>
-      "Choose cash or contact admin for bank information";
+      "Выберите наличные или свяжитесь с администратором для получения банковской информации";
 
   @override
-  String get bankName => "Bank Name";
+  String get bankName => "Название банка";
 
   @override
-  String get accountNumber => "Account number";
+  String get accountNumber => "Номер счёта";
 
   @override
-  String get iFSCCode => "IFSC code";
+  String get iFSCCode => "Код IFSC";
 
   @override
-  String get bankAddress => "Bank address";
+  String get bankAddress => "Адрес банка";
 
   @override
   String get pleaseWaitWhileWeLoadBankDetails =>
-      "Please wait while we load bank details...";
+      "Пожалуйста, подождите, пока мы загружаем банковские данные...";
 
   @override
-  String get cashPaymentConfirmation => "Cash Payment Confirmation";
+  String get cashPaymentConfirmation => "Подтверждение наличной оплаты";
 
   @override
-  String get remark => "Remark";
+  String get remark => "Комментарий";
 
   @override
   String get pleaseWaitWhileWeLoadChatDetails =>
-      "Please wait while we load chat details...";
+      "Пожалуйста, подождите, пока мы загружаем детали чата...";
 
   @override
-  String get isNotAvailableForChat => "is not available for chat";
+  String get isNotAvailableForChat => "недоступен для чата";
 
   @override
-  String get connectWithFirebaseForChat => "Connect with firebase for chat";
+  String get connectWithFirebaseForChat => "Подключите Firebase для чата";
 
   @override
-  String get admin => 'Admin';
+  String get admin => 'Админ';
 
   @override
-  String get cashStatus => 'Cash Status';
+  String get cashStatus => 'Статус наличных';
 
   @override
-  String get closeApp => 'Close App';
+  String get closeApp => 'Закрыть приложение';
 
   @override
   String get youMustProvideValidCurrentPassword =>
-      'You must provide a valid current password';
+      'Необходимо указать корректный текущий пароль';
 
   @override
-  String get selectUserType => 'Select User Type';
+  String get selectUserType => 'Выберите тип пользователя';
 
   @override
-  String get pleaseSelectCommission => 'Please select commission';
+  String get pleaseSelectCommission => 'Пожалуйста, выберите комиссию';
 
   @override
-  String get copied => 'Copied';
+  String get copied => 'Скопировано';
 
   @override
   String get pleaseContactYourAdmin =>
-      'Your account is inactive. Please contact system administrator.';
+      'Ваш аккаунт неактивен. Пожалуйста, свяжитесь с системным администратором.';
 
   @override
-  String get search => 'Search';
+  String get search => 'Поиск';
 
   @override
   String get wouldYouLikeToAssignThisBooking =>
-      'Would you like to assign this booking?';
+      'Назначить это бронирование?';
 
   @override
-  String get connect => 'Connect';
+  String get connect => 'Подключиться';
 
   @override
-  String get youAreNotConnectedWithChatServer => 'Connect to Chat Server';
+  String get youAreNotConnectedWithChatServer =>
+      'Подключитесь к чат-серверу';
 
   @override
   String get tapBelowButtonToConnectWithOurChatServer =>
-      'You are not connected to the chat server. Tap the button below to connect and start chatting';
+      'Вы не подключены к чат-серверу. Нажмите кнопку ниже, чтобы подключиться и начать общение';
 
   @override
-  String get transactionId => 'Transaction ID';
+  String get transactionId => 'ID транзакции';
 
   @override
-  String get appliedTaxes => 'Applied Taxes';
+  String get appliedTaxes => 'Применённые налоги';
 
   @override
-  String get by => 'by';
+  String get by => 'от';
 
   @override
   String get thisOrderWillBe =>
-      'This order will be marked as completed. Would you like to proceed?';
+      'Этот заказ будет отмечен как завершённый. Продолжить?';
 
   @override
-  String get externalWallet => 'External Wallet';
+  String get externalWallet => 'Внешний кошелёк';
 
   @override
-  String get start => 'Start';
+  String get start => 'Старт';
 
   @override
-  String get digitalService => 'Digital Service';
+  String get digitalService => 'Цифровая услуга';
 
   @override
   String get digitalServiceSwitchSubText =>
-      'Digital service booking with instant status updates in short process for direct interactions';
+      'Бронирование цифровых услуг с мгновенными обновлениями статуса в коротком процессе для прямого взаимодействия';
 
   @override
   String get filterAtLeastOneBookingStatusToast =>
-      'Please ensure you pick at least one Booking Status';
+      'Пожалуйста, выберите хотя бы один статус бронирования';
 
   @override
-  String get apply => 'Apply';
+  String get apply => 'Применить';
 
   @override
-  String get clearFilter => 'Clear Filter';
+  String get clearFilter => 'Очистить фильтр';
 
   @override
-  String get bookingStatus => 'Booking Status';
+  String get bookingStatus => 'Статус бронирования';
 
   @override
-  String get filterBy => 'Filter By';
+  String get filterBy => 'Фильтр по';
 
   @override
   String get cinetpayIsnTSupportedByCurrencies =>
-      "CinetPay isn't supported by your Currencies";
+      "CinetPay не поддерживается вашей валютой";
 
   @override
-  String get totalAmountShouldBeMoreThan => 'Total amount should be more than';
+  String get totalAmountShouldBeMoreThan =>
+      'Итоговая сумма должна быть больше';
 
   @override
-  String get totalAmountShouldBeLessThan => 'Total amount should be less than';
+  String get totalAmountShouldBeLessThan =>
+      'Итоговая сумма должна быть меньше';
 
   @override
   String get pleaseNoteThatAllServiceMarkedCompleted =>
-      'Please Note That all service add-ons marked as completed!';
+      'Обратите внимание: все дополнения к услуге отмечены как выполненные!';
 
   @override
-  String get serviceVisitType => 'Service Visit Type';
+  String get serviceVisitType => 'Тип визита услуги';
 
   @override
   String get thisServiceIsOnlineRemote =>
-      'This service will be completed Online/Remotely.';
+      'Эта услуга будет выполнена онлайн/удалённо.';
 
   @override
-  String get visitOption => 'Visit Option';
+  String get visitOption => 'Вариант визита';
 
   @override
-  String get onSiteVisit => 'On-Site Visit';
+  String get onSiteVisit => 'Выезд на место';
 
   @override
-  String get onlineRemoteService => 'Online/Remote Service';
+  String get onlineRemoteService => 'Онлайн/удалённо';
 
   @override
-  String get addOns => 'Add-ons';
+  String get addOns => 'Дополнения';
 
   @override
-  String get serviceAddOns => 'Service Add-ons';
+  String get serviceAddOns => 'Дополнения к услуге';
 
   @override
-  String get writeHere => 'Write Here';
+  String get writeHere => 'Пишите здесь';
 
   @override
-  String get writeShortLineAbout => 'Write short line about, Why Choose Me?';
+  String get writeShortLineAbout =>
+      'Напишите короткую строку: Почему выбрать меня?';
 
   @override
-  String get reasonsToChooseYour => 'Reasons to choose your service';
+  String get reasonsToChooseYour =>
+      'Причины выбрать вашу услугу';
 
   @override
-  String get addReasons => 'Add Reasons';
+  String get addReasons => 'Добавить причины';
 
   @override
-  String get addReason => 'Add Reason';
+  String get addReason => 'Добавить причину';
 
   @override
-  String get writeReason => 'write reason';
+  String get writeReason => 'Напишите причину';
 
   @override
-  String get pleaseAddReason => 'Please add Reason!';
+  String get pleaseAddReason => 'Пожалуйста, добавьте причину!';
 
   @override
   String get isAvailableGoTo =>
-      'is available. Go to Play Store and Download the New Version of the App.';
+      'доступно. Перейдите в Play Store и скачайте новую версию приложения.';
 
   @override
-  String get later => 'Later';
+  String get later => 'Позже';
 
   @override
-  String get addonServices => 'Addon Services';
+  String get addonServices => 'Дополнительные услуги';
 
   @override
-  String get paymentSuccess => 'Payment Success';
+  String get paymentSuccess => 'Оплата успешна';
 
   @override
-  String get redirectingToBookings => 'Redirecting to bookings..';
+  String get redirectingToBookings => 'Переходим к бронированиям..';
 
   @override
-  String get transactionIsInProcess => 'Transaction is in process...';
+  String get transactionIsInProcess => 'Транзакция в процессе...';
 
   @override
   String get pleaseCheckThePayment =>
-      'Please check the payment request is sent to your number';
+      'Пожалуйста, проверьте запрос на оплату, отправленный на ваш номер';
 
   @override
-  String get enterYourMsisdnHere => 'Enter your msisdn here';
+  String get enterYourMsisdnHere => 'Введите ваш MSISDN';
 
   @override
   String get theTransactionIsStill =>
-      'The transaction is still processing and is in ambiguous state. Please do the transaction enquiry to fetch the transaction status.';
+      'Транзакция всё ещё обрабатывается и находится в неоднозначном состоянии. Выполните запрос статуса транзакции, чтобы получить актуальный статус.';
 
   @override
-  String get transactionIsSuccessful => 'Transaction is successful';
+  String get transactionIsSuccessful => 'Транзакция успешна';
 
   @override
-  String get incorrectPinHasBeen => 'Incorrect Pin has been entered';
+  String get incorrectPinHasBeen => 'Введён неверный PIN';
 
   @override
   String get theUserHasExceeded =>
-      'The User has exceeded their wallet allowed transaction limit';
+      'Пользователь превысил лимит транзакций кошелька';
 
   @override
   String get theAmountUserIs =>
-      'The amount User is trying to transfer is less than the minimum amount allowed';
+      'Сумма меньше минимально разрешённой';
 
   @override
-  String get userDidnTEnterThePin => "User didn't enter the pin";
+  String get userDidnTEnterThePin => "Пользователь не ввёл PIN";
 
   @override
   String get transactionInPendingState =>
-      'Transaction in pending state. Please check after sometime';
+      'Транзакция в ожидании. Проверьте позже';
 
   @override
   String get userWalletDoesNot =>
-      'User wallet does not have enough money to cover the payable amount';
+      'На кошельке пользователя недостаточно средств для оплаты';
 
   @override
-  String get theTransactionWasRefused => 'The transaction was refused';
+  String get theTransactionWasRefused => 'Транзакция была отклонена';
 
   @override
   String get thisIsAGeneric =>
-      'This is a generic refusal that has several possible causes';
+      'Это общий отказ, который может иметь несколько причин';
 
   @override
   String get payeeIsAlreadyInitiated =>
-      'Payee is already initiated for churn or barred or not registered on Airtel Money platform';
+      'Получатель уже инициирован/заблокирован или не зарегистрирован в Airtel Money';
 
   @override
-  String get theTransactionWasTimed => 'The transaction was timed out.';
+  String get theTransactionWasTimed => 'Время транзакции истекло.';
 
   @override
-  String get theTransactionWasNot => 'The transaction was not found.';
+  String get theTransactionWasNot => 'Транзакция не найдена.';
 
   @override
-  String get xSignatureAndPayloadDid => 'x-signature and payload did not match';
+  String get xSignatureAndPayloadDid =>
+      'x-signature и payload не совпали';
 
   @override
   String get encryptionKeyHasBeen =>
-      'Encryption key has been fetched successfully';
+      'Ключ шифрования успешно получен';
 
   @override
-  String get couldNotFetchEncryption => 'Could not fetch encryption key';
+  String get couldNotFetchEncryption =>
+      'Не удалось получить ключ шифрования';
 
   @override
-  String get transactionHasBeenExpired => 'Transaction has been expired';
+  String get transactionHasBeenExpired => 'Срок транзакции истёк';
 
   @override
-  String get airtelMoneyPayment => 'Airtel Money Payment';
+  String get airtelMoneyPayment => 'Оплата Airtel Money';
 
   @override
-  String get addonServiceName => 'Addon Service Name';
+  String get addonServiceName => 'Название доп. услуги';
 
   @override
-  String get editAddonService => 'Edit Addon Service';
+  String get editAddonService => 'Редактировать доп. услугу';
 
   @override
-  String get addAddonService => 'Add Addon Service';
+  String get addAddonService => 'Добавить доп. услугу';
 
   @override
   String get noteYouCanUpload =>
-      'Note: You can upload image with \'jpg\', \'png\', \'jpeg\' extensions & you can select only one image';
+      'Примечание: вы можете загружать изображения с расширениями \'jpg\', \'png\', \'jpeg\' и выбрать только одно изображение';
 
   @override
   String get oppsLooksLikeYou =>
-      'Opps! looks like you have not added any Add-ons Services yet.';
+      'Упс! Похоже, вы ещё не добавили дополнительные услуги.';
 
   @override
-  String get ambiguous => 'Ambiguous';
+  String get ambiguous => 'Неоднозначно';
 
   @override
-  String get success => 'Success';
+  String get success => 'Успешно';
 
   @override
-  String get incorrectPin => 'Incorrect Pin';
+  String get incorrectPin => 'Неверный PIN';
 
   @override
   String get exceedsWithdrawalAmountLimitS =>
-      'Exceeds withdrawal amount limit(s) / Withdrawal amount limit exceeded';
+      'Превышен лимит(ы) снятия / Превышен лимит снятия';
 
   @override
-  String get invalidAmount => 'Invalid Amount';
+  String get invalidAmount => 'Неверная сумма';
 
   @override
-  String get transactionIdIsInvalid => 'Transaction ID is invalid';
+  String get transactionIdIsInvalid => 'Неверный ID транзакции';
 
   @override
-  String get inProcess => 'In process';
+  String get inProcess => 'В процессе';
 
   @override
-  String get notEnoughBalance => 'Not enough balance';
+  String get notEnoughBalance => 'Недостаточно средств';
 
   @override
-  String get refused => 'Refused';
+  String get refused => 'Отклонено';
 
   @override
-  String get doNotHonor => 'Do not honor';
+  String get doNotHonor => 'Не обслуживать';
 
   @override
-  String get transactionNotPermittedTo => 'Transaction not permitted to Payee';
+  String get transactionNotPermittedTo =>
+      'Транзакция не разрешена для получателя';
 
   @override
-  String get transactionTimedOut => 'Transaction Timed Out';
+  String get transactionTimedOut => 'Транзакция истекла (timeout)';
 
   @override
-  String get transactionNotFound => 'Transaction Not Found';
+  String get transactionNotFound => 'Транзакция не найдена';
 
   @override
-  String get forBidden => 'Forbidden';
+  String get forBidden => 'Запрещено';
 
   @override
   String get successfullyFetchedEncryptionKey =>
-      'Successfully fetched Encryption Key';
+      'Ключ шифрования успешно получен';
 
   @override
   String get errorWhileFetchingEncryption =>
-      'Error while fetching encryption key';
+      'Ошибка при получении ключа шифрования';
 
   @override
-  String get transactionExpired => 'Transaction Expired';
+  String get transactionExpired => 'Транзакция истекла';
 
   @override
-  String get pleaseSelectAService => 'Please select a service';
+  String get pleaseSelectAService => 'Пожалуйста, выберите услугу';
 
   @override
-  String get verifyEmail => 'Verify Email';
+  String get verifyEmail => 'Подтвердить email';
 
   @override
-  String get verified => 'Verified';
+  String get verified => 'Подтверждено';
 
   @override
-  String get minRead => 'min read';
+  String get minRead => 'мин чтения';
 
   @override
-  String get loadingChats => 'Loading chats...';
+  String get loadingChats => 'Загрузка чатов...';
 
   @override
-  String get monthly => 'Monthly';
+  String get monthly => 'Ежемесячно';
 
   @override
-  String get mon => 'Mon';
+  String get mon => 'Пн';
 
   @override
-  String get tue => 'Tue';
+  String get tue => 'Вт';
 
   @override
-  String get wed => 'Wed';
+  String get wed => 'Ср';
 
   @override
-  String get thu => 'Thu';
+  String get thu => 'Чт';
 
   @override
-  String get fri => 'Fri';
+  String get fri => 'Пт';
 
   @override
-  String get sat => 'Sat';
+  String get sat => 'Сб';
 
   @override
-  String get sun => 'Sun';
+  String get sun => 'Вс';
 
   @override
-  String get jan => 'Jan';
+  String get jan => 'Янв';
 
   @override
-  String get feb => 'Feb';
+  String get feb => 'Фев';
 
   @override
-  String get mar => 'Mar';
+  String get mar => 'Мар';
 
   @override
-  String get apr => 'Apr';
+  String get apr => 'Апр';
 
   @override
-  String get may => 'May';
+  String get may => 'Май';
 
   @override
-  String get jun => 'Jun';
+  String get jun => 'Июн';
 
   @override
-  String get july => 'July';
+  String get july => 'Июль';
 
   @override
-  String get aug => 'Aug';
+  String get aug => 'Авг';
 
   @override
-  String get sept => 'Sept';
+  String get sept => 'Сен';
 
   @override
-  String get oct => 'Oct';
+  String get oct => 'Окт';
 
   @override
-  String get nov => 'Nov';
+  String get nov => 'Ноя';
 
   @override
-  String get dec => 'Dec';
+  String get dec => 'Дек';
 
   @override
-  String get pushNotification => 'Push Notification';
+  String get pushNotification => 'Push-уведомления';
 
   @override
-  String get sentYouAMessage => 'sent you a message';
+  String get sentYouAMessage => 'отправил(а) вам сообщение';
 
   @override
-  String get deleteMessage => 'Delete Message';
+  String get deleteMessage => 'Удалить сообщение';
 
   @override
-  String get removeThisFile => 'Remove This File';
+  String get removeThisFile => 'Удалить этот файл';
 
   @override
   String get areYouSureWantToRemoveThisFile =>
-      'Are you sure want to remove this file?';
+      'Вы уверены, что хотите удалить этот файл?';
 
   @override
-  String get sendMessage => 'Send Message';
+  String get sendMessage => 'Отправить сообщение';
 
   @override
-  String get handymanLocation => 'Handyman Location';
+  String get handymanLocation => 'Местоположение мастера';
 
   @override
-  String get track => 'Track';
+  String get track => 'Отслеживать';
 
   @override
-  String get trackHandymanLocation => 'Track Handyman Location';
+  String get trackHandymanLocation => 'Отслеживать местоположение мастера';
 
   @override
-  String get lastUpdatedAt => 'Last updated at:';
+  String get lastUpdatedAt => 'Последнее обновление:';
 
   @override
-  String get lblBankDetails => "Bank Details";
+  String get lblBankDetails => "Банковские реквизиты";
 
   @override
-  String get withdraw => "Withdraw";
+  String get withdraw => "Вывести";
 
   @override
-  String get availableBalance => "Available Balance";
+  String get availableBalance => "Доступный баланс";
 
   @override
-  String get withdrawRequest => "Withdraw Request";
+  String get withdrawRequest => "Запрос на вывод";
 
   @override
-  String get chooseBank => "Choose Bank";
+  String get chooseBank => "Выберите банк";
 
   @override
-  String get egCentralNationalBank => 'eg" central national bank"';
+  String get egCentralNationalBank => 'напр.: "central national bank"';
 
   @override
-  String get addBank => "Add bank";
+  String get addBank => "Добавить банк";
 
   @override
-  String get successful => 'Successful';
+  String get successful => 'Успешно';
 
   @override
   String get yourWithdrawalRequestHasBeenSuccessfullySubmitted =>
-      'Your withdrawal request has been successfully submitted.';
+      'Ваш запрос на вывод средств успешно отправлен.';
 
   @override
-  String get done => "Done";
+  String get done => "Готово";
 
   @override
-  String get requestList => "Request List";
+  String get requestList => "Список запросов";
 
   @override
-  String get filter => 'Filter';
+  String get filter => 'Фильтр';
 
   @override
-  String get reset => "Reset";
+  String get reset => "Сброс";
 
   @override
-  String get bankList => "Bank List";
+  String get bankList => "Список банков";
 
   @override
-  String get lbldefault => "Default";
+  String get lbldefault => "По умолчанию";
 
   @override
-  String get setAsDefault => "Set as default";
+  String get setAsDefault => "Сделать по умолчанию";
 
   @override
-  String get branchName => "Branch Name";
+  String get branchName => "Название отделения";
 
   @override
-  String get lblPleaseEnterAccountNumber => "Please Enter Account Number";
+  String get lblPleaseEnterAccountNumber => "Введите номер счёта";
 
   @override
   String get lblAccountNumberMustContainOnlyDigits =>
-      "Account number must contain only digits";
+      "Номер счёта должен содержать только цифры";
 
   @override
   String get lblAccountNumberMustBetween11And16Digits =>
-      "Account number must be between 11 and 16 digits";
+      "Номер счёта должен содержать от 11 до 16 цифр";
 
   @override
-  String get noBankDataTitle => "No Bank Data Found";
+  String get noBankDataTitle => "Банковские данные не найдены";
 
   @override
-  String get noBankDataSubTitle => "You didn't add bank yet";
+  String get noBankDataSubTitle => "Вы ещё не добавили банк";
 
   @override
-  String get eg3000 => 'eg" 3000"';
+  String get eg3000 => 'напр.: "3000"';
 
   @override
-  String get pleaseAddLessThanOrEqualTo => "Please add less than or equal to";
+  String get pleaseAddLessThanOrEqualTo =>
+      "Пожалуйста, добавьте значение меньше или равно";
 
   @override
-  String get deleteBankTitle => 'Are you sure want to delete this Bank?';
+  String get deleteBankTitle => 'Вы уверены, что хотите удалить этот банк?';
 
   @override
-  String get debit => 'Debit';
+  String get debit => 'Дебет';
 
   @override
-  String get credit => 'Credit';
+  String get credit => 'Кредит';
 
   @override
-  String get fullNameOnBankAccount => 'Branch name';
+  String get fullNameOnBankAccount => 'Название отделения';
 
   @override
-  String get updateYourLocation => 'Update your location';
+  String get updateYourLocation => 'Обновить местоположение';
 
   @override
-  String get lbHours => "Hours";
+  String get lbHours => "Часы";
 
   @override
-  String get lbMinutes => "Minutes";
+  String get lbMinutes => "Минуты";
 
   @override
-  String get handymanCommission => 'Handyman Commission';
+  String get handymanCommission => 'Комиссия мастера';
 
   @override
-  String get commission => 'Commission';
+  String get commission => 'Комиссия';
 
   @override
-  String get noCommissionTypeListFound => 'No Commission Type List Found';
+  String get noCommissionTypeListFound => 'Список типов комиссии не найден';
 
   @override
-  String get typeName => 'Type Name';
+  String get typeName => 'Название типа';
 
   @override
-  String get addHandymanCommission => 'Add Handyman Commission';
+  String get addHandymanCommission => 'Добавить комиссию мастера';
 
   @override
-  String get editHandymanCommission => 'Edit Handyman Commission';
+  String get editHandymanCommission => 'Редактировать комиссию мастера';
 
   @override
-  String get enterValidCommissionValue => 'Enter Valid Commission Value';
+  String get enterValidCommissionValue => 'Введите корректное значение комиссии';
 
   @override
-  String get percentage => 'Percentage';
+  String get percentage => 'Процент';
 
   @override
-  String get selectStatus => 'Select Status';
+  String get selectStatus => 'Выберите статус';
 
   @override
-  String get youCanTUpdateDeleted => "You can't update deleted items";
+  String get youCanTUpdateDeleted => "Нельзя обновлять удалённые элементы";
 
   @override
   String get thisCommissionHasBeen =>
-      'This commission has been created by the admin.';
+      'Эта комиссия создана администратором.';
 
   @override
-  String get copyMessage => 'Copy Message';
+  String get copyMessage => 'Копировать сообщение';
 
   @override
-  String get transactions => 'Transactions';
+  String get transactions => 'Транзакции';
 
   @override
-  String get thisYear => 'This Year';
+  String get thisYear => 'Этот год';
 
   @override
-  String get thisMonth => 'This Month';
+  String get thisMonth => 'Этот месяц';
 
   @override
-  String get thisWeek => 'This Week';
+  String get thisWeek => 'Эта неделя';
 
   @override
-  String get providerList => 'Provider List';
+  String get providerList => 'Список провайдеров';
 
   @override
-  String get walletBalance => 'Wallet Balance';
+  String get walletBalance => 'Баланс кошелька';
 
   @override
-  String get remainingPayout => 'Remaining Payout';
+  String get remainingPayout => 'Остаток выплат';
 
   @override
-  String get totalRevenue => 'Total Revenue';
+  String get totalRevenue => 'Общая выручка';
 
   @override
-  String get totalActiveCount => 'Total Active Count:';
+  String get totalActiveCount => 'Всего активных:';
 
   @override
-  String get completedBookings => 'Completed Bookings';
+  String get completedBookings => 'Завершённые бронирования';
 
   @override
-  String get pickAProviderYou => 'Pick A provider you wish to work with';
+  String get pickAProviderYou =>
+      'Выберите провайдера, с которым хотите работать';
 
   @override
-  String get selectedProvider => 'Selected Provider';
+  String get selectedProvider => 'Выбранный провайдер';
 
   @override
   String get youHavePermanentlyDenied =>
-      'You have permanently denied location permission please allow for live location tracking from your settings';
+      'Вы навсегда запретили доступ к геолокации. Разрешите отслеживание в настройках';
 
   @override
-  String get open => 'OPEN';
+  String get open => 'ОТКРЫТО';
 
   @override
-  String get closed => 'CLOSED';
+  String get closed => 'ЗАКРЫТО';
 
   @override
-  String get createBy => 'Create by';
+  String get createBy => 'Создано';
 
   @override
-  String get repliedBy => 'Replied by';
+  String get repliedBy => 'Ответил(а)';
 
   @override
-  String get closedBy => 'Closed by';
+  String get closedBy => 'Закрыл(а)';
 
   @override
-  String get helpDesk => 'Help Desk';
+  String get helpDesk => 'Служба поддержки';
 
   @override
-  String get addNew => 'Add New';
+  String get addNew => 'Добавить';
 
   @override
-  String get queryYet => 'Query Yet';
+  String get queryYet => 'Запросов нет';
 
   @override
   String get toSubmitYourProblems =>
-      'To submit your problems simply press add button and explain your concern';
+      'Чтобы отправить проблему, нажмите «Добавить» и опишите вашу ситуацию';
 
   @override
-  String get noRecordsFoundFor => 'No records found for';
+  String get noRecordsFoundFor => 'Нет записей для';
 
   @override
-  String get queries => 'queries.';
+  String get queries => 'запросов.';
 
   @override
-  String get noActivityYet => 'No Activity Yet';
+  String get noActivityYet => 'Активности пока нет';
 
   @override
-  String get noRecordsFound => 'No records found';
+  String get noRecordsFound => 'Записи не найдены';
 
   @override
-  String get reply => 'Reply';
+  String get reply => 'Ответить';
 
   @override
   String get eGDuringTheService =>
-      'e.g. During the service, the furniture was accidentally damaged.';
+      'напр.: Во время услуги мебель была случайно повреждена.';
 
   @override
-  String get doYouWantClosedThisQuery => 'Do you want closed this query';
+  String get doYouWantClosedThisQuery =>
+      'Хотите закрыть этот запрос';
 
   @override
-  String get markAsClosed => 'Mark as Closed';
+  String get markAsClosed => 'Отметить как закрыто';
 
   @override
   String get youCanMarkThis =>
-      'You can mark this as closed if you are satisfied with our answer';
+      'Вы можете отметить как закрыто, если довольны нашим ответом';
 
   @override
-  String get subject => 'Subject';
+  String get subject => 'Тема';
 
   @override
-  String get eGDamagedFurniture => 'e.g. Damaged furniture';
+  String get eGDamagedFurniture => 'напр.: Повреждённая мебель';
 
   @override
-  String get closedOn => 'Closed on:';
+  String get closedOn => 'Закрыто:';
 
   @override
-  String get on => 'on';
+  String get on => 'в';
 
   @override
-  String get showMessage => 'Show Message';
+  String get showMessage => 'Показать сообщение';
 
   @override
-  String get viewDetail => 'View Detail';
+  String get viewDetail => 'Подробнее';
 
   @override
   String get serviceProofMediaUploadNote =>
-      'Note : You can Upload Image with “JPG” , ‘PNG”, “JPEG” extension and you can select multiple images';
+      'Примечание: можно загрузить изображения “JPG”, ‘PNG”, “JPEG” и выбрать несколько';
 
   @override
-  String get uploadMedia => 'Upload Media';
+  String get uploadMedia => 'Загрузить медиа';
 
   @override
-  String get viewStatus => 'View Status';
+  String get viewStatus => 'Посмотреть статус';
 
   @override
   String get email => 'Email:';
 
   @override
-  String get at => 'at';
+  String get at => 'в';
 
   @override
-  String get general => 'GENERAL';
+  String get general => 'ОБЩЕЕ';
 
   @override
-  String get service => 'SERVICE';
+  String get service => 'УСЛУГА';
 
   @override
-  String get other => 'OTHER';
+  String get other => 'ДРУГОЕ';
 
   @override
-  String get setting => 'SETTING';
+  String get setting => 'НАСТРОЙКИ';
 
   @override
-  String get viewBreakdown => 'View Breakdown';
+  String get viewBreakdown => 'Посмотреть детализацию';
 
   @override
-  String get totalAmount => 'Total Amount:';
+  String get totalAmount => 'Итоговая сумма:';
 
   @override
-  String get role => 'ROLE';
+  String get role => 'РОЛЬ';
 
   @override
-  String get paymentBreakdown => 'Payment Breakdown';
+  String get paymentBreakdown => 'Детализация оплаты';
 
   @override
-  String get paymentType => 'Payment Type';
+  String get paymentType => 'Тип оплаты';
 
   @override
-  String get dateRange => 'Date Range';
+  String get dateRange => 'Диапазон дат';
 
   @override
-  String get providerNotFound => 'Provider Not Found';
+  String get providerNotFound => 'Провайдер не найден';
 
   @override
-  String get noPaymentMethodsFound => 'No Payment Methods Found';
+  String get noPaymentMethodsFound => 'Способы оплаты не найдены';
 
   @override
-  String get handymanNotFound => 'Handyman Not Found';
+  String get handymanNotFound => 'Мастер не найден';
 
   @override
-  String get selectStartDateEndDate => 'Select start date & end date';
+  String get selectStartDateEndDate => 'Выберите дату начала и окончания';
 
   @override
-  String get customerNotFound => 'Customer Not Found';
+  String get customerNotFound => 'Клиент не найден';
 
   @override
-  String get to => 'to';
+  String get to => 'до';
 
   @override
-  String get chooseYourDateRange => 'Choose your Date Range';
+  String get chooseYourDateRange => 'Выберите диапазон дат';
 
   @override
-  String get advancedRefund => 'Advanced Refund';
+  String get advancedRefund => 'Расширенный возврат';
 
   @override
-  String get taxAmount => 'Tax Amount';
+  String get taxAmount => 'Сумма налога';
 
   @override
-  String get lblReassign => 'Reassign';
+  String get lblReassign => 'Переназначить';
 
   @override
-  String get handymanPayoutList => 'Handyman Payout List';
+  String get handymanPayoutList => 'Список выплат мастерам';
 
   @override
-  String get earningDetails => 'Earning Details';
+  String get earningDetails => 'Детали дохода';
 
   @override
-  String get adminEarning => 'Admin Earning';
+  String get adminEarning => 'Доход администратора';
 
   @override
-  String get handymanName => 'Handyman Name';
+  String get handymanName => 'Имя мастера';
 
   @override
-  String get totalEarning => 'Total Earning';
+  String get totalEarning => 'Общий доход';
 
   @override
-  String get myEarning => 'My Earning';
+  String get myEarning => 'Мой доход';
 
   @override
-  String get handymanPayDue => 'Handyman Pay Due';
+  String get handymanPayDue => 'Задолженность мастеру';
 
   @override
-  String get handymanPaidAmount => 'Handyman Paid Amount';
+  String get handymanPaidAmount => 'Выплачено мастеру';
 
   @override
-  String get payout => 'Payout';
+  String get payout => 'Выплата';
 
   @override
-  String get addHandymanPayout => 'Add Handyman Payout';
+  String get addHandymanPayout => 'Добавить выплату мастеру';
 
   @override
-  String get selectMethod => 'Select Method';
+  String get selectMethod => 'Выберите метод';
 
   @override
-  String get handymanEarning => 'Handyman Earning';
+  String get handymanEarning => 'Доход мастера';
 
   @override
-  String get handymanEarnings => 'Handyman Earnings';
+  String get handymanEarnings => 'Доходы мастера';
 
   @override
-  String get noPayoutFound => 'No Payout Found';
+  String get noPayoutFound => 'Выплаты не найдены';
 
   @override
-  String get handymanEarningList => 'Handyman Earning List';
+  String get handymanEarningList => 'Список доходов мастера';
 
   @override
   String get permissionDeniedUnableTo =>
-      'Permission denied! Unable to edit Handyman';
+      'Доступ запрещён! Невозможно редактировать мастера';
 
   @override
   String get passwordLengthShouldBe =>
-      'Password length should be 8 to 12 characters.';
+      'Длина пароля должна быть от 8 до 12 символов.';
 
   @override
-  String get promotionalBanners => 'Promotional Banners';
+  String get promotionalBanners => 'Промо-баннеры';
 
   @override
-  String get chooseAnyOnePayment => 'Choose any one payment method first';
+  String get chooseAnyOnePayment =>
+      'Сначала выберите хотя бы один способ оплаты';
 
   @override
   String get thisBannerIsCurrently =>
-      'This banner is currently under admin review.';
+      'Этот баннер сейчас на проверке у администратора.';
 
   @override
-  String get doYouWantToDeleteBanner => 'Do you want to delete this banner';
+  String get doYouWantToDeleteBanner =>
+      'Вы хотите удалить этот баннер';
 
   @override
-  String get link => 'Link';
+  String get link => 'Ссылка';
 
   @override
   String get youHaveAnInsufficient =>
-      'You have an insufficient balance in your wallet. Please choose another method.';
+      'Недостаточно средств в кошельке. Пожалуйста, выберите другой способ.';
 
   @override
-  String get addPromotionalBanner => 'Add Promotional Banner';
+  String get addPromotionalBanner => 'Добавить промо-баннер';
 
   @override
   String promoteYourBusinessBanners(String perDayAmount) =>
-      'Promote your business banners in $perDayAmount/day.!';
+      'Продвигайте баннеры вашего бизнеса за $perDayAmount/день.!';
 
   @override
   String get advertiseYourServicesEffectively =>
-      'Advertise your services effectively and drive more engagement today.';
+      'Эффективно рекламируйте услуги и повышайте вовлечённость уже сегодня.';
 
   @override
-  String get shortDescription => 'Short Description';
+  String get shortDescription => 'Короткое описание';
 
   @override
-  String get eGHandymanTrustedService => 'e.g. Handyman trusted service';
+  String get eGHandymanTrustedService => 'напр.: Надёжный сервис мастера';
 
   @override
-  String get chooseService => 'Choose Service';
+  String get chooseService => 'Выберите услугу';
 
   @override
-  String get enterLink => 'Enter Link';
+  String get enterLink => 'Введите ссылку';
 
   @override
-  String get eGHttpsWwwYourlinkCom => 'e.g. https://www.yourlink.com';
+  String get eGHttpsWwwYourlinkCom => 'напр.: https://www.yourlink.com';
 
   @override
-  String daysSelected(String totalDaysCount) => '$totalDaysCount days selected';
+  String daysSelected(String totalDaysCount) => '$totalDaysCount дней выбрано';
 
   @override
-  String get promotionalBannerDetail => 'Promotional Banner Detail';
+  String get promotionalBannerDetail => 'Детали промо-баннера';
 
   @override
-  String get promotionalBanner => 'Promotional Banner';
+  String get promotionalBanner => 'Промо-баннер';
 
   @override
-  String promotionalBannerYet(String name) => 'No $name Promotional Banner Yet';
+  String promotionalBannerYet(String name) => 'Промо-баннеров $name пока нет';
 
   @override
   String get toSubmitYourBanner =>
-      'To submit your banner simply press add button and upload your promotional banner';
+      'Чтобы отправить баннер, нажмите «Добавить» и загрузите промо-баннер';
 
   @override
-  String get canTFindRevenuecatProduct => "Can't find revenueCat product";
+  String get canTFindRevenuecatProduct =>
+      "Не удаётся найти продукт RevenueCat";
 
   @override
-  String get waitForAWhile => "Wait for a while we're saving your subscription";
+  String get waitForAWhile =>
+      "Подождите немного, мы сохраняем вашу подписку";
 
   @override
-  String get reason => 'Reason:';
+  String get reason => 'Причина:';
 
   @override
-  String get type => 'Type:';
+  String get type => 'Тип:';
 
   @override
   String noRecordsFoundForBanner(String status) =>
-      'No records found for $status Promotional Banners';
+      'Нет записей для промо-баннеров со статусом $status';
 
   @override
-  String get note => 'Note:';
+  String get note => 'Примечание:';
 
   @override
   String get thisServiceIsCurrently =>
-      'This service is currently under admin review.';
+      'Эта услуга сейчас на проверке у администратора.';
 
   @override
-  String get approved => 'Approved';
+  String get approved => 'Одобрено';
 
   @override
-  String get noPromotionalBannerYet => 'No Promotional Banner Yet';
+  String get noPromotionalBannerYet => 'Промо-баннеров пока нет';
 
   @override
-  String get pay => 'Pay';
+  String get pay => 'Оплатить';
 
   @override
   String get selecteDateNote =>
-      'This banner will be displayed to users from {startDate} to {endDate}.';
+      'Этот баннер будет показываться пользователям с {startDate} по {endDate}.';
 
   @override
-  String get doWantToDelete => 'Do want to delete this Service?';
+  String get doWantToDelete => 'Удалить эту услугу?';
 
   @override
   String get razorPay => "RazorPay";
@@ -2543,7 +2631,7 @@ class LanguageRu extends Languages {
   String get flutterWave => "FlutterWave";
 
   @override
-  String get wallet => "Wallet";
+  String get wallet => "Кошелёк";
 
   @override
   String get paytm => "Paytm";
@@ -2564,57 +2652,58 @@ class LanguageRu extends Languages {
   String get phonePe => "PhonePe";
 
   @override
-  String get inAppPurchase => "In-App Purchase";
+  String get inAppPurchase => "Покупка в приложении";
 
   @override
   String get pix => "Pix";
 
   @override
-  String get chooseWithdrawalMethod => "Choose Withdrawal Method";
+  String get chooseWithdrawalMethod => "Выберите способ вывода";
 
   @override
-  String get servicesDelivered => "Services Delivered";
+  String get servicesDelivered => "Услуги оказаны";
 
   @override
-  String get selectServiceZones => 'Select Service Zones';
+  String get selectServiceZones => 'Выберите зоны обслуживания';
 
   @override
-  String get selectZones => 'Select Zones';
+  String get selectZones => 'Выберите зоны';
 
   @override
-  String get plzSelectOneZone => 'Please Select Service Zone';
+  String get plzSelectOneZone => 'Пожалуйста, выберите зону обслуживания';
 
   @override
-  String get lblNext => 'Next';
+  String get lblNext => 'Далее';
 
   @override
-  String get browse => 'Browse';
+  String get browse => 'Выбрать файл';
 
   @override
-  String get dropYourFilesHereOr => 'Drop your files here or';
+  String get dropYourFilesHereOr => 'Перетащите файлы сюда или';
 
   @override
   String get pleaseUploadTheFollowing =>
-      'Please upload the following documents for verification. All documents should be clear and readable. ';
+      'Пожалуйста, загрузите следующие документы для проверки. Все документы должны быть чёткими и читаемыми. ';
 
   @override
   String get requiredDocumentsMustBe =>
-      'Required documents must be uploaded to proceed.';
+      'Чтобы продолжить, необходимо загрузить обязательные документы.';
 
   @override
-  String get uploadDocuments => 'Upload Documents';
+  String get uploadDocuments => 'Загрузить документы';
 
   @override
-  String get uploadRequiredDocuments => 'Upload Required Documents';
+  String get uploadRequiredDocuments => 'Загрузить обязательные документы';
 
   @override
-  String get pleaseUploadAllRequired => 'Please upload all required documents';
+  String get pleaseUploadAllRequired =>
+      'Пожалуйста, загрузите все обязательные документы';
 
   @override
-  String get viewPDF => 'View PDF';
+  String get viewPDF => 'Просмотреть PDF';
 
   @override
-  String get selectServiceZone => 'Select Service Zone';
+  String get selectServiceZone => 'Выберите зону обслуживания';
 
   @override
   String get lblJobOfferPackages => 'Пакеты Предложений Работы';

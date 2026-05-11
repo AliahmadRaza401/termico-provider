@@ -83,6 +83,8 @@ abstract class Languages {
 
   String get notification;
 
+  String get notificationCategories;
+
   String get accept;
 
   String get decline;
@@ -635,6 +637,20 @@ abstract class Languages {
 
   String get myBid;
 
+  String get lblExpired;
+
+  String lblDaysLeft(int days);
+
+  String lblDaysRemaining(int days);
+
+  String get lblExpiryDays;
+
+  String lblExpiryDaysFormat(int days);
+
+  String get lblJobExpiredMessage;
+
+  String get lblBiddingNotAvailable;
+
   String get inputMustBeNumberOrDigit;
 
   String get requiredAfterCountryCode;
@@ -908,6 +924,24 @@ abstract class Languages {
   String get handymanHome;
 
   String get home;
+
+  /// Label for request type filter only (e.g. Acasă / Дом). Bottom menu keeps [home].
+  String get homeFilter;
+
+  String get apartment;
+
+  // Onboarding
+  String get onboardingTitle1;
+  String get onboardingText1;
+  String get onboardingTitle2;
+  String get onboardingText2;
+  String get onboardingTitle3;
+  String get onboardingText3;
+  String get providerInstructionsTitle;
+  String get providerInstructionsText;
+  String get readInstructions;
+  String get skip;
+  String get next;
 
   String get selectPlanSubTitle;
 

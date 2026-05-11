@@ -319,6 +319,71 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
+  late final _$hasOfferPackageAtom =
+      Atom(name: '_AppStore.hasOfferPackage', context: context);
+
+  @override
+  bool get hasOfferPackage {
+    _$hasOfferPackageAtom.reportRead();
+    return super.hasOfferPackage;
+  }
+
+  @override
+  set hasOfferPackage(bool value) {
+    _$hasOfferPackageAtom.reportWrite(value, super.hasOfferPackage, () {
+      super.hasOfferPackage = value;
+    });
+  }
+
+  late final _$offerPackageNameAtom =
+      Atom(name: '_AppStore.offerPackageName', context: context);
+
+  @override
+  String get offerPackageName {
+    _$offerPackageNameAtom.reportRead();
+    return super.offerPackageName;
+  }
+
+  @override
+  set offerPackageName(String value) {
+    _$offerPackageNameAtom.reportWrite(value, super.offerPackageName, () {
+      super.offerPackageName = value;
+    });
+  }
+
+  late final _$offerPackageOffersPerMonthAtom =
+      Atom(name: '_AppStore.offerPackageOffersPerMonth', context: context);
+
+  @override
+  int get offerPackageOffersPerMonth {
+    _$offerPackageOffersPerMonthAtom.reportRead();
+    return super.offerPackageOffersPerMonth;
+  }
+
+  @override
+  set offerPackageOffersPerMonth(int value) {
+    _$offerPackageOffersPerMonthAtom
+        .reportWrite(value, super.offerPackageOffersPerMonth, () {
+      super.offerPackageOffersPerMonth = value;
+    });
+  }
+
+  late final _$offerPackageIdAtom =
+      Atom(name: '_AppStore.offerPackageId', context: context);
+
+  @override
+  int get offerPackageId {
+    _$offerPackageIdAtom.reportRead();
+    return super.offerPackageId;
+  }
+
+  @override
+  set offerPackageId(int value) {
+    _$offerPackageIdAtom.reportWrite(value, super.offerPackageId, () {
+      super.offerPackageId = value;
+    });
+  }
+
   late final _$notificationCountAtom =
       Atom(name: '_AppStore.notificationCount', context: context);
 
@@ -930,6 +995,42 @@ mixin _$AppStore on _AppStore, Store {
     return _$setPlanEndDateAsyncAction.run(() => super.setPlanEndDate(val));
   }
 
+  late final _$setHasOfferPackageAsyncAction =
+      AsyncAction('_AppStore.setHasOfferPackage', context: context);
+
+  @override
+  Future<void> setHasOfferPackage(bool val) {
+    return _$setHasOfferPackageAsyncAction
+        .run(() => super.setHasOfferPackage(val));
+  }
+
+  late final _$setOfferPackageNameAsyncAction =
+      AsyncAction('_AppStore.setOfferPackageName', context: context);
+
+  @override
+  Future<void> setOfferPackageName(String val) {
+    return _$setOfferPackageNameAsyncAction
+        .run(() => super.setOfferPackageName(val));
+  }
+
+  late final _$setOfferPackageOffersPerMonthAsyncAction =
+      AsyncAction('_AppStore.setOfferPackageOffersPerMonth', context: context);
+
+  @override
+  Future<void> setOfferPackageOffersPerMonth(int val) {
+    return _$setOfferPackageOffersPerMonthAsyncAction
+        .run(() => super.setOfferPackageOffersPerMonth(val));
+  }
+
+  late final _$setOfferPackageIdAsyncAction =
+      AsyncAction('_AppStore.setOfferPackageId', context: context);
+
+  @override
+  Future<void> setOfferPackageId(int val) {
+    return _$setOfferPackageIdAsyncAction
+        .run(() => super.setOfferPackageId(val));
+  }
+
   late final _$setUserIdAsyncAction =
       AsyncAction('_AppStore.setUserId', context: context);
 
@@ -1187,6 +1288,10 @@ isPlanSubscribe: ${isPlanSubscribe},
 planTitle: ${planTitle},
 identifier: ${identifier},
 planEndDate: ${planEndDate},
+hasOfferPackage: ${hasOfferPackage},
+offerPackageName: ${offerPackageName},
+offerPackageOffersPerMonth: ${offerPackageOffersPerMonth},
+offerPackageId: ${offerPackageId},
 notificationCount: ${notificationCount},
 token: ${token},
 countryId: ${countryId},

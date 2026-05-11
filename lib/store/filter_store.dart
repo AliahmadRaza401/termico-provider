@@ -45,6 +45,9 @@ abstract class FilterStoreBase with Store {
   bool isPriceFilterApplied = false;
 
   @observable
+  List<String> requestTypeList = ObservableList();
+
+  @observable
   bool isAnyFilterApplied = false;
 
   @action
@@ -147,6 +150,20 @@ abstract class FilterStoreBase with Store {
   }
 
   @action
+  void addToRequestTypeList(String requestType) {
+    if (!requestTypeList.contains(requestType)) {
+      requestTypeList.add(requestType);
+      updateFilterFlag();
+    }
+  }
+
+  @action
+  void removeFromRequestTypeList(String requestType) {
+    requestTypeList.removeWhere((element) => element == requestType);
+    updateFilterFlag();
+  }
+
+  @action
   void setPriceRange({required double min, required double max}) {
     minPrice = min;
     maxPrice = max;
@@ -172,6 +189,7 @@ abstract class FilterStoreBase with Store {
     paymentType.clear();
     paymentStatus.clear();
     categoryId.clear();
+    requestTypeList.clear();
     startDate = '';
     endDate = '';
     minPrice = 0.0;
@@ -191,6 +209,7 @@ abstract class FilterStoreBase with Store {
             paymentStatus.isNotEmpty ||
             paymentType.isNotEmpty ||
             categoryId.isNotEmpty ||
+            requestTypeList.isNotEmpty ||
             isPriceFilterApplied ||
             startDate.isNotEmpty ||
             endDate.isNotEmpty;
@@ -209,6 +228,7 @@ abstract class FilterStoreBase with Store {
     count += paymentStatus.length;
     count += paymentType.length;
     count += categoryId.length;
+    count += requestTypeList.length;
 
     return count;
   }

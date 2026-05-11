@@ -265,6 +265,10 @@ Map<String, String> defaultHeaders() {
   header.putIfAbsent(HttpHeaders.cacheControlHeader, () => 'no-cache');
   header.putIfAbsent('Access-Control-Allow-Headers', () => '*');
   header.putIfAbsent('Access-Control-Allow-Origin', () => '*');
+  // Headers so Imunify360 is less likely to treat app traffic as bot (server must still whitelist API or User-Agent)
+  header.putIfAbsent(HttpHeaders.userAgentHeader, () => 'TehnicoProvider/1.0 (Mobile)');
+  header.putIfAbsent('Accept-Language', () => 'en-US,en;q=0.9');
+  header.putIfAbsent('X-Requested-With', () => 'TehnicoProvider');
 
   return header;
 }

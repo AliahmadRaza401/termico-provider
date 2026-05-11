@@ -39,10 +39,12 @@ class PromotionalBannerDetailScreen extends StatefulWidget {
   PromotionalBannerDetailScreen({required this.promotionalBannerData});
 
   @override
-  State<PromotionalBannerDetailScreen> createState() => _PromotionalBannerDetailScreenState();
+  State<PromotionalBannerDetailScreen> createState() =>
+      _PromotionalBannerDetailScreenState();
 }
 
-class _PromotionalBannerDetailScreenState extends State<PromotionalBannerDetailScreen> {
+class _PromotionalBannerDetailScreenState
+    extends State<PromotionalBannerDetailScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   UniqueKey uniqueKey = UniqueKey();
   List<PaymentSetting> paymentList = [];
@@ -88,7 +90,8 @@ class _PromotionalBannerDetailScreenState extends State<PromotionalBannerDetailS
   Future<void> getAllService() async {
     appStore.setLoading(true);
 
-    await getAllServiceList(providerId: appStore.providerId, perPage: 'all').then((value) {
+    await getAllServiceList(providerId: appStore.providerId, perPage: 'all')
+        .then((value) {
       serviceList = value.data.validate();
 
       setState(() {});
@@ -101,6 +104,12 @@ class _PromotionalBannerDetailScreenState extends State<PromotionalBannerDetailS
 
   /// Get Payment Methods API
   Future<void> getPaymentMethods() async {
+    if (isIOS) {
+      paymentList = [];
+      setState(() {});
+      return;
+    }
+
     appStore.setLoading(true);
 
     await getPaymentGateways(requireCOD: false).then((paymentListData) {
@@ -117,6 +126,10 @@ class _PromotionalBannerDetailScreenState extends State<PromotionalBannerDetailS
 
   /// Region Handle Payment Method Click
   Future<void> _handleClick() async {
+    if (isIOS) {
+      toast('Promotional banner payments are disabled on iOS.');
+      return;
+    }
 
     if (widget.promotionalBannerData.id == null) {
       toast('Banner ID is required before proceeding with payment.');
@@ -195,9 +208,11 @@ class _PromotionalBannerDetailScreenState extends State<PromotionalBannerDetailS
         toast(languages.cinetpayIsnTSupportedByCurrencies);
         return;
       } else if (totalAmount < 100) {
-        return toast('${languages.totalAmountShouldBeMoreThan} ${100.toPriceFormat()}');
+        return toast(
+            '${languages.totalAmountShouldBeMoreThan} ${100.toPriceFormat()}');
       } else if (totalAmount > 1500000) {
-        return toast('${languages.totalAmountShouldBeLessThan} ${1500000.toPriceFormat()}');
+        return toast(
+            '${languages.totalAmountShouldBeLessThan} ${1500000.toPriceFormat()}');
       }
 
       CinetPayServicesNew cinetPayServices = CinetPayServicesNew(
@@ -304,7 +319,7 @@ class _PromotionalBannerDetailScreenState extends State<PromotionalBannerDetailS
       appStore.setLoading(true);
       await midtransService.initialize(
         currentPaymentMethod: selectedPaymentSetting!,
-        totalAmount:widget.promotionalBannerData.totalAmount.toDouble(),
+        totalAmount: widget.promotionalBannerData.totalAmount.toDouble(),
         loaderOnOFF: (p0) {
           appStore.setLoading(p0);
         },
@@ -326,7 +341,9 @@ class _PromotionalBannerDetailScreenState extends State<PromotionalBannerDetailS
       PhonePeServices peServices = PhonePeServices(
         paymentSetting: selectedPaymentSetting!,
         totalAmount: widget.promotionalBannerData.totalAmount.toDouble(),
-        bookingId: appStore.userId.validate().toInt(), //TODO: set banner id if possible
+        bookingId: appStore.userId
+            .validate()
+            .toInt(), //TODO: set banner id if possible
         onComplete: (res) {
           log('RES: $res');
           savePay(
@@ -344,7 +361,10 @@ class _PromotionalBannerDetailScreenState extends State<PromotionalBannerDetailS
     }
   }
 
-  Future<void> savePay({String txnId = '', String paymentMethod = '', String paymentStatus = ''}) async {
+  Future<void> savePay(
+      {String txnId = '',
+      String paymentMethod = '',
+      String paymentStatus = ''}) async {
     if (widget.promotionalBannerData.id == null) {
       toast('Banner ID is required to update payment status');
       return;
@@ -352,11 +372,14 @@ class _PromotionalBannerDetailScreenState extends State<PromotionalBannerDetailS
 
     Map request = {
       PromotionalBannerKey.bannerId: widget.promotionalBannerData.id,
-      PromotionalBannerKey.txnId: txnId.isNotEmpty ? txnId : "#${widget.promotionalBannerData.id}",
+      PromotionalBannerKey.txnId:
+          txnId.isNotEmpty ? txnId : "#${widget.promotionalBannerData.id}",
       PromotionalBannerKey.paymentStatus: paymentStatus,
       PromotionalBannerKey.paymentType: paymentMethod,
-      PromotionalBannerKey.startDate: widget.promotionalBannerData.startDate.toString(),
-      PromotionalBannerKey.endDate: widget.promotionalBannerData.endDate.toString(),
+      PromotionalBannerKey.startDate:
+          widget.promotionalBannerData.startDate.toString(),
+      PromotionalBannerKey.endDate:
+          widget.promotionalBannerData.endDate.toString(),
     };
 
     appStore.setLoading(true);
@@ -366,13 +389,12 @@ class _PromotionalBannerDetailScreenState extends State<PromotionalBannerDetailS
       toast(value.message.validate());
       isPaymentPending = false;
       setState(() {});
-      finish(context);
+      finish(context, true);
     }).catchError((e) {
       appStore.setLoading(false);
       log(e.toString());
     }).whenComplete(() => appStore.setLoading(false));
   }
-
 
   @override
   void setState(fn) {
@@ -389,6 +411,22 @@ class _PromotionalBannerDetailScreenState extends State<PromotionalBannerDetailS
 
   @override
   Widget build(BuildContext context) {
+    if (isAppleReviewFreeMode) {
+      return AppScaffold(
+        appBarTitle: languages.promotionalBannerDetail,
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Text(
+              'Promotional banner payments are hidden on iOS in this build.',
+              style: secondaryTextStyle(),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      );
+    }
+
     return AppScaffold(
       appBarTitle: languages.promotionalBannerDetail,
       showLoader: false,
@@ -418,16 +456,22 @@ class _PromotionalBannerDetailScreenState extends State<PromotionalBannerDetailS
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                 decoration: boxDecorationWithRoundedCorners(
                   borderRadius: radius(16),
-                  backgroundColor: widget.promotionalBannerData.status.validate().getPromBannerStatusBackgroundColor,
+                  backgroundColor: widget.promotionalBannerData.status
+                      .validate()
+                      .getPromBannerStatusBackgroundColor,
                 ),
                 child: Text(
-                  widget.promotionalBannerData.status.validate().toPromotionalBannerStatus(),
+                  widget.promotionalBannerData.status
+                      .validate()
+                      .toPromotionalBannerStatus(),
                   style: boldTextStyle(color: Colors.white, size: 12),
                 ),
               ),
             ],
           ),
-          if(widget.promotionalBannerData.description.validate().isNotEmpty)...[
+          if (widget.promotionalBannerData.description
+              .validate()
+              .isNotEmpty) ...[
             16.height,
             ReadMoreText(
               widget.promotionalBannerData.description.validate(),
@@ -440,12 +484,22 @@ class _PromotionalBannerDetailScreenState extends State<PromotionalBannerDetailS
             children: [
               Text('${languages.type} ', style: secondaryTextStyle()),
               4.width,
-              Text(widget.promotionalBannerData.bannerType.validate().toPromotionalBannerType(), style: boldTextStyle()),
+              Text(
+                  widget.promotionalBannerData.bannerType
+                      .validate()
+                      .toPromotionalBannerType(),
+                  style: boldTextStyle()),
             ],
           ),
-          if (widget.promotionalBannerData.bannerType == PROMOTIONAL_TYPE_SERVICE)
-            Text(widget.promotionalBannerData.serviceName.validate(), style: boldTextStyle()).onTap(() {
-              ServiceDetailScreen(serviceId: widget.promotionalBannerData.serviceId.validate()).launch(context);
+          if (widget.promotionalBannerData.bannerType ==
+              PROMOTIONAL_TYPE_SERVICE)
+            Text(widget.promotionalBannerData.serviceName.validate(),
+                    style: boldTextStyle())
+                .onTap(() {
+              ServiceDetailScreen(
+                      serviceId:
+                          widget.promotionalBannerData.serviceId.validate())
+                  .launch(context);
             }).paddingTop(16),
           if (widget.promotionalBannerData.bannerType == PROMOTIONAL_TYPE_LINK)
             Text(
@@ -466,22 +520,31 @@ class _PromotionalBannerDetailScreenState extends State<PromotionalBannerDetailS
             children: [
               Text('${languages.paymentStatus}:', style: secondaryTextStyle()),
               4.width,
-              Text(widget.promotionalBannerData.paymentStatus.validate().toPaymentStatus(), style: boldTextStyle(color: widget.promotionalBannerData.paymentStatus == 'paid' ? greenColor : redColor)),
+              Text(
+                  widget.promotionalBannerData.paymentStatus
+                      .validate()
+                      .toPaymentStatus(),
+                  style: boldTextStyle(
+                      color:
+                          widget.promotionalBannerData.paymentStatus == 'paid'
+                              ? greenColor
+                              : redColor)),
             ],
           ),
-            if(widget.promotionalBannerData.paymentStatus  == 'paid')...[
-              16.height,
-              Row(
-                children: [
-                  Text(languages.totalAmount, style: secondaryTextStyle()),
-                  4.width,
-                  PriceWidget(price: widget.promotionalBannerData.totalAmount.toDouble()),
-                ],
-              ),
-            ],
-
+          if (widget.promotionalBannerData.paymentStatus == 'paid') ...[
+            16.height,
+            Row(
+              children: [
+                Text(languages.totalAmount, style: secondaryTextStyle()),
+                4.width,
+                PriceWidget(
+                    price: widget.promotionalBannerData.totalAmount.toDouble()),
+              ],
+            ),
+          ],
           if (paymentList.isNotEmpty) ...[
-            if(widget.promotionalBannerData.paymentStatus  == 'pending' && widget.promotionalBannerData.status == 'pending')...[
+            if (widget.promotionalBannerData.paymentStatus == 'pending' &&
+                widget.promotionalBannerData.status == 'pending') ...[
               20.height,
               Text(languages.lblChoosePaymentMethod, style: boldTextStyle()),
               4.height,
@@ -510,14 +573,16 @@ class _PromotionalBannerDetailScreenState extends State<PromotionalBannerDetailS
                       selectedPaymentSetting = ind;
                       setState(() {});
                     },
-                    title: Text(paymentData.title.validate(), style: primaryTextStyle()),
+                    title: Text(paymentData.title.validate(),
+                        style: primaryTextStyle()),
                   );
                 },
               ),
               16.height,
               Container(
                 padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                decoration: boxDecorationDefault(borderRadius: radius(), color: context.cardColor),
+                decoration: boxDecorationDefault(
+                    borderRadius: radius(), color: context.cardColor),
                 child: Column(
                   children: [
                     Row(
@@ -526,7 +591,10 @@ class _PromotionalBannerDetailScreenState extends State<PromotionalBannerDetailS
                         Text(languages.lblTotalAmount, style: boldTextStyle()),
                         16.width,
                         Observer(builder: (context) {
-                          return PriceWidget(price: widget.promotionalBannerData.totalAmount.toDouble(), color: primaryColor);
+                          return PriceWidget(
+                              price: widget.promotionalBannerData.totalAmount
+                                  .toDouble(),
+                              color: primaryColor);
                         }),
                       ],
                     ),
@@ -540,23 +608,40 @@ class _PromotionalBannerDetailScreenState extends State<PromotionalBannerDetailS
                   height: 40,
                   enabled: selectedPaymentSetting != null,
                   disabledColor: primaryColor.withValues(alpha: 0.5),
-                  color:primaryColor,
+                  color: primaryColor,
                   textStyle: boldTextStyle(color: Colors.white),
                   width: context.width(),
                   onTap: appStore.isLoading
                       ? () {}
                       : () {
-                    _handleClick(); // Retry payment if pending
-                  },
+                          _handleClick(); // Retry payment if pending
+                        },
                 ),
               ),
             ]
-
+          ],
+          if (isIOS &&
+              widget.promotionalBannerData.paymentStatus == 'pending' &&
+              widget.promotionalBannerData.status == 'pending') ...[
+            20.height,
+            Container(
+              padding: EdgeInsets.all(12),
+              decoration: boxDecorationWithRoundedCorners(
+                backgroundColor: Colors.orange.withValues(alpha: 0.12),
+                border: Border.all(color: Colors.orange.withValues(alpha: 0.4)),
+                borderRadius: radius(),
+              ),
+              child: Text(
+                'Banner payments are unavailable on iOS in this build. Complete this payment from Android or the web/admin side.',
+                style: secondaryTextStyle(),
+              ),
+            ),
           ],
         ],
       ),
     );
   }
 
-  num get totalAmount => (appConfigurationStore.bannerPerDayAmount * totalDaysCount.toInt(defaultValue: 1));
+  num get totalAmount => (appConfigurationStore.bannerPerDayAmount *
+      totalDaysCount.toInt(defaultValue: 1));
 }

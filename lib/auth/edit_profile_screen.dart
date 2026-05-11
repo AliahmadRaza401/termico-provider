@@ -120,10 +120,8 @@ class EditProfileScreenState extends State<EditProfileScreen> {
       await getSelectedZone();
       await getZoneListApi();
 
-      if (isUserTypeHandyman) await getAddressList();
     });
 
-    if (isUserTypeHandyman) await getAddressList();
     countryId = getIntAsync(COUNTRY_ID);
     stateId = getIntAsync(STATE_ID);
     cityId = getIntAsync(CITY_ID);
@@ -303,7 +301,6 @@ class EditProfileScreenState extends State<EditProfileScreen> {
       multiPartRequest.files.add(await MultipartFile.fromPath(UserKeys.profileImage, imageFile!.path));
     }
 
-    if (isUserTypeHandyman && serviceAddressId != null) multiPartRequest.fields[UserKeys.serviceAddressId] = serviceAddressId == 0 ? '' : serviceAddressId.toString();
     if (isUserTypeProvider) multiPartRequest.fields['service_zones'] = jsonEncode(selectedZoneIds.map((e) => int.parse(e)).toList());
 
     appStore.setLoading(true);
@@ -709,7 +706,6 @@ class EditProfileScreenState extends State<EditProfileScreen> {
                                 8.height,
                               ],
                             ),
-                          if (isUserTypeHandyman && serviceAddressList.isNotEmpty) 16.height,
                           AppTextField(
                             controller: addressCont,
                             textFieldType: TextFieldType.MULTILINE,

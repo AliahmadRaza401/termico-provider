@@ -13,7 +13,7 @@ import '../utils/constant.dart';
 import 'components/filter_booking_status_component.dart';
 import 'components/filter_customer_list_component.dart';
 import 'components/filter_date_range_component.dart';
-import 'components/filter_handyman_list_component.dart';
+// Handyman filter component removed - only provider role supported
 import 'components/filter_payment_status_component.dart';
 import 'components/filter_payment_type_component.dart';
 import 'components/filter_provider_list_component.dart';
@@ -32,8 +32,7 @@ class _BookingFilterScreenState extends State<BookingFilterScreen> {
     SERVICE_FILTER,
     DATE_RANGE,
     CUSTOMER,
-    if (appStore.userType != USER_TYPE_HANDYMAN) PROVIDER.toLowerCase(),
-    if (appStore.userType != USER_TYPE_HANDYMAN || appStore.userType != USER_TYPE_PROVIDER) HANDYMAN.toLowerCase(),
+    PROVIDER.toLowerCase(),
     BOOKING_STATUS,
     PAYMENT_TYPE,
     PAYMENT_STATUS,
@@ -103,11 +102,8 @@ class _BookingFilterScreenState extends State<BookingFilterScreen> {
   void computeFilteredSectionList() {
     setState(() {
       filteredSectionList = sectionList.where((section) {
-        if (section.toLowerCase() == HANDYMAN.toLowerCase() && appStore.userType == 'handyman') {
-          return false;
-        } else if (section.toLowerCase() == PROVIDER.toLowerCase() && appStore.userType == 'handyman') {
-          return false;
-        } else if (section.toLowerCase() == PROVIDER.toLowerCase() && appStore.userType == 'provider') {
+        // Only provider role supported - filter out provider section if needed
+        if (section.toLowerCase() == PROVIDER.toLowerCase() && appStore.userType == USER_TYPE_PROVIDER) {
           return false;
         }
         return true;
@@ -202,8 +198,7 @@ class _BookingFilterScreenState extends State<BookingFilterScreen> {
                       return FilterCustomerListComponent();
                     } else if (e == PROVIDER.toLowerCase()) {
                       return FilterProviderListComponent();
-                    } else if (e == HANDYMAN.toLowerCase()) {
-                      return FilterHandymanListComponent();
+                    // Handyman filter removed - only provider role supported
                     } else if (e == BOOKING_STATUS) {
                       return FilterBookingStatusComponent(bookingStatusList: bookingStatusList);
                     } else if (e == PAYMENT_TYPE) {

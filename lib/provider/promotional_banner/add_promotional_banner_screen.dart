@@ -13,7 +13,6 @@ import '../../components/app_widgets.dart';
 import '../../components/chat_gpt_loder.dart';
 import '../../components/custom_image_picker.dart';
 import '../../components/date_range_component.dart';
-import '../../components/empty_error_state_widget.dart';
 import '../../components/price_widget.dart';
 import '../../main.dart';
 import '../../models/service_model.dart';
@@ -42,10 +41,12 @@ class AddPromotionalBannerScreen extends StatefulWidget {
   AddPromotionalBannerScreen({required this.callback});
 
   @override
-  _AddPromotionalBannerScreenState createState() => _AddPromotionalBannerScreenState();
+  _AddPromotionalBannerScreenState createState() =>
+      _AddPromotionalBannerScreenState();
 }
 
-class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen> {
+class _AddPromotionalBannerScreenState
+    extends State<AddPromotionalBannerScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   UniqueKey uniqueKey = UniqueKey();
 
@@ -97,7 +98,7 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
     future = getSearchList(
       status: SERVICE_APPROVE,
       page,
-      providerId: appStore.userType == USER_TYPE_HANDYMAN ? appStore.providerId : appStore.userId,
+      providerId: appStore.userId,
       services: serviceList,
       lastPageCallback: (b) {
         isLastPage = b;
@@ -120,7 +121,8 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
   Future<void> getAllService() async {
     appStore.setLoading(true);
 
-    await getAllServiceList(providerId: appStore.providerId, perPage: 'all').then((value) {
+    await getAllServiceList(providerId: appStore.providerId, perPage: 'all')
+        .then((value) {
       serviceList = value.data.validate();
 
       setState(() {});
@@ -132,6 +134,12 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
 
   /// Get Payment Methods API
   Future<void> getPaymentMethods() async {
+    if (isIOS) {
+      paymentList = [];
+      setState(() {});
+      return;
+    }
+
     appStore.setLoading(true);
 
     await getPaymentGateways(requireCOD: false).then((paymentListData) {
@@ -157,10 +165,6 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
 
-      if (selectedPaymentSetting == null) {
-        return toast(languages.chooseAnyOnePayment);
-      }
-
       Map<String, dynamic> req = {
         PromotionalBannerKey.bannerType: selectedType,
         PromotionalBannerKey.startDate: startingDate,
@@ -168,30 +172,35 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
       };
 
       if (descriptionCont.text.isNotEmpty) {
-        req.putIfAbsent(PromotionalBannerKey.description, () => descriptionCont.text.validate());
+        req.putIfAbsent(PromotionalBannerKey.description,
+            () => descriptionCont.text.validate());
       }
 
       if (selectedService != null) {
-        req.putIfAbsent(PromotionalBannerKey.serviceId, () => selectedService!.id.validate());
+        req.putIfAbsent(PromotionalBannerKey.serviceId,
+            () => selectedService!.id.validate());
       }
 
       if (linkCont.text.isNotEmpty) {
-        req.putIfAbsent(PromotionalBannerKey.bannerRedirectUrl, () => linkCont.text.validate());
+        req.putIfAbsent(PromotionalBannerKey.bannerRedirectUrl,
+            () => linkCont.text.validate());
       }
 
       log("Request: $req");
       savePromotionalBannerMultiPart(
         value: req,
-        imageFile: imageFiles.where((element) => !element.path.contains('http')).toList(),
+        imageFile: imageFiles
+            .where((element) => !element.path.contains('http'))
+            .toList(),
         callback: (id) {
           appStore.setLoading(false);
           bannerId = id.toString();
-          isPaymentPending = true;
           setState(() {});
         },
       ).then((value) {
         appStore.setLoading(false);
-        _handleClick();
+        finish(context);
+        widget.callback.call(true);
       }).catchError((e) {
         appStore.setLoading(false);
         toast(e.toString());
@@ -202,6 +211,7 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
   //endregion
 
   /// Region Handle Payment Method Click
+  // ignore: unused_element
   Future<void> _handleClick() async {
     _handlePayment().catchError((e) {
       appStore.setLoading(false);
@@ -264,9 +274,11 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
         toast(languages.cinetpayIsnTSupportedByCurrencies);
         return;
       } else if (totalAmount < 100) {
-        return toast('${languages.totalAmountShouldBeMoreThan} ${100.toPriceFormat()}');
+        return toast(
+            '${languages.totalAmountShouldBeMoreThan} ${100.toPriceFormat()}');
       } else if (totalAmount > 1500000) {
-        return toast('${languages.totalAmountShouldBeLessThan} ${1500000.toPriceFormat()}');
+        return toast(
+            '${languages.totalAmountShouldBeLessThan} ${1500000.toPriceFormat()}');
       }
 
       CinetPayServicesNew cinetPayServices = CinetPayServicesNew(
@@ -395,7 +407,9 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
       PhonePeServices peServices = PhonePeServices(
         paymentSetting: selectedPaymentSetting!,
         totalAmount: totalAmount.toDouble(),
-        bookingId: appStore.userId.validate().toInt(), //TODO: set banner id if possible
+        bookingId: appStore.userId
+            .validate()
+            .toInt(), //TODO: set banner id if possible
         onComplete: (res) {
           log('RES: $res');
           savePay(
@@ -413,10 +427,14 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
     }
   }
 
-  Future<void> savePay({String txnId = '', String paymentMethod = '', String paymentStatus = ''}) async {
+  Future<void> savePay(
+      {String txnId = '',
+      String paymentMethod = '',
+      String paymentStatus = ''}) async {
     Map request = {
       PromotionalBannerKey.bannerId: bannerId.validate(),
-      PromotionalBannerKey.txnId: txnId.isNotEmpty ? txnId : "#${bannerId.validate()}",
+      PromotionalBannerKey.txnId:
+          txnId.isNotEmpty ? txnId : "#${bannerId.validate()}",
       PromotionalBannerKey.paymentStatus: paymentStatus,
       PromotionalBannerKey.paymentType: paymentMethod,
     };
@@ -451,6 +469,22 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
 
   @override
   Widget build(BuildContext context) {
+    if (isAppleReviewFreeMode) {
+      return AppScaffold(
+        appBarTitle: languages.promotionalBanner,
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Text(
+              'Promotional banner purchases are hidden on iOS in this build.',
+              style: secondaryTextStyle(),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      );
+    }
+
     return AppScaffold(
       appBarTitle: languages.addPromotionalBanner,
       body: Stack(
@@ -480,7 +514,8 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
                               color: completed,
                             ),
                             child: Center(
-                              child: Image.asset(ic_outline_banner, height: 26, width: 26, color: Colors.white),
+                              child: Image.asset(ic_outline_banner,
+                                  height: 26, width: 26, color: Colors.white),
                             ),
                           ),
                           16.width,
@@ -489,13 +524,16 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  languages.promoteYourBusinessBanners(appConfigurationStore.bannerPerDayAmount.toPriceFormat()),
+                                  languages.promoteYourBusinessBanners(
+                                      appConfigurationStore.bannerPerDayAmount
+                                          .toPriceFormat()),
                                   style: boldTextStyle(size: 14),
                                 ),
                                 8.height,
                                 Text(
                                   languages.advertiseYourServicesEffectively,
-                                  style: boldTextStyle(color: textSecondaryColor, size: 12),
+                                  style: boldTextStyle(
+                                      color: textSecondaryColor, size: 12),
                                 ),
                               ],
                             ).expand();
@@ -520,7 +558,8 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
                                 positiveText: languages.lblDelete,
                                 negativeText: languages.lblCancel,
                                 onAccept: (p0) {
-                                  imageFiles.removeWhere((element) => element.path == value);
+                                  imageFiles.removeWhere(
+                                      (element) => element.path == value);
                                   setState(() {});
                                 },
                               );
@@ -531,7 +570,8 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
                             },
                           ),
                           if (imageFiles.isNotEmpty) 16.height,
-                          Text(languages.shortDescription, style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                          Text(languages.shortDescription,
+                              style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                           8.height,
                           AppTextField(
                             textFieldType: TextFieldType.MULTILINE,
@@ -541,22 +581,26 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
                             maxLines: 10,
                             maxLength: 120,
                             enableChatGPT: appConfigurationStore.chatGPTStatus,
-                            promptFieldInputDecorationChatGPT: inputDecoration(context).copyWith(
+                            promptFieldInputDecorationChatGPT:
+                                inputDecoration(context).copyWith(
                               hintText: languages.writeHere,
                               fillColor: context.scaffoldBackgroundColor,
                               filled: true,
                               hintStyle: primaryTextStyle(),
                             ),
                             isValidationRequired: false,
-                            testWithoutKeyChatGPT: appConfigurationStore.testWithoutKey,
-                            loaderWidgetForChatGPT: const ChatGPTLoadingWidget(),
+                            testWithoutKeyChatGPT:
+                                appConfigurationStore.testWithoutKey,
+                            loaderWidgetForChatGPT:
+                                const ChatGPTLoadingWidget(),
                             decoration: inputDecoration(
                               context,
                               hintText: languages.eGHandymanTrustedService,
                             ),
                           ),
                           16.height,
-                          Text(languages.hintSelectType, style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                          Text(languages.hintSelectType,
+                              style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                           8.height,
                           DropdownButtonFormField<StaticDataModel>(
                             decoration: inputDecoration(
@@ -568,7 +612,8 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
                             items: typeStaticData.map((StaticDataModel data) {
                               return DropdownMenuItem<StaticDataModel>(
                                 value: data,
-                                child: Text(data.value.validate(), style: primaryTextStyle()),
+                                child: Text(data.value.validate(),
+                                    style: primaryTextStyle()),
                               );
                             }).toList(),
                             validator: (value) {
@@ -588,21 +633,25 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
                           ),
                           16.height,
                           if (selectedType == PROMOTIONAL_TYPE_SERVICE) ...[
-                            Text(languages.selectService, style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                            Text(languages.selectService,
+                                style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                             8.height,
                             DropdownButtonFormField<ServiceData>(
                               decoration: inputDecoration(context),
-                              hint: Text(languages.chooseService, style: secondaryTextStyle()),
+                              hint: Text(languages.chooseService,
+                                  style: secondaryTextStyle()),
                               value: selectedService,
                               dropdownColor: context.scaffoldBackgroundColor,
                               items: serviceList.map((data) {
                                 return DropdownMenuItem<ServiceData>(
                                   value: data,
-                                  child: Text(data.name.validate(), style: primaryTextStyle()),
+                                  child: Text(data.name.validate(),
+                                      style: primaryTextStyle()),
                                 );
                               }).toList(),
                               validator: (value) {
-                                if (value == null) return errorThisFieldRequired;
+                                if (value == null)
+                                  return errorThisFieldRequired;
 
                                 return null;
                               },
@@ -614,7 +663,8 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
                             ),
                           ],
                           if (selectedType == PROMOTIONAL_TYPE_LINK) ...[
-                            Text(languages.enterLink, style: boldTextStyle(size: LABEL_TEXT_SIZE)),
+                            Text(languages.enterLink,
+                                style: boldTextStyle(size: LABEL_TEXT_SIZE)),
                             8.height,
                             AppTextField(
                               controller: linkCont,
@@ -629,7 +679,9 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
                           DateRangeComponent(
                             padding: EdgeInsets.only(top: 16),
                             onApplyCallback: (startDate, endDate, totalDays) {
-                              if (startDate != null && endDate != null && totalDays != null) {
+                              if (startDate != null &&
+                                  endDate != null &&
+                                  totalDays != null) {
                                 startingDate = startDate;
                                 endingDate = endDate;
 
@@ -642,69 +694,71 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
                           if (totalDaysCount.isNotEmpty)
                             Text(
                               languages.daysSelected(totalDaysCount),
-                              style: boldTextStyle(color: primaryColor, size: 12),
+                              style:
+                                  boldTextStyle(color: primaryColor, size: 12),
                             ).paddingTop(8),
-                          if (totalDaysCount.isNotEmpty && DateTime.parse(startingDate).isAfter(DateTime.now())) ...[
+                          if (isIOS && totalDaysCount.isNotEmpty) ...[
+                            12.height,
+                            Container(
+                              padding: EdgeInsets.all(12),
+                              decoration: boxDecorationWithRoundedCorners(
+                                backgroundColor:
+                                    Colors.orange.withValues(alpha: 0.12),
+                                border: Border.all(
+                                    color:
+                                        Colors.orange.withValues(alpha: 0.4)),
+                                borderRadius: radius(),
+                              ),
+                              child: Text(
+                                'Promotional banner payments are hidden on iOS for App Store compliance. You can submit the banner here and complete payment from Android or your web/admin flow.',
+                                style: secondaryTextStyle(size: 12),
+                              ),
+                            ),
+                          ],
+                          if (totalDaysCount.isNotEmpty &&
+                              DateTime.parse(startingDate)
+                                  .isAfter(DateTime.now())) ...[
                             16.height,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(languages.notes, style: boldTextStyle(size: 12)),
+                                Text(languages.notes,
+                                    style: boldTextStyle(size: 12)),
                                 SizedBox(width: 2),
                                 Text(
-                                  languages.selecteDateNote.replaceAll("{startDate}", startingDate.validate()).replaceAll("{endDate}", endingDate.validate()),
+                                  languages.selecteDateNote
+                                      .replaceAll("{startDate}",
+                                          startingDate.validate())
+                                      .replaceAll(
+                                          "{endDate}", endingDate.validate()),
                                   style: secondaryTextStyle(size: 12),
                                 ).expand(),
                               ],
                             ),
                           ],
-                          if (paymentList.isNotEmpty) ...[
+                          // Payment is handled later from banner details, so skip method selection during creation.
+                          if (totalDaysCount.isNotEmpty) ...[
                             20.height,
-                            Text(languages.lblChoosePaymentMethod, style: boldTextStyle()),
-                            4.height,
-                            AnimatedListView(
-                              itemCount: paymentList.length,
-                              shrinkWrap: true,
-                              listAnimationType: ListAnimationType.FadeIn,
-                              physics: NeverScrollableScrollPhysics(),
-                              fadeInConfiguration: FadeInConfiguration(duration: 2.seconds),
-                              emptyWidget: NoDataWidget(
-                                imageWidget: EmptyStateWidget(),
-                                title: languages.noPaymentMethodsFound,
-                              ),
-                              itemBuilder: (context, index) {
-                                PaymentSetting paymentData = paymentList[index];
-
-                                return RadioListTile<PaymentSetting>(
-                                  dense: true,
-                                  activeColor: primaryColor,
-                                  value: paymentData,
-                                  controlAffinity: ListTileControlAffinity.trailing,
-                                  groupValue: selectedPaymentSetting,
-                                  contentPadding: EdgeInsets.zero,
-                                  visualDensity: VisualDensity.compact,
-                                  onChanged: (PaymentSetting? ind) {
-                                    selectedPaymentSetting = ind;
-                                    setState(() {});
-                                  },
-                                  title: Text(paymentData.title.validate(), style: primaryTextStyle()),
-                                );
-                              },
-                            ),
-                            16.height,
                             Container(
-                              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                              decoration: boxDecorationDefault(borderRadius: radius(), color: context.cardColor),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 12, horizontal: 16),
+                              decoration: boxDecorationDefault(
+                                  borderRadius: radius(),
+                                  color: context.cardColor),
                               child: Column(
                                 children: [
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(languages.lblTotalAmount, style: boldTextStyle()),
+                                      Text(languages.lblTotalAmount,
+                                          style: boldTextStyle()),
                                       16.width,
                                       Observer(builder: (context) {
-                                        return PriceWidget(price: totalAmount.toDouble(), color: primaryColor);
+                                        return PriceWidget(
+                                            price: totalAmount.toDouble(),
+                                            color: primaryColor);
                                       }),
                                     ],
                                   ),
@@ -722,29 +776,30 @@ class _AddPromotionalBannerScreenState extends State<AddPromotionalBannerScreen>
               Observer(
                 builder: (_) => AppButton(
                   margin: EdgeInsets.only(left: 16, bottom: 16, right: 16),
-                  text: isPaymentPending ? languages.pay : languages.lblSubmit,
+                  text: languages.lblSubmit,
                   height: 40,
-                  color: appStore.isLoading ? primaryColor.withValues(alpha: 0.5) : primaryColor,
+                  color: appStore.isLoading
+                      ? primaryColor.withValues(alpha: 0.5)
+                      : primaryColor,
                   textStyle: boldTextStyle(color: white),
                   width: context.width(),
                   onTap: appStore.isLoading
                       ? () {}
                       : () {
-                          if (isPaymentPending) {
-                            _handleClick(); // Retry payment if pending
-                          } else {
-                            checkValidation(); // Submit form and proceed to payment
-                          }
+                          checkValidation();
                         },
                 ),
               ),
             ],
           ),
-          Observer(builder: (_) => LoaderWidget().center().visible(appStore.isLoading)),
+          Observer(
+              builder: (_) =>
+                  LoaderWidget().center().visible(appStore.isLoading)),
         ],
       ),
     );
   }
 
-  num get totalAmount => (appConfigurationStore.bannerPerDayAmount * totalDaysCount.toInt(defaultValue: 1));
+  num get totalAmount => (appConfigurationStore.bannerPerDayAmount *
+      totalDaysCount.toInt(defaultValue: 1));
 }

@@ -31,22 +31,21 @@ class _FilterProviderListComponentState extends State<FilterProviderListComponen
   }
 
   Future<void> init() async {
-    future = getHandyman(
+    future = getProviderList(
       page: page,
+      perPage: PER_PAGE_ITEM,
       list: providerList,
-      userTypeHandyman: USER_TYPE_PROVIDER,
       lastPageCallback: (b) {
         isLastPage = b;
       },
     ).then((list) {
-      providerList = list.validate();
       providerList.forEach((element) {
         if (filterStore.providerId.contains(element.id)) {
           element.isSelected = true;
         }
       });
       return providerList;
-    });;
+    });
   }
 
   void setPageToOne() {

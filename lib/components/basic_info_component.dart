@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:handyman_provider_flutter/components/handyman_name_widget.dart';
+// HandymanNameWidget removed - only provider role supported
 import 'package:handyman_provider_flutter/components/image_border_component.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/booking_list_response.dart';
@@ -130,10 +130,12 @@ class BasicInfoComponentState extends State<BasicInfoComponent> {
               children: [
                 Row(
                   children: [
-                    HandymanNameWidget(
-                      name: name.validate(),
-                      size: 14,
-                      showVerifiedBadge: showVerifiedBadge,
+                    Row(
+                      children: [
+                        Text(name.validate(), style: boldTextStyle(size: 14)).expand(),
+                        if (showVerifiedBadge)
+                          Icon(Icons.verified, color: primaryColor, size: 16).paddingOnly(left: 4),
+                      ],
                     ).flexible(),
                   ],
                 ),

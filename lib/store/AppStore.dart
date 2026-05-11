@@ -58,7 +58,13 @@ abstract class _AppStore with Store {
   bool isCategoryWisePackageService = getBoolAsync(CATEGORY_BASED_SELECT_PACKAGE_SERVICE);
 
   @observable
-  String selectedLanguageCode = getStringAsync(SELECTED_LANGUAGE_CODE, defaultValue: DEFAULT_LANGUAGE);
+  String selectedLanguageCode = _initialLanguageCode();
+
+  static String _initialLanguageCode() {
+    final v = getStringAsync(SELECTED_LANGUAGE_CODE, defaultValue: '');
+    if (v.isEmpty || !['en', 'ro', 'ru'].contains(v)) return DEFAULT_LANGUAGE;
+    return v;
+  }
 
   @observable
   String uid = getStringAsync(UID);
@@ -138,8 +144,9 @@ abstract class _AppStore with Store {
   @computed
   bool get earningTypeSubscription => earningType == EARNING_TYPE_SUBSCRIPTION;
 
+  // Handyman availability removed - only provider role supported
   @observable
-  int handymanAvailability = getIntAsync(HANDYMAN_AVAILABLE_STATUS);
+  int handymanAvailability = 0; // Deprecated - kept for compatibility with generated code
 
   @observable
   int totalHandyman = 0;
@@ -496,10 +503,11 @@ abstract class _AppStore with Store {
     errorInternetNotAvailable = languages.internetNotAvailable;
   }
 
+  // Handyman availability methods removed - only provider role supported
   @action
   Future<void> setHandymanAvailability(int val) async {
-    handymanAvailability = val;
-    await setValue(HANDYMAN_AVAILABLE_STATUS, val);
+    handymanAvailability = val; // Deprecated - kept for compatibility with generated code
+    // await setValue(HANDYMAN_AVAILABLE_STATUS, val);
   }
 
   @action

@@ -74,21 +74,22 @@ class PromotionalBannerListData {
   });
 
   PromotionalBannerListData.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    providerId = json['provider_id'];
+    id = _asInt(json['id']);
+    providerId = _asInt(json['provider_id']);
     title = json['title'];
     image = json['image'];
     description = json['description'];
     bannerType = json['banner_type'];
     bannerRedirectUrl = json['banner_redirect_url'];
-    serviceId = json['service_id'];
+    serviceId = _asInt(json['service_id']);
     serviceName = json['service_name'];
     startDate = json['start_date'];
     endDate = json['end_date'];
-    duration = json['duration'];
-    charges = json['charges'];
-    totalAmount = json['total_amount'];
+    duration = _asInt(json['duration']);
+    charges = json['charges']?.toString();
+    totalAmount = json['total_amount']?.toString();
     paymentStatus = json['payment_status'];
+    paymentMethod = json['payment_method']?.toString();
     status = json['status'];
     reason = json['reason'];
     attachments = json['attachments'] != null ? (json['attachments'] as List).map((i) => Attachments.fromJson(i)).toList() : null;
@@ -117,5 +118,12 @@ class PromotionalBannerListData {
       data['attachments'] = this.attachments!.map((v) => v.toJson()).toList();
     }
     return data;
+  }
+
+  int? _asInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    return int.tryParse(value.toString());
   }
 }

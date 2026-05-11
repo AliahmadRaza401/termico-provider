@@ -36,6 +36,18 @@ class _BidPriceDialogState extends State<BidPriceDialog> {
   void _handleSubmitClick() async {
     hideKeyboard(context);
 
+    // Check if job has expired before allowing bid submission
+    if (widget.data.isExpired) {
+      toast(languages.lblJobExpiredMessage, print: true);
+      return;
+    }
+
+    // Check if job still allows bidding
+    if (!widget.data.canBid.validate()) {
+      toast(languages.lblBiddingNotAvailable, print: true);
+      return;
+    }
+
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       appStore.setLoading(true);

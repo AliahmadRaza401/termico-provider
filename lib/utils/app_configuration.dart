@@ -25,7 +25,7 @@ Future<void> setAppConfigurations(AppConfigurationModel data) async {
 
   await appConfigurationStore.setCurrencyCode(data.currencyCode.validate());
   await appConfigurationStore.setCurrencyPosition(data.currencyPosition.validate());
-  await appConfigurationStore.setCurrencySymbol(data.currencySymbol.validate());
+  await appConfigurationStore.setCurrencySymbol(data.currencyCode.validate());
   await appConfigurationStore.setPriceDecimalPoint(data.decimalPoint.toInt());
 
   await appConfigurationStore.setJobRequestStatus(data.jobRequestServiceStatus.validate().getBoolInt());
@@ -612,7 +612,7 @@ class AppConfigurationModel {
         appstoreUrl = map["appstore_url"],
         providerAppstoreUrl = map["provider_appstore_url"],
         providerPlayStoreUrl = map["provider_playstore_url"],
-        currencyCode = map["currency_coden"],
+        currencyCode = map["currency_code"],
         currencyPosition = map["currency_position"],
         currencySymbol = map["currency_symbol"],
         decimalPoint = map["decimal_point"],

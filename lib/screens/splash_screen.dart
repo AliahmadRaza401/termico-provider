@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:handyman_provider_flutter/auth/sign_in_screen.dart';
-import 'package:handyman_provider_flutter/handyman/handyman_dashboard_screen.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/provider/provider_dashboard_screen.dart';
+import 'package:handyman_provider_flutter/screens/languages_screen.dart';
 import 'package:handyman_provider_flutter/screens/maintenance_mode_screen.dart';
+import 'package:handyman_provider_flutter/screens/onboarding_screen.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
@@ -13,6 +14,13 @@ import 'package:nb_utils/nb_utils.dart';
 import '../components/app_widgets.dart';
 import '../networks/rest_apis.dart';
 import '../utils/constant.dart';
+
+/// Returns stored language code, or DEFAULT_LANGUAGE (Romanian) when none saved or invalid.
+String _normalizedLanguageCode() {
+  final v = getStringAsync(SELECTED_LANGUAGE_CODE, defaultValue: '');
+  if (v.isEmpty || !['en', 'ro', 'ru'].contains(v)) return DEFAULT_LANGUAGE;
+  return v;
+}
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -54,8 +62,7 @@ class SplashScreenState extends State<SplashScreen> {
       setState(() {});
     } else {
       appStore.setLanguage(
-          getStringAsync(SELECTED_LANGUAGE_CODE,
-              defaultValue: DEFAULT_LANGUAGE),
+          _normalizedLanguageCode(),
           context: context);
       int themeModeIndex =
           getIntAsync(THEME_MODE_INDEX, defaultValue: THEME_MODE_SYSTEM);
@@ -68,11 +75,27 @@ class SplashScreenState extends State<SplashScreen> {
         MaintenanceModeScreen()
             .launch(context, pageRouteAnimation: PageRouteAnimation.Fade);
       } else {
-      // Check if the user is unauthorized and logged in, then clear preferences and cached data.
-      // This condition occurs when the user is marked as inactive from the admin panel,
-      if (!appConfigurationStore.isUserAuthorized && appStore.isLoggedIn) {
-        await clearPreferences();
-      }
+        // Show onboarding first time (after splash, before language/login)
+        bool onboardingCompleted = getBoolAsync(IS_ONBOARDING_COMPLETED, defaultValue: false);
+        if (!onboardingCompleted) {
+          OnboardingScreen().launch(context,
+              isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
+          return;
+        }
+
+        // Check if it's the first time opening the app - show language selection
+        bool isFirstTime = getBoolAsync(IS_FIRST_TIME, defaultValue: true);
+        if (isFirstTime) {
+          LanguagesScreen(isFirstTime: true).launch(context,
+              isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
+          return;
+        }
+
+        // Check if the user is unauthorized and logged in, then clear preferences and cached data.
+        // This condition occurs when the user is marked as inactive from the admin panel,
+        if (!appConfigurationStore.isUserAuthorized && appStore.isLoggedIn) {
+          await clearPreferences();
+        }
         if (!appStore.isLoggedIn) {
           SignInScreen().launch(context,
               isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
@@ -81,10 +104,6 @@ class SplashScreenState extends State<SplashScreen> {
           if (isUserTypeProvider) {
             setStatusBarColor(primaryColor);
             ProviderDashboardScreen(index: 0).launch(context,
-                isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
-          } else if (isUserTypeHandyman) {
-            setStatusBarColor(primaryColor);
-            HandymanDashboardScreen(index: 0).launch(context,
                 isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
           } else {
             SignInScreen().launch(context, isNewTask: true);

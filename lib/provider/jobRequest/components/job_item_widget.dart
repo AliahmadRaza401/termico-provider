@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/extensions/color_extension.dart';
 import 'package:handyman_provider_flutter/utils/extensions/string_extension.dart';
@@ -43,11 +44,74 @@ class JobItemWidget extends StatelessWidget {
                 price: data!.price.validate(),
                 isHourlyService: false,
                 color: textPrimaryColorGlobal,
-                isFreeService: false,
+                isFreeService: isAppleReviewFreeMode,
                 size: 14,
               ),
               2.height,
               Text(formatDate(data!.createdAt.validate()), style: secondaryTextStyle(), maxLines: 2, overflow: TextOverflow.ellipsis),
+              if (data!.requestType.validate().isNotEmpty) ...[
+                4.height,
+                Builder(
+                  builder: (context) {
+                    String rawType = data!.requestType.validate();
+                    String localizedType;
+
+                    switch (rawType.trim().toLowerCase()) {
+                      case 'Home':
+                        localizedType = languages.home;
+                        break;
+                      case 'Apartment':
+                        localizedType = languages.apartment;
+                        break;
+                      default:
+                        localizedType = rawType;
+                    }
+
+                    return Text(
+                      '${languages.lblType}: $localizedType',
+                      style: secondaryTextStyle(size: 11),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    );
+                  },
+                ),
+              ],
+              if (data!.expiryDays != null) ...[
+                4.height,
+                Row(
+                  children: [
+                    Text(
+                      languages.lblExpiryDaysFormat(data!.expiryDays!),
+                      style: secondaryTextStyle(size: 11),
+                    ),
+                    8.width,
+                    if (data!.isExpired)
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: Colors.red.withOpacity(0.1),
+                          borderRadius: radius(8),
+                        ),
+                        child: Text(
+                          languages.lblExpired,
+                          style: boldTextStyle(color: Colors.red, size: 11),
+                        ),
+                      )
+                    else if (data!.remainingDays != null)
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: context.primaryColor.withOpacity(0.1),
+                          borderRadius: radius(8),
+                        ),
+                        child: Text(
+                          languages.lblDaysLeft(data!.remainingDays!),
+                          style: boldTextStyle(color: context.primaryColor, size: 11),
+                        ),
+                      ),
+                  ],
+                ),
+              ],
             ],
           ).expand(),
           Container(

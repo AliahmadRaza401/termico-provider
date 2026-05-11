@@ -30,7 +30,7 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
 
-      if (emailCont.text == DEFAULT_HANDYMAN_EMAIL || emailCont.text == DEFAULT_PROVIDER_EMAIL) {
+      if (emailCont.text == DEFAULT_PROVIDER_EMAIL) {
         toast(languages.lblUnAuthorized);
       } else {
         Map req = {UserKeys.email: emailCont.text.validate()};

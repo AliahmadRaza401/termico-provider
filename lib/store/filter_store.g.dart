@@ -218,6 +218,22 @@ mixin _$FilterStore on FilterStoreBase, Store {
     });
   }
 
+  late final _$requestTypeListAtom =
+      Atom(name: 'FilterStoreBase.requestTypeList', context: context);
+
+  @override
+  List<String> get requestTypeList {
+    _$requestTypeListAtom.reportRead();
+    return super.requestTypeList;
+  }
+
+  @override
+  set requestTypeList(List<String> value) {
+    _$requestTypeListAtom.reportWrite(value, super.requestTypeList, () {
+      super.requestTypeList = value;
+    });
+  }
+
   late final _$isAnyFilterAppliedAtom =
       Atom(name: 'FilterStoreBase.isAnyFilterApplied', context: context);
 
@@ -417,6 +433,28 @@ mixin _$FilterStore on FilterStoreBase, Store {
   }
 
   @override
+  void addToRequestTypeList(String requestType) {
+    final _$actionInfo = _$FilterStoreBaseActionController.startAction(
+        name: 'FilterStoreBase.addToRequestTypeList');
+    try {
+      return super.addToRequestTypeList(requestType);
+    } finally {
+      _$FilterStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void removeFromRequestTypeList(String requestType) {
+    final _$actionInfo = _$FilterStoreBaseActionController.startAction(
+        name: 'FilterStoreBase.removeFromRequestTypeList');
+    try {
+      return super.removeFromRequestTypeList(requestType);
+    } finally {
+      _$FilterStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setPriceRange({required double min, required double max}) {
     final _$actionInfo = _$FilterStoreBaseActionController.startAction(
         name: 'FilterStoreBase.setPriceRange');
@@ -465,6 +503,7 @@ categoryId: ${categoryId},
 minPrice: ${minPrice},
 maxPrice: ${maxPrice},
 isPriceFilterApplied: ${isPriceFilterApplied},
+requestTypeList: ${requestTypeList},
 isAnyFilterApplied: ${isAnyFilterApplied}
     ''';
   }

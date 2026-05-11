@@ -31,7 +31,7 @@ class AppLocalizations extends LocalizationsDelegate<Languages> {
       //   return LanguageFr();
 
       default:
-        return LanguageEn();
+        return LanguageRo();
     }
   }
 

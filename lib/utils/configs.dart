@@ -2,9 +2,9 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 
 const APP_NAME = 'Tehnico Provider';
-const DEFAULT_LANGUAGE = 'en';
+const DEFAULT_LANGUAGE = 'ro';
 
-const primaryColor = Color(0xFFc5824b);
+const primaryColor = Color(0xFF0e7cdc);
 
 /// Live Url
 const DOMAIN_URL = "https://tehnico.md";

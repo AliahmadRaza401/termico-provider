@@ -9,6 +9,7 @@ import '../../components/app_widgets.dart';
 import '../../components/empty_error_state_widget.dart';
 import '../../main.dart';
 import '../../utils/colors.dart';
+import '../../utils/common.dart';
 import '../../utils/configs.dart';
 import '../../utils/constant.dart';
 import '../../utils/images.dart';
@@ -70,6 +71,22 @@ class _PromotionalBannerListScreenState extends State<PromotionalBannerListScree
 
   @override
   Widget build(BuildContext context) {
+    if (isAppleReviewFreeMode) {
+      return AppScaffold(
+        appBarTitle: languages.promotionalBanner,
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Text(
+              'Promotional banner purchases are hidden on iOS in this build.',
+              style: secondaryTextStyle(),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      );
+    }
+
     return AppScaffold(
       appBarTitle: languages.promotionalBanner,
       actions: [

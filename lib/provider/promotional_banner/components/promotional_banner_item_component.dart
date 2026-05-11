@@ -23,7 +23,11 @@ class PromotionalBannerItemComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        PromotionalBannerDetailScreen(promotionalBannerData: promotionalBannerData,).launch(context);
+        PromotionalBannerDetailScreen(
+          promotionalBannerData: promotionalBannerData,
+        ).launch(context).then((value) {
+          if (value == true) onCallBack?.call();
+        });
       },
       child: Container(
         padding: EdgeInsets.zero,

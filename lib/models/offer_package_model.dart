@@ -5,6 +5,7 @@ class OfferPackageModel {
   int? offersPerMonth;
   String? description;
   int? status;
+  int? freeMonth;
 
   OfferPackageModel({
     this.id,
@@ -13,6 +14,7 @@ class OfferPackageModel {
     this.offersPerMonth,
     this.description,
     this.status,
+    this.freeMonth,
   });
 
   factory OfferPackageModel.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,9 @@ class OfferPackageModel {
       offersPerMonth: json['offers_per_month'],
       description: json['description'],
       status: json['status'],
+      freeMonth: json['free_month'] != null
+          ? int.tryParse(json['free_month'].toString())
+          : null,
     );
   }
 
@@ -34,6 +39,7 @@ class OfferPackageModel {
     data['offers_per_month'] = this.offersPerMonth;
     data['description'] = this.description;
     data['status'] = this.status;
+    data['free_month'] = this.freeMonth;
     return data;
   }
 }
@@ -46,7 +52,9 @@ class OfferPackageListResponse {
   factory OfferPackageListResponse.fromJson(Map<String, dynamic> json) {
     return OfferPackageListResponse(
       data: json['data'] != null
-          ? (json['data'] as List).map((i) => OfferPackageModel.fromJson(i)).toList()
+          ? (json['data'] as List)
+              .map((i) => OfferPackageModel.fromJson(i))
+              .toList()
           : null,
     );
   }
@@ -67,6 +75,7 @@ class OfferPackageStatusModel {
   String? paymentId;
   String? paymentMethodName;
   bool? canSendOffer;
+  int? freeMonth;
 
   OfferPackageStatusModel({
     this.hasActivePackage,
@@ -83,13 +92,23 @@ class OfferPackageStatusModel {
     this.paymentId,
     this.paymentMethodName,
     this.canSendOffer,
+    this.freeMonth,
   });
 
   factory OfferPackageStatusModel.fromJson(Map<String, dynamic> json) {
+    final bool? hasActivePackage =
+        json['has_active_package'] is bool ? json['has_active_package'] : null;
+    final bool? hasPackage =
+        json['has_package'] is bool ? json['has_package'] : null;
+    final int? packageId = json['package_id'] is int
+        ? json['package_id']
+        : int.tryParse('${json['package_id'] ?? ''}');
+
     return OfferPackageStatusModel(
-      hasActivePackage: json['has_active_package'],
-      hasPackage: json['has_package'],
-      packageId: json['package_id'],
+      hasActivePackage: hasActivePackage,
+      // Some responses omit has_package but still provide an active package payload.
+      hasPackage: hasPackage ?? hasActivePackage ?? (packageId != null),
+      packageId: packageId,
       packageName: json['package_name'],
       packagePrice: json['package_price'],
       offersPerMonth: json['offers_per_month'],
@@ -98,31 +117,114 @@ class OfferPackageStatusModel {
       status: json['status'],
       startAt: json['start_at'],
       endAt: json['end_at'],
-      paymentId: json['payment_id'],
-      paymentMethodName: json['payment_method_name'],
+      paymentId: json['payment_id']?.toString(),
+      paymentMethodName: json['payment_method_name']?.toString(),
       canSendOffer: json['can_send_offer'],
+      freeMonth: json['free_month'] != null
+          ? int.tryParse(json['free_month'].toString())
+          : null,
     );
+  }
+
+  // Helper method to parse date string (handles both ISO 8601 and standard formats)
+  DateTime? _parseDate(String? dateString) {
+    if (dateString == null || dateString.isEmpty) {
+      return null;
+    }
+
+    try {
+      // Try parsing as ISO 8601 format first (e.g., "2026-01-18T17:11:56.000000Z")
+      if (dateString.contains('T') || dateString.contains('Z')) {
+        return DateTime.parse(dateString);
+      }
+
+      // Try parsing standard format (e.g., "2026-04-18 20:12:14")
+      // Replace space with T to make it parseable
+      String normalizedDate = dateString.replaceFirst(' ', 'T');
+      // If no timezone info, add Z for UTC or parse as local
+      if (!normalizedDate.contains('Z') &&
+          !normalizedDate.contains('+') &&
+          !normalizedDate.contains('-', 10)) {
+        return DateTime.parse(normalizedDate);
+      }
+
+      return DateTime.parse(normalizedDate);
+    } catch (e) {
+      // If parsing fails, return null
+      return null;
+    }
+  }
+
+  // Helper method to check if we're in a free month period (unlimited offers)
+  bool get isInFreeMonthPeriod {
+    // If freeMonth is null or 0, not in free period
+    if (freeMonth == null || freeMonth! <= 0) {
+      return false;
+    }
+
+    // If startAt or endAt is missing, cannot determine free period
+    if (startAt == null ||
+        startAt!.isEmpty ||
+        endAt == null ||
+        endAt!.isEmpty) {
+      return false;
+    }
+
+    DateTime? startDate = _parseDate(startAt);
+    DateTime? endDate = _parseDate(endAt);
+
+    if (startDate == null || endDate == null) {
+      return false;
+    }
+
+    DateTime now = DateTime.now();
+
+    // Check if current date is within the free period (from start_at to end_at)
+    return now.isAfter(startDate.subtract(Duration(seconds: 1))) &&
+        now.isBefore(endDate.add(Duration(seconds: 1)));
   }
 
   // Helper method to check if user can send offers
   bool get canSendOffers {
+    final bool hasAnyPackage =
+        hasPackage ?? hasActivePackage ?? (packageId != null);
+    final bool isActivePackage =
+        hasActivePackage ?? (status?.toLowerCase() == 'active');
+
     // Check if user has no package at all
-    if (hasPackage == false || hasActivePackage == false) {
+    if (!hasAnyPackage || !isActivePackage) {
       return false;
     }
-    // Check if package is active and has remaining offers
-    if (status?.toLowerCase() == 'active' && offersRemaining != null && offersRemaining! > 0) {
+
+    // If package is not active, cannot send offers
+    if (status?.toLowerCase() != 'active') {
+      return false;
+    }
+
+    // If in free month period (freeMonth > 0 and within date range), allow unlimited offers
+    if (isInFreeMonthPeriod) {
       return true;
     }
+
+    // Otherwise, check if package has remaining offers
+    if (offersRemaining != null && offersRemaining! > 0) {
+      return true;
+    }
+
     return false;
   }
 
   // Helper method to get the reason why user cannot send offers
   String get cannotSendOfferReason {
-    if (hasPackage == false || hasActivePackage == false) {
+    final bool hasAnyPackage =
+        hasPackage ?? hasActivePackage ?? (packageId != null);
+    final bool isActivePackage =
+        hasActivePackage ?? (status?.toLowerCase() == 'active');
+
+    if (!hasAnyPackage) {
       return 'no_subscription';
     }
-    if (status?.toLowerCase() != 'active') {
+    if (!isActivePackage || status?.toLowerCase() != 'active') {
       return 'package_ended';
     }
     if (offersRemaining != null && offersRemaining! <= 0) {
@@ -147,6 +249,7 @@ class OfferPackageStatusModel {
     data['payment_id'] = this.paymentId;
     data['payment_method_name'] = this.paymentMethodName;
     data['can_send_offer'] = this.canSendOffer;
+    data['free_month'] = this.freeMonth;
     return data;
   }
 }
@@ -159,7 +262,9 @@ class OfferPackageStatusResponse {
 
   factory OfferPackageStatusResponse.fromJson(Map<String, dynamic> json) {
     return OfferPackageStatusResponse(
-      data: json['data'] != null ? OfferPackageStatusModel.fromJson(json['data']) : null,
+      data: json['data'] != null
+          ? OfferPackageStatusModel.fromJson(json['data'])
+          : null,
       message: json['message'],
     );
   }
@@ -173,4 +278,3 @@ class OfferPackageStatusResponse {
     return data;
   }
 }
-

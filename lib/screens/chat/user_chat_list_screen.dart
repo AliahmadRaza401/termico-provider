@@ -34,7 +34,6 @@ class _ChatListScreenState extends State<ChatListScreen> {
     if (mounted) super.setState(fn);
   }
 
-  bool get isUserTypeHandyman => appStore.userType == USER_TYPE_HANDYMAN;
   bool get isUserTypeProvider => appStore.userType == USER_TYPE_PROVIDER;
 
   @override

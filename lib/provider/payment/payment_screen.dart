@@ -13,6 +13,7 @@ import '../../components/app_common_dialog.dart';
 import '../../components/empty_error_state_widget.dart';
 import '../../networks/rest_apis.dart';
 import '../../utils/app_configuration.dart';
+import '../../utils/common.dart';
 import 'components/airtel_money/airtel_money_service.dart';
 import 'components/cinet_pay_services_new.dart';
 import 'components/flutter_wave_service_new.dart';
@@ -108,9 +109,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
         toast(languages.cinetpayIsnTSupportedByCurrencies);
         return;
       } else if (widget.selectedPricingPlan.amount.validate() < 100) {
-        return toast('${languages.totalAmountShouldBeMoreThan} ${100.toPriceFormat()}');
+        return toast(
+            '${languages.totalAmountShouldBeMoreThan} ${100.toPriceFormat()}');
       } else if (widget.selectedPricingPlan.amount.validate() > 1500000) {
-        return toast('${languages.totalAmountShouldBeLessThan} ${1500000.toPriceFormat()}');
+        return toast(
+            '${languages.totalAmountShouldBeLessThan} ${1500000.toPriceFormat()}');
       }
 
       CinetPayServicesNew cinetPayServices = CinetPayServicesNew(
@@ -269,73 +272,108 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBarWidget(languages.lblPayment, color: context.primaryColor, textColor: Colors.white, backWidget: BackWidget()),
-      body: Stack(
-        children: [
-          SnapHelperWidget<List<PaymentSetting>>(
-            future: future,
-            onSuccess: (paymentList) {
-              if (paymentList.isEmpty) {
-                return NoDataWidget(
-                  imageWidget: EmptyStateWidget(),
-                  title: languages.lblNoPayments,
-                  imageSize: Size(150, 150),
-                );
-              }
-
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  16.height,
-                  Text(languages.lblChoosePaymentMethod, style: boldTextStyle(size: 18)).paddingOnly(left: 16),
-                  16.height,
-                  AnimatedListView(
-                    itemCount: paymentList.length,
-                    shrinkWrap: true,
-                    listAnimationType: ListAnimationType.FadeIn,
-                    fadeInConfiguration: FadeInConfiguration(duration: 2.seconds),
-                    itemBuilder: (context, index) {
-                      PaymentSetting value = paymentList[index];
-
-                      return RadioListTile<PaymentSetting>(
-                        dense: true,
-                        activeColor: primaryColor,
-                        value: value,
-                        controlAffinity: ListTileControlAffinity.trailing,
-                        groupValue: selectedPaymentSetting,
-                        onChanged: (PaymentSetting? ind) {
-                          selectedPaymentSetting = ind;
-                          setState(() {});
-                        },
-                        title: Text(value.title.validate(), style: primaryTextStyle()),
-                      );
-                    },
-                  ),
-                  Spacer(),
-                  AppButton(
-                    onTap: () {
-                      if (selectedPaymentSetting == null) return toast(languages.chooseAnyOnePayment);
-
-                      _handleClick();
-                    },
-                    text: languages.lblProceed,
-                    color: context.primaryColor,
-                    width: context.width(),
-                  ).paddingAll(16),
-                ],
-              );
-            },
-            errorBuilder: (error) {
-              return NoDataWidget(
-                title: error,
-                imageWidget: ErrorStateWidget(),
-              );
-            },
+    if (isAppleReviewFreeMode) {
+      return Scaffold(
+        appBar: appBarWidget(languages.lblPayment),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Text(
+              'Payments are hidden on iOS in this build.',
+              style: secondaryTextStyle(),
+              textAlign: TextAlign.center,
+            ),
           ),
-          Observer(builder: (context) => LoaderWidget().center().visible(appStore.isLoading))
-        ],
-      ),
+        ),
+      );
+    }
+
+    return Scaffold(
+      appBar: appBarWidget(languages.lblPayment,
+          color: context.primaryColor,
+          textColor: Colors.white,
+          backWidget: BackWidget()),
+      body: isIOS
+          ? Center(
+              child: NoDataWidget(
+                imageWidget: EmptyStateWidget(),
+                title:
+                    'External payment methods are disabled on iOS. Use Apple In-App Purchase for paid digital content.',
+                imageSize: Size(150, 150),
+              ),
+            )
+          : Stack(
+              children: [
+                SnapHelperWidget<List<PaymentSetting>>(
+                  future: future,
+                  onSuccess: (paymentList) {
+                    if (paymentList.isEmpty) {
+                      return NoDataWidget(
+                        imageWidget: EmptyStateWidget(),
+                        title: languages.lblNoPayments,
+                        imageSize: Size(150, 150),
+                      );
+                    }
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        16.height,
+                        Text(languages.lblChoosePaymentMethod,
+                                style: boldTextStyle(size: 18))
+                            .paddingOnly(left: 16),
+                        16.height,
+                        AnimatedListView(
+                          itemCount: paymentList.length,
+                          shrinkWrap: true,
+                          listAnimationType: ListAnimationType.FadeIn,
+                          fadeInConfiguration:
+                              FadeInConfiguration(duration: 2.seconds),
+                          itemBuilder: (context, index) {
+                            PaymentSetting value = paymentList[index];
+
+                            return RadioListTile<PaymentSetting>(
+                              dense: true,
+                              activeColor: primaryColor,
+                              value: value,
+                              controlAffinity: ListTileControlAffinity.trailing,
+                              groupValue: selectedPaymentSetting,
+                              onChanged: (PaymentSetting? ind) {
+                                selectedPaymentSetting = ind;
+                                setState(() {});
+                              },
+                              title: Text(value.title.validate(),
+                                  style: primaryTextStyle()),
+                            );
+                          },
+                        ),
+                        Spacer(),
+                        AppButton(
+                          onTap: () {
+                            if (selectedPaymentSetting == null)
+                              return toast(languages.chooseAnyOnePayment);
+
+                            _handleClick();
+                          },
+                          text: languages.lblProceed,
+                          color: context.primaryColor,
+                          width: context.width(),
+                        ).paddingAll(16),
+                      ],
+                    );
+                  },
+                  errorBuilder: (error) {
+                    return NoDataWidget(
+                      title: error,
+                      imageWidget: ErrorStateWidget(),
+                    );
+                  },
+                ),
+                Observer(
+                    builder: (context) =>
+                        LoaderWidget().center().visible(appStore.isLoading))
+              ],
+            ),
     );
   }
 }

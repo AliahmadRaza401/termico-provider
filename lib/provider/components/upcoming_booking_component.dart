@@ -25,8 +25,7 @@ class UpcomingBookingComponent extends StatelessWidget {
           list: bookingData,
           onTap: () {
             LiveStream().emit(LIVESTREAM_PROVIDER_ALL_BOOKING, 1);
-            // LiveStream().emit(LIVESTREAM_HANDYMAN_ALL_BOOKING, 1);
-            LiveStream().emit(LIVESTREAM_CHANGE_HANDYMAN_TAB, {"index": 1});
+            // Handyman tab removed - only provider role supported
           },
         ),
         8.height,

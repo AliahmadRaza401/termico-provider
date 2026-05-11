@@ -59,9 +59,9 @@ bool get isRTL => RTL_LANGUAGES.contains(appStore.selectedLanguageCode);
 bool isCommissionTypePercent(String? type) =>
     type.validate() == COMMISSION_TYPE_PERCENT;
 
-bool get isUserTypeHandyman => appStore.userType == USER_TYPE_HANDYMAN;
-
 bool get isUserTypeProvider => appStore.userType == USER_TYPE_PROVIDER;
+
+bool get isAppleReviewFreeMode => true;
 
 Future<void> setSaveSubscription({
   int? isSubscribe,
@@ -98,46 +98,46 @@ List<LanguageDataModel> languageList() {
   return [
     LanguageDataModel(
         id: 1,
+        name: 'Romanian',
+        languageCode: 'ro',
+        fullLanguageCode: 'ro-RO',
+        flag: 'assets/flag/ic_ro.png'),
+    LanguageDataModel(
+        id: 2,
         name: 'English',
         languageCode: 'en',
         fullLanguageCode: 'en-US',
         flag: 'assets/flag/ic_us.png'),
     LanguageDataModel(
-        id: 2,
+        id: 3,
         name: 'Russian',
         languageCode: 'ru',
         fullLanguageCode: 'ru-MO',
         flag: 'assets/flag/ic_ru.png'),
-    LanguageDataModel(
-        id: 3,
-        name: 'Romanian',
-        languageCode: 'ro',
-        fullLanguageCode: 'ro-MO',
-        flag: 'assets/flag/ic_ro.png'),
-    LanguageDataModel(
-        id: 4,
-        name: 'Hindi',
-        languageCode: 'hi',
-        fullLanguageCode: 'hi-IN',
-        flag: 'assets/flag/ic_india.png'),
-    LanguageDataModel(
-        id: 5,
-        name: 'Arabic',
-        languageCode: 'ar',
-        fullLanguageCode: 'ar-AR',
-        flag: 'assets/flag/ic_ar.png'),
-    LanguageDataModel(
-        id: 6,
-        name: 'French',
-        languageCode: 'fr',
-        fullLanguageCode: 'fr-FR',
-        flag: 'assets/flag/ic_fr.png'),
-    LanguageDataModel(
-        id: 7,
-        name: 'German',
-        languageCode: 'de',
-        fullLanguageCode: 'de-DE',
-        flag: 'assets/flag/ic_de.png')
+    // LanguageDataModel(
+    //     id: 4,
+    //     name: 'Hindi',
+    //     languageCode: 'hi',
+    //     fullLanguageCode: 'hi-IN',
+    //     flag: 'assets/flag/ic_india.png'),
+    // LanguageDataModel(
+    //     id: 5,
+    //     name: 'Arabic',
+    //     languageCode: 'ar',
+    //     fullLanguageCode: 'ar-AR',
+    //     flag: 'assets/flag/ic_ar.png'),
+    // LanguageDataModel(
+    //     id: 6,
+    //     name: 'French',
+    //     languageCode: 'fr',
+    //     fullLanguageCode: 'fr-FR',
+    //     flag: 'assets/flag/ic_fr.png'),
+    // LanguageDataModel(
+    //     id: 7,
+    //     name: 'German',
+    //     languageCode: 'de',
+    //     fullLanguageCode: 'de-DE',
+    //     flag: 'assets/flag/ic_de.png')
   ];
 
   /*if (getStringAsync(SERVER_LANGUAGES).isNotEmpty) {

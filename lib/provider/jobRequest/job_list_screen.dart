@@ -53,6 +53,19 @@ class _JobListScreenState extends State<JobListScreen> {
 
   void _applyFilters() {
     filteredJobsList = allJobsList.where((job) {
+      // Filter out expired jobs - they're no longer available for bidding
+      if (job.isExpired) {
+        return false;
+      }
+      
+      // Filter out assigned and completed jobs - only show active requests
+      if (job.status != null) {
+        String statusLower = job.status!.toLowerCase();
+        if (statusLower == 'assigned' || statusLower == 'completed') {
+          return false;
+        }
+      }
+
       // Filter by price
       if (filterStore.isPriceFilterApplied) {
         double jobPrice = job.price?.toDouble() ?? 0.0;
@@ -77,19 +90,40 @@ class _JobListScreenState extends State<JobListScreen> {
         }
       }
 
+      // Filter by request type
+      if (filterStore.requestTypeList.isNotEmpty) {
+        String? jobRequestType = job.requestType?.trim();
+        if (jobRequestType == null || jobRequestType.isEmpty) {
+          return false;
+        }
+        if (!filterStore.requestTypeList.any((t) => t.trim().toLowerCase() == jobRequestType.toLowerCase())) {
+          return false;
+        }
+      }
+
       return true;
     }).toList();
 
     print('🔍 JobListScreen - Applied filters:');
     print('   - Total jobs: ${allJobsList.length}');
     print('   - Categories: ${filterStore.categoryId}');
-    print('   - Price range: \$${filterStore.minPrice} - \$${filterStore.maxPrice}');
+    print('   - Request types: ${filterStore.requestTypeList}');
+    print('   - Price range: ${appConfigurationStore.currencySymbol}${filterStore.minPrice} - ${appConfigurationStore.currencySymbol}${filterStore.maxPrice}');
     print('   - Filtered results: ${filteredJobsList.length} jobs');
   }
 
   @override
   void setState(fn) {
     if (mounted) super.setState(fn);
+  }
+
+  List<String> _getAvailableRequestTypes() {
+    Set<String> types = {};
+    for (var job in allJobsList) {
+      String? rt = job.requestType?.trim();
+      if (rt != null && rt.isNotEmpty) types.add(rt);
+    }
+    return types.toList()..sort();
   }
 
   void _showFilterBottomSheet() {
@@ -99,10 +133,10 @@ class _JobListScreenState extends State<JobListScreen> {
       backgroundColor: Colors.transparent,
       builder: (context) => JobFilterBottomSheet(
         onApplyFilter: () {
-          // Apply filters locally without API call
           _applyFilters();
           setState(() {});
         },
+        availableRequestTypes: _getAvailableRequestTypes(),
       ),
     );
   }

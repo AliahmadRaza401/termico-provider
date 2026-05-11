@@ -34,7 +34,7 @@ class _FilterServiceListComponentState extends State<FilterServiceListComponent>
     future = getSearchList(
       status: SERVICE_APPROVE,
       page,
-      providerId: appStore.userType == USER_TYPE_HANDYMAN ? appStore.providerId : appStore.userId,
+      providerId: appStore.userId,
       services: servicesList,
       lastPageCallback: (b) {
         isLastPage = b;

@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+import 'package:nb_utils/nb_utils.dart';
 import '../../../models/service_model.dart';
 
 class PostJobData {
@@ -19,6 +21,8 @@ class PostJobData {
   double? latitude;
   double? longitude;
   String? address;
+  int? expiryDays;
+  String? requestType;
 
   PostJobData({
     this.id,
@@ -38,6 +42,8 @@ class PostJobData {
     this.latitude,
     this.longitude,
     this.address,
+    this.expiryDays,
+    this.requestType,
   });
 
   PostJobData.fromJson(dynamic json) {
@@ -62,6 +68,8 @@ class PostJobData {
         ? double.tryParse(json['longitude'].toString())
         : null;
     address = json['address'];
+    expiryDays = json['expiry_days'] != null ? int.tryParse(json['expiry_days'].toString()) : null;
+    requestType = json['request_type'];
 
     if (json['service'] != null) {
       service = [];
@@ -91,10 +99,60 @@ class PostJobData {
     map['latitude'] = latitude;
     map['longitude'] = longitude;
     map['address'] = address;
+    map['expiry_days'] = expiryDays;
+    map['request_type'] = requestType;
 
     if (service != null) {
       map['service'] = service?.map((v) => v.toJson()).toList();
     }
     return map;
+  }
+
+  /// Check if the job has expired based on createdAt + expiryDays
+  /// Returns true if the current date/time is after the expiry date
+  bool get isExpired {
+    if (expiryDays == null || createdAt == null || createdAt!.isEmpty) {
+      return false;
+    }
+
+    try {
+      // Parse the created date
+      DateTime createdDate = DateFormat('yyyy-MM-dd HH:mm:ss').parse(createdAt!);
+      
+      // Calculate expiry date by adding expiryDays
+      DateTime expiryDate = createdDate.add(Duration(days: expiryDays!));
+      
+      // Get current date/time
+      DateTime now = DateTime.now();
+      
+      // Job is expired if current time is after or equal to expiry date
+      return now.isAfter(expiryDate) || now.isAtSameMomentAs(expiryDate);
+    } catch (e) {
+      // If date parsing fails, log error and return false to be safe
+      log('Error checking expiry: $e');
+      return false;
+    }
+  }
+
+  /// Get remaining days until expiry (returns 0 if expired or null if no expiry)
+  int? get remainingDays {
+    if (expiryDays == null || createdAt == null || createdAt!.isEmpty) {
+      return null;
+    }
+
+    try {
+      DateTime createdDate = DateFormat('yyyy-MM-dd HH:mm:ss').parse(createdAt!);
+      DateTime expiryDate = createdDate.add(Duration(days: expiryDays!));
+      DateTime now = DateTime.now();
+      
+      if (now.isAfter(expiryDate)) {
+        return 0; // Expired
+      }
+      
+      int days = expiryDate.difference(now).inDays;
+      return days;
+    } catch (e) {
+      return null;
+    }
   }
 }

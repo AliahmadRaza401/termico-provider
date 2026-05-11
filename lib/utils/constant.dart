@@ -47,14 +47,12 @@ const DISCOUNT_TYPE_FIXED = 'fixed';
 //region LiveStream Keys
 const LIVESTREAM_UPDATE_BOOKINGS = 'LiveStreamUpdateBookings';
 const LIVESTREAM_HANDY_BOARD = 'HandyBoardStream';
-const LIVESTREAM_HANDYMAN_ALL_BOOKING = "handymanAllBooking";
 const LIVESTREAM_PROVIDER_ALL_BOOKING = "providerAllBooking";
 const LIVESTREAM_START_TIMER = "startTimer";
 const LIVESTREAM_PAUSE_TIMER = "pauseTimer";
 const LIVESTREAM_UPDATE_NOTIFICATIONS = "LIVESTREAM_UPDATE_NOTIFICATIONS";
 const LIVESTREAM_UPDATE_BOOKING_STATUS_WISE =
     "LIVESTREAM_UPDATE_BOOKING_STATUS_WISE";
-const LIVESTREAM_CHANGE_HANDYMAN_TAB = "LIVESTREAM_CHANGE_HANDYMAN_TAB";
 const LIVESTREAM_UPDATE_HELP_DESK_LIST = "LIVESTREAM_UPDATE_HELP_DESK_LIST";
 //endregion
 
@@ -66,7 +64,6 @@ const THEME_MODE_SYSTEM = 2;
 
 //region Tags for Firebase
 const PROVIDER_APP_TAG = 'providerApp';
-const HANDYMAN_APP_TAG = 'handymanApp';
 //endregion
 
 // region JOB REQUEST STATUS
@@ -82,6 +79,7 @@ const BOOKING_SAVE_FORMAT = "yyyy-MM-dd kk:mm:ss";
 
 //region SharedPreferences Keys
 const IS_FIRST_TIME = 'IsFirstTime';
+const IS_ONBOARDING_COMPLETED = 'IsOnboardingCompleted';
 const IS_LOGGED_IN = 'IS_LOGGED_IN';
 const IS_TESTER = 'IS_TESTER';
 const USER_ID = 'USER_ID';
@@ -117,7 +115,6 @@ const HAS_OFFER_PACKAGE = 'HAS_OFFER_PACKAGE';
 const HAS_IN_APP_STORE_REVIEW = 'hasInAppStoreReview1';
 const HAS_IN_PLAY_STORE_REVIEW = 'hasInPlayStoreReview1';
 const HAS_IN_REVIEW = 'hasInReview';
-const HANDYMAN_AVAILABLE_STATUS = 'HANDYMAN_AVAILABLE_STATUS';
 const DESIGNATION = 'DESIGNATION';
 const UPDATE_NOTIFY = 'UPDATE_NOTIFY';
 const FOR_ALL_SERVICES = 'FOR_ALL_SERVICES';
@@ -134,6 +131,7 @@ const IS_SUBSCRIBED_FOR_PUSH_NOTIFICATION =
 const PERMISSION_STATUS = 'permissionStatus';
 const BANK_IMAGE = 'BANK_IMAGE';
 const IS_HELP_DESK_FIRST_TIME = 'IS_HELP_DESK_FIRST_TIME';
+const NOTIFICATION_CATEGORY_IDS = 'NOTIFICATION_CATEGORY_IDS';
 
 ///IN APP PURCHASE
 const IS_IN_APP_PURCHASE_ENABLE = 'IS_IN_APP_PURCHASE_ENABLE';
@@ -173,7 +171,6 @@ const CURRENCY_POSITION_RIGHT = 'right';
 
 //region  Login Type
 const USER_TYPE_PROVIDER = 'provider';
-const USER_TYPE_HANDYMAN = 'handyman';
 const IS_USER = 'user';
 const USER_STATUS_CODE = 1;
 //endregion
@@ -195,7 +192,6 @@ const UPDATE_BOOKING_STATUS = 'update_booking_status';
 const CANCEL_BOOKING = 'cancel_booking';
 const PAID_FOR_BOOKING = 'paid_for_booking';
 const PROVIDER_PAYOUT = 'provider_payout';
-const HANDYMAN_PAYOUT = 'handyman_payout';
 
 const PAYMENT_MESSAGE_STATUS = 'payment_message_status';
 const JOB_REQUESTED = 'job_requested';
@@ -249,7 +245,6 @@ const FORCE_DELETE = "forcedelete";
 
 //region default handyman login
 const DEFAULT_PROVIDER_EMAIL = 'demo@provider.com';
-const DEFAULT_HANDYMAN_EMAIL = 'demo@handyman.com';
 const DEFAULT_PASS = '12345678';
 const DEFAULT_PASSWORD_FOR_FIREBASE = '12345678';
 //endregion

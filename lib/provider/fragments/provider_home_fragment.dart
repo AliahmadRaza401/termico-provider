@@ -4,8 +4,9 @@ import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/dashboard_response.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/provider/components/chart_component.dart';
-import 'package:handyman_provider_flutter/provider/components/handyman_list_component.dart';
-import 'package:handyman_provider_flutter/provider/components/handyman_recently_online_component.dart';
+// Handyman components removed - only provider role supported
+// import 'package:handyman_provider_flutter/provider/components/handyman_list_component.dart';
+// import 'package:handyman_provider_flutter/provider/components/handyman_recently_online_component.dart';
 import 'package:handyman_provider_flutter/provider/components/job_list_component.dart';
 import 'package:handyman_provider_flutter/provider/components/services_list_component.dart';
 import 'package:handyman_provider_flutter/provider/components/total_component.dart';
@@ -58,6 +59,8 @@ class _ProviderHomeFragmentState extends State<ProviderHomeFragment> {
   }
 
   Widget planBanner(DashboardResponse data) {
+    if (isAppleReviewFreeMode) return Offstage();
+
     if (data.isPlanExpired.validate()) {
       return subSubscriptionPlanWidget(
         planBgColor: appStore.isDarkMode ? context.cardColor : Colors.red.shade50,
@@ -124,21 +127,22 @@ class _ProviderHomeFragmentState extends State<ProviderHomeFragment> {
                   listAnimationType: ListAnimationType.FadeIn,
                   fadeInConfiguration: FadeInConfiguration(duration: 2.seconds),
                   children: [
-                    if (appStore.earningTypeSubscription) planBanner(snap.data!),
+                    if (appStore.earningTypeSubscription && !isAppleReviewFreeMode) planBanner(snap.data!),
                     _buildHeaderWidget(snap.data!),
+                    // Job Request List - moved to top section
+                    JobListComponent(list: snap.data!.myPostJobData.validate()).paddingOnly(left: 16, right: 16, top: 8).visible(true),
+                    // JobListComponent(list: snap.data!.myPostJobData.validate()).paddingOnly(left: 16, right: 16, top: 8).visible(rolesAndPermissionStore.postJobList),
                     TodayCashComponent(totalCashInHand: snap.data!.totalCashInHand.validate()),
                     TotalComponent(snap: snap.data!),
                     ChartComponent(),
-                    HandymanRecentlyOnlineComponent(images: snap.data!.onlineHandyman.validate()),
-                    HandymanListComponent(
-                      list: snap.data!.handyman.validate(),
-                      totalActiveHandyman: snap.data!.totalActiveHandyman.validate(),
-                      onRefresh: init,
-                    ),
+                    // Handyman components removed - only provider role supported
+                    // HandymanRecentlyOnlineComponent(images: snap.data!.onlineHandyman.validate()),
+                    // HandymanListComponent(
+                    //   list: snap.data!.handyman.validate(),
+                    //   totalActiveHandyman: snap.data!.totalActiveHandyman.validate(),
+                    //   onRefresh: init,
+                    // ),
                     UpcomingBookingComponent(bookingData: snap.data!.upcomingBookings.validate()),
-                                        JobListComponent(list: snap.data!.myPostJobData.validate()).paddingOnly(left: 16, right: 16, top: 8).visible(true),
-
-                    // JobListComponent(list: snap.data!.myPostJobData.validate()).paddingOnly(left: 16, right: 16, top: 8).visible(rolesAndPermissionStore.postJobList),
                     ServiceListComponent(list: snap.data!.service.validate()).visible(rolesAndPermissionStore.serviceList),
                   ],
                   onSwipeRefresh: () async {

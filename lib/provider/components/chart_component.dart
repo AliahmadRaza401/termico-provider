@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/revenue_chart_data.dart';
+import 'package:handyman_provider_flutter/utils/app_configuration.dart';
 import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -30,8 +31,26 @@ class ChartComponent extends StatelessWidget {
           textStyle: secondaryTextStyle(),
         ),
         backgroundColor: context.cardColor,
-        primaryYAxis: NumericAxis(numberFormat: NumberFormat.compactCurrency(symbol: appConfigurationStore.currencySymbol, decimalDigits: 2),
-          labelStyle: primaryTextStyle(size: 12)),
+        primaryYAxis: NumericAxis(
+          numberFormat: NumberFormat.compact(),
+          labelStyle: primaryTextStyle(size: 12),
+          axisLabelFormatter: (AxisLabelRenderDetails details) {
+            // Get the formatted value from numberFormat
+            String formattedValue = details.text;
+            // Remove trailing .0 for whole numbers
+            if (formattedValue.endsWith('.0')) {
+              formattedValue = formattedValue.substring(0, formattedValue.length - 2);
+            }
+            // Format the value with currency symbol based on position
+            String finalValue;
+            if (isCurrencyPositionLeft) {
+              finalValue = '${appConfigurationStore.currencySymbol}$formattedValue';
+            } else {
+              finalValue = '$formattedValue${appConfigurationStore.currencySymbol}';
+            }
+            return ChartAxisLabel(finalValue, details.textStyle);
+          },
+        ),
         primaryXAxis: CategoryAxis(
           placeLabelsNearAxisLine: true,
           labelPlacement: LabelPlacement.onTicks,

@@ -14,8 +14,6 @@ import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/provider/bank_details/bank_details.dart';
 import 'package:handyman_provider_flutter/provider/blog/view/blog_list_screen.dart';
 import 'package:handyman_provider_flutter/provider/components/commission_component.dart';
-import 'package:handyman_provider_flutter/provider/handyman_commission_list_screen.dart';
-import 'package:handyman_provider_flutter/provider/handyman_list_screen.dart';
 import 'package:handyman_provider_flutter/provider/jobRequest/bid_list_screen.dart';
 import 'package:handyman_provider_flutter/provider/packages/package_list_screen.dart';
 import 'package:handyman_provider_flutter/provider/services/service_list_screen.dart';
@@ -25,6 +23,7 @@ import 'package:handyman_provider_flutter/provider/timeSlots/my_time_slots_scree
 import 'package:handyman_provider_flutter/provider/wallet/wallet_history_screen.dart';
 import 'package:handyman_provider_flutter/screens/about_us_screen.dart';
 import 'package:handyman_provider_flutter/screens/languages_screen.dart';
+import 'package:handyman_provider_flutter/screens/notification_categories_screen.dart';
 import 'package:handyman_provider_flutter/screens/verify_provider_screen.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
@@ -38,7 +37,6 @@ import 'package:nb_utils/nb_utils.dart';
 import '../../components/switch_push_notification_subscription_component.dart';
 import '../../helpDesk/help_desk_list_screen.dart';
 import '../../models/selectZoneModel.dart';
-import '../earning/handyman_earning_list_screen.dart';
 import '../promotional_banner/promotional_banner_list_screen.dart';
 import '../services/addons/addon_service_list_screen.dart';
 import '../offer_package/offer_package_list_screen.dart';
@@ -152,7 +150,7 @@ class ProviderProfileFragmentState extends State<ProviderProfileFragment> {
                 .onTap(() {
               EditProfileScreen().launch(context, pageRouteAnimation: PageRouteAnimation.Fade);
             }),
-            if (appStore.earningTypeSubscription && appStore.isPlanSubscribe)
+            if (!isAppleReviewFreeMode && appStore.earningTypeSubscription && appStore.isPlanSubscribe)
               Column(
                 children: [
                   16.height,
@@ -199,7 +197,7 @@ class ProviderProfileFragmentState extends State<ProviderProfileFragment> {
                   }, overlayColor: WidgetStatePropertyAll(transparentColor)),
                 ],
               ),
-            if (appStore.hasOfferPackage)
+            if (!isAppleReviewFreeMode && appStore.hasOfferPackage)
               Column(
                 children: [
                   16.height,
@@ -273,7 +271,8 @@ class ProviderProfileFragmentState extends State<ProviderProfileFragment> {
                     style: boldTextStyle(color: Colors.green),
                   ),
                 ),
-                if (appStore.earningTypeSubscription)
+             
+                if (!isAppleReviewFreeMode && appStore.earningTypeSubscription)
                   SettingItemWidget(
                     decoration: BoxDecoration(color: context.cardColor),
                     leading: Image.asset(services, height: 16, width: 16, color: appStore.isDarkMode ? white : appTextSecondaryColor),
@@ -287,19 +286,20 @@ class ProviderProfileFragmentState extends State<ProviderProfileFragment> {
                       });
                     },
                   ),
-                SettingItemWidget(
-                  decoration: BoxDecoration(color: context.cardColor),
-                  leading: Image.asset(ic_packages, height: 16, width: 16, color: appStore.isDarkMode ? white : appTextSecondaryColor),
-                  title: languages.lblJobOfferPackages,
-                  titleTextStyle: boldTextStyle(size: 12),
-                  trailing: Icon(Icons.chevron_right, color: appStore.isDarkMode ? white : gray.withValues(alpha: 0.8), size: 18),
-                  padding: EdgeInsets.only(top: 20, left: 16, right: 16),
-                  onTap: () {
-                    OfferPackageListScreen().launch(context).then((value) {
-                      setState(() {});
-                    });
-                  },
-                ),
+                if (!isAppleReviewFreeMode)
+                  SettingItemWidget(
+                    decoration: BoxDecoration(color: context.cardColor),
+                    leading: Image.asset(ic_packages, height: 16, width: 16, color: appStore.isDarkMode ? white : appTextSecondaryColor),
+                    title: languages.lblJobOfferPackages,
+                    titleTextStyle: boldTextStyle(size: 12),
+                    trailing: Icon(Icons.chevron_right, color: appStore.isDarkMode ? white : gray.withValues(alpha: 0.8), size: 18),
+                    padding: EdgeInsets.only(top: 20, left: 16, right: 16),
+                    onTap: () {
+                      OfferPackageListScreen().launch(context).then((value) {
+                        setState(() {});
+                      });
+                    },
+                  ),
                 if (rolesAndPermissionStore.serviceList)
                   SettingItemWidget(
                     decoration: BoxDecoration(color: context.cardColor),
@@ -312,7 +312,7 @@ class ProviderProfileFragmentState extends State<ProviderProfileFragment> {
                       ServiceListScreen().launch(context);
                     },
                   ),
-                if (appStore.userType != USER_TYPE_HANDYMAN && rolesAndPermissionStore.providerDocumentList)
+                if (rolesAndPermissionStore.providerDocumentList)
                   SettingItemWidget(
                     decoration: BoxDecoration(color: context.cardColor),
                     leading: Image.asset(ic_document, height: 16, width: 16, color: appStore.isDarkMode ? white : appTextSecondaryColor),
@@ -324,7 +324,7 @@ class ProviderProfileFragmentState extends State<ProviderProfileFragment> {
                       VerifyProviderScreen().launch(context);
                     },
                   ),
-                if (appStore.userType != USER_TYPE_HANDYMAN && rolesAndPermissionStore.blogList)
+                if (rolesAndPermissionStore.blogList)
                   SettingItemWidget(
                     decoration: BoxDecoration(color: context.cardColor),
                     leading: Image.asset(ic_blog, height: 16, width: 16, color: appStore.isDarkMode ? white : appTextSecondaryColor),
@@ -334,18 +334,6 @@ class ProviderProfileFragmentState extends State<ProviderProfileFragment> {
                     padding: EdgeInsets.only(top: 20, left: 16, right: 16),
                     onTap: () {
                       BlogListScreen().launch(context);
-                    },
-                  ),
-                if (rolesAndPermissionStore.handymanList)
-                  SettingItemWidget(
-                    decoration: BoxDecoration(color: context.cardColor),
-                    leading: Image.asset(handyman, height: 16, width: 16, color: appStore.isDarkMode ? white : appTextSecondaryColor),
-                    title: languages.lblAllHandyman,
-                    titleTextStyle: boldTextStyle(size: 12),
-                    trailing: Icon(Icons.chevron_right, color: appStore.isDarkMode ? white : gray.withValues(alpha: 0.8), size: 18),
-                    padding: EdgeInsets.only(top: 20, left: 16, right: 16),
-                    onTap: () {
-                      HandymanListScreen().launch(context);
                     },
                   ),
                 if (appStore.isLoggedIn && rolesAndPermissionStore.helpDeskList)
@@ -360,31 +348,7 @@ class ProviderProfileFragmentState extends State<ProviderProfileFragment> {
                       HelpDeskListScreen().launch(context);
                     },
                   ),
-                if (appStore.userType != USER_TYPE_HANDYMAN && rolesAndPermissionStore.handymanPayout)
-                  SettingItemWidget(
-                    decoration: BoxDecoration(color: context.cardColor),
-                    leading: Image.asset(ic_earning, height: 16, width: 16, color: appStore.isDarkMode ? white : gray.withValues(alpha: 0.8)),
-                    title: languages.handymanEarningList,
-                    titleTextStyle: boldTextStyle(size: 12),
-                    trailing: Icon(Icons.chevron_right, color: appStore.isDarkMode ? white : gray.withValues(alpha: 0.8), size: 18),
-                    padding: EdgeInsets.only(top: 20, left: 16, right: 16),
-                    onTap: () {
-                      HandymanEarningListScreen().launch(context);
-                    },
-                  ),
-                if (rolesAndPermissionStore.handymanTypeList)
-                  SettingItemWidget(
-                    decoration: BoxDecoration(color: context.cardColor),
-                    leading: Image.asset(percent_line, height: 16, width: 16, color: appStore.isDarkMode ? white : appTextSecondaryColor),
-                    title: languages.handymanCommission,
-                    titleTextStyle: boldTextStyle(size: 12),
-                    trailing: Icon(Icons.chevron_right, color: appStore.isDarkMode ? white : gray.withValues(alpha: 0.8), size: 18),
-                    padding: EdgeInsets.only(top: 20, left: 16, right: 16),
-                    onTap: () {
-                      HandymanCommissionTypeListScreen().launch(context);
-                    },
-                  ),
-                if (appConfigurationStore.servicePackageStatus && rolesAndPermissionStore.servicePackageList)
+                if (!isAppleReviewFreeMode && appConfigurationStore.servicePackageStatus && rolesAndPermissionStore.servicePackageList)
                   SettingItemWidget(
                     decoration: BoxDecoration(color: context.cardColor),
                     leading: Image.asset(ic_packages, height: 16, width: 16, color: appStore.isDarkMode ? white : appTextSecondaryColor),
@@ -470,7 +434,7 @@ class ProviderProfileFragmentState extends State<ProviderProfileFragment> {
                       BankDetails().launch(context);
                     },
                   ),
-                if (appStore.userType == USER_TYPE_PROVIDER && appConfigurationStore.isPromotionalBanner)
+                if (!isAppleReviewFreeMode && appStore.userType == USER_TYPE_PROVIDER && appConfigurationStore.isPromotionalBanner)
                   SettingItemWidget(
                     decoration: BoxDecoration(color: context.cardColor),
                     leading: Image.asset(ic_promotional_banner, height: 16, width: 16, color: appStore.isDarkMode ? white.withValues(alpha: 0.9) : appTextSecondaryColor.withValues(alpha: 0.8)),
@@ -482,6 +446,19 @@ class ProviderProfileFragmentState extends State<ProviderProfileFragment> {
                       PromotionalBannerListScreen().launch(context);
                     },
                   ),
+                     SettingItemWidget(
+                  decoration: BoxDecoration(color: context.cardColor),
+                  leading: Icon(Icons.notifications_outlined, size: 20, color: appStore.isDarkMode ? white : appTextSecondaryColor),
+                  title: languages.notificationCategories,
+                  titleTextStyle: boldTextStyle(size: 12),
+                  trailing: Icon(Icons.chevron_right, color: appStore.isDarkMode ? white : gray.withValues(alpha: 0.8), size: 18),
+                  padding: EdgeInsets.only(top: 20, left: 16, right: 16),
+                  onTap: () {
+                    NotificationCategoriesScreen().launch(context).then((value) {
+                      if (value == true) setState(() {});
+                    });
+                  },
+                ),
                 SettingItemWidget(
                   decoration: BoxDecoration(color: context.cardColor, borderRadius: BorderRadiusDirectional.vertical(bottom: Radius.circular(16))),
                   title: "",

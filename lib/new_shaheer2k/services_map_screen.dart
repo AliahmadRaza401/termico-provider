@@ -90,13 +90,34 @@ class _ServicesMapScreenState extends State<ServicesMapScreen> {
         }
       }
 
+      // Filter by request type
+      if (filterStore.requestTypeList.isNotEmpty) {
+        String? jobRequestType = job.requestType?.trim();
+        if (jobRequestType == null || jobRequestType.isEmpty) {
+          return false;
+        }
+        if (!filterStore.requestTypeList.any((t) => t.trim().toLowerCase() == jobRequestType.toLowerCase())) {
+          return false;
+        }
+      }
+
       return true;
     }).toList();
 
     print('🔍 Applied filters:');
     print('   - Categories: ${filterStore.categoryId}');
-    print('   - Price range: \$${filterStore.minPrice} - \$${filterStore.maxPrice}');
+    print('   - Request types: ${filterStore.requestTypeList}');
+    print('   - Price range: ${appConfigurationStore.currencySymbol}${filterStore.minPrice} - ${appConfigurationStore.currencySymbol}${filterStore.maxPrice}');
     print('   - Results: ${filteredJobsList.length} jobs');
+  }
+
+  List<String> _getAvailableRequestTypes() {
+    Set<String> types = {};
+    for (var job in allJobsList) {
+      String? rt = job.requestType?.trim();
+      if (rt != null && rt.isNotEmpty) types.add(rt);
+    }
+    return types.toList()..sort();
   }
 
   Future<void> _setMarkers() async {
@@ -140,7 +161,7 @@ class _ServicesMapScreenState extends State<ServicesMapScreen> {
     for (var cluster in clusters) {
       if (cluster.isCluster) {
         // Multiple jobs - create cluster marker
-        print('🎯 Cluster: ${cluster.count} jobs, Total: \$${cluster.totalPrice.toStringAsFixed(0)}');
+        print('🎯 Cluster: ${cluster.count} jobs, Total: ${appConfigurationStore.currencySymbol}${cluster.totalPrice.toStringAsFixed(0)}');
         
         // Mark all jobs in this cluster as processed
         for (var job in cluster.jobs) {
@@ -150,7 +171,7 @@ class _ServicesMapScreenState extends State<ServicesMapScreen> {
         final icon = await CustomMapMarker.createEnhancedClusterMarker(
           count: cluster.count,
           avgPrice: cluster.totalPrice.toStringAsFixed(0),
-          currency: '\$',
+          currency: appConfigurationStore.currencySymbol,
           color: context.primaryColor,
           size: 110,
         );
@@ -193,7 +214,7 @@ class _ServicesMapScreenState extends State<ServicesMapScreen> {
         final markerIcon = await CustomMapMarker.createServiceImageMarker(
           imageUrl: imageUrl,
           price: job.price.toString(),
-          currency: '\$',
+          currency: appConfigurationStore.currencySymbol,
           size: 130,
           borderColor: Colors.white,
           priceBgColor: context.primaryColor,
@@ -224,11 +245,11 @@ class _ServicesMapScreenState extends State<ServicesMapScreen> {
       backgroundColor: Colors.transparent,
       builder: (context) => JobFilterBottomSheet(
         onApplyFilter: () async {
-          // Apply filters locally without API call
           _applyFilters();
           await _setMarkers();
           if (mounted) setState(() {});
         },
+        availableRequestTypes: _getAvailableRequestTypes(),
       ),
     );
   }
@@ -241,10 +262,20 @@ class _ServicesMapScreenState extends State<ServicesMapScreen> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Center(
+            child: Text(
+              languages.somethingWentWrong,
+              style: primaryTextStyle(),
+            ),
+          );
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No jobs found'));
-            } else {
+          return Center(
+            child: Text(
+              languages.noDataFound,
+              style: primaryTextStyle(),
+            ),
+          );
+        } else {
               return Stack(
                 children: [
                   GoogleMap(

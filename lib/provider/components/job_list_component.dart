@@ -14,24 +14,40 @@ class JobListComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (list.isEmpty) return Offstage();
+    // Filter out expired, assigned and completed jobs - only show active requests
+    List<PostJobData> activeJobs = list.where((job) {
+      // Filter out expired jobs - they're no longer available for bidding
+      if (job.isExpired) {
+        return false;
+      }
+      
+      if (job.status != null) {
+        String statusLower = job.status!.toLowerCase();
+        if (statusLower == 'assigned' || statusLower == 'completed') {
+          return false;
+        }
+      }
+      return true;
+    }).toList();
+
+    if (activeJobs.isEmpty) return Offstage();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ViewAllLabel(
           label: languages.jobRequestList,
-          list: list.validate(),
+          list: activeJobs.validate(),
           onTap: () {
             JobListScreen(showAppBar: true).launch(context);
           },
         ),
         AnimatedListView(
-          itemCount: list.validate().length,
+          itemCount: activeJobs.validate().length,
           shrinkWrap: true,
           listAnimationType: ListAnimationType.FadeIn,
           fadeInConfiguration: FadeInConfiguration(duration: 2.seconds),
-          itemBuilder: (_, i) => JobItemWidget(data: list[i]),
+          itemBuilder: (_, i) => JobItemWidget(data: activeJobs[i]),
         ),
       ],
     );

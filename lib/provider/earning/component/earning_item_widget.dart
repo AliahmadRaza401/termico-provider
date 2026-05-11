@@ -4,9 +4,9 @@ import 'package:nb_utils/nb_utils.dart';
 import '../../../components/cached_image_widget.dart';
 import '../../../components/price_widget.dart';
 import '../../../main.dart';
-import '../../../utils/configs.dart';
 import '../../../utils/images.dart';
-import '../add_handyman_payout_screen.dart';
+// Handyman payout screen removed - only provider role supported
+// import '../add_handyman_payout_screen.dart';
 import '../model/earning_list_model.dart';
 import 'earning_detail_bottomsheet.dart';
 
@@ -229,21 +229,21 @@ class EarningItemWidget extends StatelessWidget {
               ).expand(),
             ],
           ),
-          if (earningModel.handymanDueAmount.validate() > 0)
-            AppButton(
-              text: languages.payout,
-              color: primaryColor,
-              width: context.width(),
-              margin: EdgeInsets.only(top: 16),
-              padding: EdgeInsets.zero,
-              onTap: () async {
-                bool? res = await AddHandymanPayoutScreen(earningModel: earningModel).launch(context);
-
-                if (res ?? false) {
-                  onUpdate?.call();
-                }
-              },
-            ),
+          // Handyman payout functionality removed - only provider role supported
+          // if (earningModel.handymanDueAmount.validate() > 0)
+          //   AppButton(
+          //     text: languages.payout,
+          //     color: primaryColor,
+          //     width: context.width(),
+          //     margin: EdgeInsets.only(top: 16),
+          //     padding: EdgeInsets.zero,
+          //     onTap: () async {
+          //       bool? res = await AddHandymanPayoutScreen(earningModel: earningModel).launch(context);
+          //       if (res ?? false) {
+          //         onUpdate?.call();
+          //       }
+          //     },
+          //   ),
         ],
       ),
     ).onTap(

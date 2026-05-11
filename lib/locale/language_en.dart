@@ -122,6 +122,9 @@ class LanguageEn extends Languages {
   String get notification => 'Notifications';
 
   @override
+  String get notificationCategories => 'Notification Categories';
+
+  @override
   String get accept => 'Accept';
 
   @override
@@ -950,6 +953,27 @@ class LanguageEn extends Languages {
   String get myBid => 'My Bid';
 
   @override
+  String get lblExpired => 'Expired';
+
+  @override
+  String lblDaysLeft(int days) => '$days ${days == 1 ? 'day' : 'days'} left';
+
+  @override
+  String lblDaysRemaining(int days) => '$days ${days == 1 ? 'day' : 'days'} remaining';
+
+  @override
+  String get lblExpiryDays => 'Expiry Days';
+
+  @override
+  String lblExpiryDaysFormat(int days) => 'Expiry: $days ${days == 1 ? 'day' : 'days'}';
+
+  @override
+  String get lblJobExpiredMessage => 'This job request has expired and is no longer available for bidding.';
+
+  @override
+  String get lblBiddingNotAvailable => 'Bidding is not available for this job request.';
+
+  @override
   String get inputMustBeNumberOrDigit => 'Input must be number or digit';
 
   @override
@@ -1347,6 +1371,35 @@ class LanguageEn extends Languages {
 
   @override
   String get home => 'Home';
+
+  @override
+  String get homeFilter => 'Home';
+
+  @override
+  String get apartment => 'Apartment';
+
+  @override
+  String get onboardingTitle1 => 'Create your account';
+  @override
+  String get onboardingText1 => 'Sign up or sign in quickly. Complete your profile to post requests and communicate easily with providers.';
+  @override
+  String get onboardingTitle2 => 'Request a job and get offers';
+  @override
+  String get onboardingText2 => 'Say what you need, add address and estimated price. Nearby providers send you offers and you choose the right one.';
+  @override
+  String get onboardingTitle3 => 'Choose the provider and track the booking';
+  @override
+  String get onboardingText3 => 'Compare offers, select the provider and confirm date and time. Track job status in real time and chat or call directly.';
+  @override
+  String get providerInstructionsTitle => 'Provider instructions';
+  @override
+  String get providerInstructionsText => 'Browse nearby requests, send your offer, and manage bookings through completion. Read the quick guide to work efficiently in the app.';
+  @override
+  String get readInstructions => 'Read instructions';
+  @override
+  String get skip => 'Skip';
+  @override
+  String get next => 'Next';
 
   @override
   String get selectPlanSubTitle => 'Choose a plan tailored to your needs';

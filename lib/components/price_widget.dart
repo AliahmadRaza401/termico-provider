@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:handyman_provider_flutter/main.dart';
+import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/extensions/num_extenstions.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -31,6 +32,8 @@ class PriceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool shouldShowFree = isAppleReviewFreeMode || isFreeService;
+
     TextDecoration? textDecoration() => isLineThroughEnabled ? TextDecoration.lineThrough : null;
 
     TextStyle _textStyle({int? aSize}) {
@@ -52,12 +55,12 @@ class PriceWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
-          "${isDiscountedPrice ? ' -' : ''}",
+          "${isDiscountedPrice && !shouldShowFree ? ' -' : ''}",
           style: _textStyle(),
         ),
         Row(
           children: [
-            if (isFreeService)
+            if (shouldShowFree)
               Text(languages.lblFree, style: _textStyle())
             else
               Text(

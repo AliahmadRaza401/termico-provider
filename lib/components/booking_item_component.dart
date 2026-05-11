@@ -4,7 +4,7 @@ import 'package:handyman_provider_flutter/components/price_widget.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/booking_list_response.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/provider/components/assign_handyman_screen.dart';
+// AssignHandymanScreen removed - only provider role supported
 import 'package:handyman_provider_flutter/screens/booking_detail_screen.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/configs.dart';
@@ -207,6 +207,7 @@ class BookingItemComponentState extends State<BookingItemComponent> {
                     PriceWidget(
                       price: widget.bookingData.totalAmount.validate(),
                       color: primaryColor,
+                      isFreeService: isAppleReviewFreeMode,
                     )
                   else
                     Row(
@@ -214,7 +215,7 @@ class BookingItemComponentState extends State<BookingItemComponent> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         PriceWidget(
-                          isFreeService: widget.bookingData.type == SERVICE_TYPE_FREE,
+                          isFreeService: isAppleReviewFreeMode || widget.bookingData.type == SERVICE_TYPE_FREE,
                           price: widget.bookingData.totalAmount.validate(),
                           color: primaryColor,
                         ),
@@ -223,7 +224,9 @@ class BookingItemComponentState extends State<BookingItemComponent> {
                             children: [
                               4.width,
                               Text(
-                                '${widget.bookingData.amount.validate().toPriceFormat()}/${languages.lblHr}',
+                                isAppleReviewFreeMode
+                                    ? '${languages.lblFree}/${languages.lblHr}'
+                                    : '${widget.bookingData.amount.validate().toPriceFormat()}/${languages.lblHr}',
                                 style: secondaryTextStyle(),
                               ),
                             ],
@@ -394,7 +397,7 @@ class BookingItemComponentState extends State<BookingItemComponent> {
                 ],
               ).paddingAll(8),
             ),
-          if (isUserTypeProvider && widget.bookingData.status == BookingStatusKeys.pending || (isUserTypeHandyman && widget.bookingData.status == BookingStatusKeys.accept))
+          if (isUserTypeProvider && widget.bookingData.status == BookingStatusKeys.pending)
             Row(
               children: [
                 if (isUserTypeProvider)
@@ -551,14 +554,9 @@ class BookingItemComponentState extends State<BookingItemComponent> {
                   color: primaryColor,
                   elevation: 0,
                   onTap: () {
-                    AssignHandymanScreen(
-                      bookingId: widget.bookingData.id,
-                      serviceAddressId: widget.bookingData.bookingAddressId,
-                      onUpdate: () {
-                        setState(() {});
-                        LiveStream().emit(LIVESTREAM_UPDATE_BOOKINGS);
-                      },
-                    ).launch(context);
+                    // AssignHandymanScreen removed - only provider role supported
+                    // Now navigate to booking detail, where provider can assign to self
+                    BookingDetailScreen(bookingId: widget.bookingData.id.validate()).launch(context);
                   },
                 ),
               ],
