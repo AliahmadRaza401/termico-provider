@@ -187,7 +187,7 @@ class LanguageRu extends Languages {
   String get lblReason => 'Причина';
 
   @override
-  String get lblSelectHandyman => 'Пожалуйста, выберите мастера';
+  String get lblSelectHandyman => 'Пожалуйста, выберите поставщика';
 
   @override
   String get lblAssign => 'Назначить';
@@ -196,7 +196,7 @@ class LanguageRu extends Languages {
   String get lblCall => 'Позвонить';
 
   @override
-  String get lblAssignHandyman => 'Назначить мастера';
+  String get lblAssignHandyman => 'Назначить поставщика';
 
   @override
   String get lblAssigned => 'Назначено';
@@ -403,8 +403,7 @@ class LanguageRu extends Languages {
   String get lblLoginTitle => "С возвращением!";
 
   @override
-  String get lblLoginSubtitle =>
-      "Мы скучали по вам. С возвращением!";
+  String get lblLoginSubtitle => "Мы скучали по вам. С возвращением!";
 
   @override
   String get lblSignupTitle => "Здравствуйте!";
@@ -712,12 +711,10 @@ class LanguageRu extends Languages {
   String get lblHelpLineNum => "Номер службы поддержки";
 
   @override
-  String get lblReasonCancelling =>
-      "Причина отмены этого бронирования";
+  String get lblReasonCancelling => "Причина отмены этого бронирования";
 
   @override
-  String get lblReasonRejecting =>
-      "Причина отклонения этого бронирования";
+  String get lblReasonRejecting => "Причина отклонения этого бронирования";
 
   @override
   String get lblFailed => "Причина, по которой бронирование не удалось";
@@ -732,15 +729,13 @@ class LanguageRu extends Languages {
   String get lblDoYouWantToRestore => "Восстановить?";
 
   @override
-  String get lblDoYouWantToDeleteForcefully =>
-      "Удалить принудительно?";
+  String get lblDoYouWantToDeleteForcefully => "Удалить принудительно?";
 
   @override
   String get lblDoYouWantToDelete => "Удалить?";
 
   @override
-  String get lblPleaseEnterMobileNumber =>
-      "Пожалуйста, введите номер телефона";
+  String get lblPleaseEnterMobileNumber => "Пожалуйста, введите номер телефона";
 
   @override
   String get lblDangerZone => "Опасная зона";
@@ -780,22 +775,21 @@ class LanguageRu extends Languages {
   String get lblNewUpdate => "Новое обновление";
 
   @override
-  String get lblOptionalUpdateNotify => "Уведомление об опциональном обновлении";
+  String get lblOptionalUpdateNotify =>
+      "Уведомление об опциональном обновлении";
 
   @override
   String get lblAnUpdateTo => "Обновление для ";
 
   @override
-  String get lblIsAvailableWouldYouLike =>
-      "доступно. Хотите обновить?";
+  String get lblIsAvailableWouldYouLike => "доступно. Хотите обновить?";
 
   @override
   String lblAreYouSureYouWantToAssignThisServiceTo(String name) =>
       "Назначить эту услугу пользователю $name?";
 
   @override
-  String get lblAreYouSureYouWantToAssignToYourself =>
-      "Назначить себе?";
+  String get lblAreYouSureYouWantToAssignToYourself => "Назначить себе?";
 
   @override
   String get lblAssignToMyself => "Назначить себе";
@@ -882,15 +876,13 @@ class LanguageRu extends Languages {
   String get noHandymanYet => "Мастеров пока нет";
 
   @override
-  String get noHandymanSubTitle =>
-      "Проверьте, что статус мастера активен";
+  String get noHandymanSubTitle => "Проверьте, что статус мастера активен";
 
   @override
   String get noServiceFound => "Услуги не найдены";
 
   @override
-  String get noServiceSubTitle =>
-      "Добавьте услуги и расширяйте свою работу";
+  String get noServiceSubTitle => "Добавьте услуги и расширяйте свою работу";
 
   @override
   String get noServiceAddressTitle => "Адрес обслуживания не найден";
@@ -906,8 +898,7 @@ class LanguageRu extends Languages {
   String get noSubscriptionFound => "Подписки не найдены";
 
   @override
-  String get noSubscriptionSubTitle =>
-      "Вы ещё не оформили подписку";
+  String get noSubscriptionSubTitle => "Вы ещё не оформили подписку";
 
   @override
   String get noTexesFound => 'Налоги не найдены';
@@ -970,8 +961,7 @@ class LanguageRu extends Languages {
       'Пожалуйста, введите корректную цену ставки';
 
   @override
-  String get yourPriceShouldNotBeLessThan =>
-      'Ваша цена не должна быть меньше';
+  String get yourPriceShouldNotBeLessThan => 'Ваша цена не должна быть меньше';
 
   @override
   String get enterBidPrice => 'Введите цену ставки';
@@ -1007,10 +997,12 @@ class LanguageRu extends Languages {
   }
 
   @override
-  String get lblJobExpiredMessage => 'Этот запрос на работу истёк и больше не доступен для ставок.';
+  String get lblJobExpiredMessage =>
+      'Этот запрос на работу истёк и больше не доступен для ставок.';
 
   @override
-  String get lblBiddingNotAvailable => 'Ставки недоступны для этого запроса на работу.';
+  String get lblBiddingNotAvailable =>
+      'Ставки недоступны для этого запроса на работу.';
 
   @override
   String get inputMustBeNumberOrDigit => 'Введите число';
@@ -1140,8 +1132,7 @@ class LanguageRu extends Languages {
   String get packageService => 'Услуга пакета';
 
   @override
-  String get confirmationRemovePackage =>
-      'Удалить эту услугу из пакета?';
+  String get confirmationRemovePackage => 'Удалить эту услугу из пакета?';
 
   @override
   String get packageName => 'Название пакета';
@@ -1183,8 +1174,7 @@ class LanguageRu extends Languages {
   String get includedInThisPackage => 'Входит в этот пакет';
 
   @override
-  String get packageServicesWillAppearHere =>
-      'Услуги пакета появятся здесь';
+  String get packageServicesWillAppearHere => 'Услуги пакета появятся здесь';
 
   @override
   String get showingFixPriceServices =>
@@ -1224,8 +1214,7 @@ class LanguageRu extends Languages {
       'Оплата не прошла. Пожалуйста, попробуйте снова';
 
   @override
-  String get yourPaymentHasBeenMadeSuccessfully =>
-      'Оплата успешно выполнена';
+  String get yourPaymentHasBeenMadeSuccessfully => 'Оплата успешно выполнена';
 
   @override
   String get lblTransactionFailed => 'Транзакция не удалась';
@@ -1244,8 +1233,7 @@ class LanguageRu extends Languages {
   String get lblNoTaxesFound => 'Налоги не найдены';
 
   @override
-  String get lblConfirmationForDeleteMsg =>
-      'Вы хотите удалить сообщение?';
+  String get lblConfirmationForDeleteMsg => 'Вы хотите удалить сообщение?';
 
   @override
   String get lblImage => 'Изображение';
@@ -1390,8 +1378,7 @@ class LanguageRu extends Languages {
   String get valueConditionMessage => 'Значение должно быть от 0 до 99';
 
   @override
-  String get withExtraAndAdvanceCharge =>
-      'С доп. расходами и предоплатой';
+  String get withExtraAndAdvanceCharge => 'С доп. расходами и предоплатой';
 
   @override
   String get withExtraCharge => 'С доп. расходами';
@@ -1438,19 +1425,23 @@ class LanguageRu extends Languages {
   @override
   String get onboardingTitle1 => 'Создайте аккаунт';
   @override
-  String get onboardingText1 => 'Зарегистрируйтесь или войдите быстро. Заполните профиль, чтобы публиковать заявки и легко общаться с мастерами.';
+  String get onboardingText1 =>
+      'Зарегистрируйтесь или войдите быстро. Заполните профиль, чтобы публиковать заявки и легко общаться с мастерами.';
   @override
   String get onboardingTitle2 => 'Оставьте заявку и получайте предложения';
   @override
-  String get onboardingText2 => 'Опишите, что нужно, укажите адрес и ориентировочную цену. Мастера рядом пришлют предложения, вы выберете подходящий вариант.';
+  String get onboardingText2 =>
+      'Опишите, что нужно, укажите адрес и ориентировочную цену. Мастера рядом пришлют предложения, вы выберете подходящий вариант.';
   @override
   String get onboardingTitle3 => 'Выберите мастера и следите за бронированием';
   @override
-  String get onboardingText3 => 'Сравните предложения, выберите мастера и подтвердите дату и время. Следите за статусом заказа в реальном времени, общайтесь в чате или по звонку.';
+  String get onboardingText3 =>
+      'Сравните предложения, выберите мастера и подтвердите дату и время. Следите за статусом заказа в реальном времени, общайтесь в чате или по звонку.';
   @override
   String get providerInstructionsTitle => 'Инструкция для мастеров';
   @override
-  String get providerInstructionsText => 'Просматривайте заявки рядом, отправляйте своё предложение и ведите бронирование до завершения. Ознакомьтесь с кратким гидом для удобной работы в приложении.';
+  String get providerInstructionsText =>
+      'Просматривайте заявки рядом, отправляйте своё предложение и ведите бронирование до завершения. Ознакомьтесь с кратким гидом для удобной работы в приложении.';
   @override
   String get readInstructions => 'Читать инструкцию';
   @override
@@ -1459,7 +1450,8 @@ class LanguageRu extends Languages {
   String get next => 'Далее';
 
   @override
-  String get selectPlanSubTitle => 'Выберите план, подходящий вашим потребностям';
+  String get selectPlanSubTitle =>
+      'Выберите план, подходящий вашим потребностям';
 
   @override
   String get userRole => 'Роль пользователя';
@@ -1477,8 +1469,7 @@ class LanguageRu extends Languages {
   String get thisServiceMayTake => 'Эта услуга может занять';
 
   @override
-  String get priceAmountValidationMessage =>
-      'Сумма должна быть больше 0';
+  String get priceAmountValidationMessage => 'Сумма должна быть больше 0';
 
   @override
   String get lblFeatureBlog => 'Это избранный блог';
@@ -1560,7 +1551,7 @@ class LanguageRu extends Languages {
   String get cashPaymentApproval => "Подтверждение наличной оплаты";
 
   @override
-  String get approvedByHandyman => "Одобрено мастером";
+  String get approvedByHandyman => "Одобрено поставщиком";
 
   @override
   String get sentToProvider => "Отправлено провайдеру";
@@ -1596,7 +1587,7 @@ class LanguageRu extends Languages {
   String get bank => "Банк";
 
   @override
-  String get handymanApprovedTheRequest => "Мастер одобрил запрос";
+  String get handymanApprovedTheRequest => "Поставщик одобрил запрос";
 
   @override
   String get requestSentToTheProvider => "Запрос отправлен провайдеру";
@@ -1605,15 +1596,13 @@ class LanguageRu extends Languages {
   String get requestSentToTheAdmin => "Запрос отправлен администратору";
 
   @override
-  String get requestPendingWithTheProvider =>
-      "Запрос ожидает у провайдера";
+  String get requestPendingWithTheProvider => "Запрос ожидает у провайдера";
 
   @override
   String get providerApprovedTheRequest => "Провайдер одобрил запрос";
 
   @override
-  String get requestPendingWithTheAdmin =>
-      "Запрос ожидает у администратора";
+  String get requestPendingWithTheAdmin => "Запрос ожидает у администратора";
 
   @override
   String get adminApprovedTheRequest => "Администратор одобрил запрос";
@@ -1673,8 +1662,9 @@ class LanguageRu extends Languages {
   String get detailsOfTheBank => "Детали банка";
 
   @override
-  String get selectABankTransferMoneyAndEnterTheReferenceIDInTheTextFieldBelow =>
-      "Выберите банк, переведите деньги и введите ID ссылки в поле ниже.";
+  String
+      get selectABankTransferMoneyAndEnterTheReferenceIDInTheTextFieldBelow =>
+          "Выберите банк, переведите деньги и введите ID ссылки в поле ниже.";
 
   @override
   String get noBanksAvailable => "Нет доступных банков";
@@ -1745,15 +1735,13 @@ class LanguageRu extends Languages {
   String get search => 'Поиск';
 
   @override
-  String get wouldYouLikeToAssignThisBooking =>
-      'Назначить это бронирование?';
+  String get wouldYouLikeToAssignThisBooking => 'Назначить это бронирование?';
 
   @override
   String get connect => 'Подключиться';
 
   @override
-  String get youAreNotConnectedWithChatServer =>
-      'Подключитесь к чат-серверу';
+  String get youAreNotConnectedWithChatServer => 'Подключитесь к чат-серверу';
 
   @override
   String get tapBelowButtonToConnectWithOurChatServer =>
@@ -1806,12 +1794,10 @@ class LanguageRu extends Languages {
       "CinetPay не поддерживается вашей валютой";
 
   @override
-  String get totalAmountShouldBeMoreThan =>
-      'Итоговая сумма должна быть больше';
+  String get totalAmountShouldBeMoreThan => 'Итоговая сумма должна быть больше';
 
   @override
-  String get totalAmountShouldBeLessThan =>
-      'Итоговая сумма должна быть меньше';
+  String get totalAmountShouldBeLessThan => 'Итоговая сумма должна быть меньше';
 
   @override
   String get pleaseNoteThatAllServiceMarkedCompleted =>
@@ -1847,8 +1833,7 @@ class LanguageRu extends Languages {
       'Напишите короткую строку: Почему выбрать меня?';
 
   @override
-  String get reasonsToChooseYour =>
-      'Причины выбрать вашу услугу';
+  String get reasonsToChooseYour => 'Причины выбрать вашу услугу';
 
   @override
   String get addReasons => 'Добавить причины';
@@ -1903,8 +1888,7 @@ class LanguageRu extends Languages {
       'Пользователь превысил лимит транзакций кошелька';
 
   @override
-  String get theAmountUserIs =>
-      'Сумма меньше минимально разрешённой';
+  String get theAmountUserIs => 'Сумма меньше минимально разрешённой';
 
   @override
   String get userDidnTEnterThePin => "Пользователь не ввёл PIN";
@@ -1935,16 +1919,13 @@ class LanguageRu extends Languages {
   String get theTransactionWasNot => 'Транзакция не найдена.';
 
   @override
-  String get xSignatureAndPayloadDid =>
-      'x-signature и payload не совпали';
+  String get xSignatureAndPayloadDid => 'x-signature и payload не совпали';
 
   @override
-  String get encryptionKeyHasBeen =>
-      'Ключ шифрования успешно получен';
+  String get encryptionKeyHasBeen => 'Ключ шифрования успешно получен';
 
   @override
-  String get couldNotFetchEncryption =>
-      'Не удалось получить ключ шифрования';
+  String get couldNotFetchEncryption => 'Не удалось получить ключ шифрования';
 
   @override
   String get transactionHasBeenExpired => 'Срок транзакции истёк';
@@ -2119,13 +2100,13 @@ class LanguageRu extends Languages {
   String get sendMessage => 'Отправить сообщение';
 
   @override
-  String get handymanLocation => 'Местоположение мастера';
+  String get handymanLocation => 'Местоположение поставщика';
 
   @override
   String get track => 'Отслеживать';
 
   @override
-  String get trackHandymanLocation => 'Отслеживать местоположение мастера';
+  String get trackHandymanLocation => 'Отслеживать местоположение поставщика';
 
   @override
   String get lastUpdatedAt => 'Последнее обновление:';
@@ -2246,7 +2227,8 @@ class LanguageRu extends Languages {
   String get editHandymanCommission => 'Редактировать комиссию мастера';
 
   @override
-  String get enterValidCommissionValue => 'Введите корректное значение комиссии';
+  String get enterValidCommissionValue =>
+      'Введите корректное значение комиссии';
 
   @override
   String get percentage => 'Процент';
@@ -2258,8 +2240,7 @@ class LanguageRu extends Languages {
   String get youCanTUpdateDeleted => "Нельзя обновлять удалённые элементы";
 
   @override
-  String get thisCommissionHasBeen =>
-      'Эта комиссия создана администратором.';
+  String get thisCommissionHasBeen => 'Эта комиссия создана администратором.';
 
   @override
   String get copyMessage => 'Копировать сообщение';
@@ -2353,8 +2334,7 @@ class LanguageRu extends Languages {
       'напр.: Во время услуги мебель была случайно повреждена.';
 
   @override
-  String get doYouWantClosedThisQuery =>
-      'Хотите закрыть этот запрос';
+  String get doYouWantClosedThisQuery => 'Хотите закрыть этот запрос';
 
   @override
   String get markAsClosed => 'Отметить как закрыто';
@@ -2458,7 +2438,7 @@ class LanguageRu extends Languages {
   String get lblReassign => 'Переназначить';
 
   @override
-  String get handymanPayoutList => 'Список выплат мастерам';
+  String get handymanPayoutList => 'Список выплат поставщикам';
 
   @override
   String get earningDetails => 'Детали дохода';
@@ -2467,7 +2447,7 @@ class LanguageRu extends Languages {
   String get adminEarning => 'Доход администратора';
 
   @override
-  String get handymanName => 'Имя мастера';
+  String get handymanName => 'Имя поставщика';
 
   @override
   String get totalEarning => 'Общий доход';
@@ -2476,10 +2456,10 @@ class LanguageRu extends Languages {
   String get myEarning => 'Мой доход';
 
   @override
-  String get handymanPayDue => 'Задолженность мастеру';
+  String get handymanPayDue => 'Задолженность поставщику';
 
   @override
-  String get handymanPaidAmount => 'Выплачено мастеру';
+  String get handymanPaidAmount => 'Выплачено поставщику';
 
   @override
   String get payout => 'Выплата';
@@ -2491,16 +2471,16 @@ class LanguageRu extends Languages {
   String get selectMethod => 'Выберите метод';
 
   @override
-  String get handymanEarning => 'Доход мастера';
+  String get handymanEarning => 'Доход поставщика';
 
   @override
-  String get handymanEarnings => 'Доходы мастера';
+  String get handymanEarnings => 'Доходы поставщика';
 
   @override
   String get noPayoutFound => 'Выплаты не найдены';
 
   @override
-  String get handymanEarningList => 'Список доходов мастера';
+  String get handymanEarningList => 'Список доходов поставщика';
 
   @override
   String get permissionDeniedUnableTo =>
@@ -2522,8 +2502,7 @@ class LanguageRu extends Languages {
       'Этот баннер сейчас на проверке у администратора.';
 
   @override
-  String get doYouWantToDeleteBanner =>
-      'Вы хотите удалить этот баннер';
+  String get doYouWantToDeleteBanner => 'Вы хотите удалить этот баннер';
 
   @override
   String get link => 'Ссылка';
@@ -2547,7 +2526,7 @@ class LanguageRu extends Languages {
   String get shortDescription => 'Короткое описание';
 
   @override
-  String get eGHandymanTrustedService => 'напр.: Надёжный сервис мастера';
+  String get eGHandymanTrustedService => 'напр.: Надёжный домашний сервис';
 
   @override
   String get chooseService => 'Выберите услугу';
@@ -2575,12 +2554,10 @@ class LanguageRu extends Languages {
       'Чтобы отправить баннер, нажмите «Добавить» и загрузите промо-баннер';
 
   @override
-  String get canTFindRevenuecatProduct =>
-      "Не удаётся найти продукт RevenueCat";
+  String get canTFindRevenuecatProduct => "Не удаётся найти продукт RevenueCat";
 
   @override
-  String get waitForAWhile =>
-      "Подождите немного, мы сохраняем вашу подписку";
+  String get waitForAWhile => "Подождите немного, мы сохраняем вашу подписку";
 
   @override
   String get reason => 'Причина:';

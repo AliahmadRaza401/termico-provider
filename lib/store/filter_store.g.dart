@@ -57,22 +57,6 @@ mixin _$FilterStore on FilterStoreBase, Store {
     });
   }
 
-  late final _$handymanIdAtom =
-      Atom(name: 'FilterStoreBase.handymanId', context: context);
-
-  @override
-  List<int> get handymanId {
-    _$handymanIdAtom.reportRead();
-    return super.handymanId;
-  }
-
-  @override
-  set handymanId(List<int> value) {
-    _$handymanIdAtom.reportWrite(value, super.handymanId, () {
-      super.handymanId = value;
-    });
-  }
-
   late final _$bookingStatusAtom =
       Atom(name: 'FilterStoreBase.bookingStatus', context: context);
 
@@ -304,24 +288,6 @@ mixin _$FilterStore on FilterStoreBase, Store {
         .run(() => super.removeFromProviderList(prodId: prodId));
   }
 
-  late final _$addToHandymanListAsyncAction =
-      AsyncAction('FilterStoreBase.addToHandymanList', context: context);
-
-  @override
-  Future<void> addToHandymanList({required int handyId}) {
-    return _$addToHandymanListAsyncAction
-        .run(() => super.addToHandymanList(handyId: handyId));
-  }
-
-  late final _$removeFromHandymanListAsyncAction =
-      AsyncAction('FilterStoreBase.removeFromHandymanList', context: context);
-
-  @override
-  Future<void> removeFromHandymanList({required int handyId}) {
-    return _$removeFromHandymanListAsyncAction
-        .run(() => super.removeFromHandymanList(handyId: handyId));
-  }
-
   late final _$addToBookingStatusListAsyncAction =
       AsyncAction('FilterStoreBase.addToBookingStatusList', context: context);
 
@@ -493,7 +459,6 @@ mixin _$FilterStore on FilterStoreBase, Store {
 serviceId: ${serviceId},
 customerId: ${customerId},
 providerId: ${providerId},
-handymanId: ${handymanId},
 bookingStatus: ${bookingStatus},
 paymentStatus: ${paymentStatus},
 paymentType: ${paymentType},

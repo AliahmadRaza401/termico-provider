@@ -78,7 +78,8 @@ class EarningItemWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Image.asset(total_booking, height: 16, color: context.primaryColor),
+                  Image.asset(total_booking,
+                      height: 16, color: context.primaryColor),
                   16.width,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,7 +102,8 @@ class EarningItemWidget extends StatelessWidget {
               16.width,
               Row(
                 children: [
-                  Image.asset(ic_un_fill_wallet, height: 16, color: context.primaryColor),
+                  Image.asset(ic_un_fill_wallet,
+                      height: 16, color: context.primaryColor),
                   16.width,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +132,8 @@ class EarningItemWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Image.asset(ic_un_fill_wallet, height: 16, color: context.primaryColor),
+                  Image.asset(ic_un_fill_wallet,
+                      height: 16, color: context.primaryColor),
                   16.width,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,7 +158,8 @@ class EarningItemWidget extends StatelessWidget {
               16.width,
               Row(
                 children: [
-                  Image.asset(ic_un_fill_wallet, height: 16, color: context.primaryColor),
+                  Image.asset(ic_un_fill_wallet,
+                      height: 16, color: context.primaryColor),
                   16.width,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -182,13 +186,14 @@ class EarningItemWidget extends StatelessWidget {
           Divider(color: context.dividerColor, thickness: 1.0, height: 20),
           Row(
             children: [
-              Image.asset(ic_un_fill_wallet, height: 16, color: context.primaryColor),
+              Image.asset(ic_un_fill_wallet,
+                  height: 16, color: context.primaryColor),
               16.width,
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    languages.handymanPayDue,
+                    'Provider Pay Due',
                     style: secondaryTextStyle(),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -207,13 +212,14 @@ class EarningItemWidget extends StatelessWidget {
           Divider(color: context.dividerColor, thickness: 1.0, height: 20),
           Row(
             children: [
-              Image.asset(ic_un_fill_wallet, height: 16, color: context.primaryColor),
+              Image.asset(ic_un_fill_wallet,
+                  height: 16, color: context.primaryColor),
               16.width,
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    languages.handymanPaidAmount,
+                    'Provider Paid Amount',
                     style: secondaryTextStyle(),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

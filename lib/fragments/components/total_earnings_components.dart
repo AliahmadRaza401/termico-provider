@@ -12,7 +12,8 @@ class TotalAmountsComponent extends StatelessWidget {
   final String totalEarning;
   final PaymentBreakdown paymentBreakdown;
 
-  TotalAmountsComponent({required this.paymentBreakdown, required this.totalEarning});
+  TotalAmountsComponent(
+      {required this.paymentBreakdown, required this.totalEarning});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,8 @@ class TotalAmountsComponent extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             margin: EdgeInsets.symmetric(horizontal: 16),
-            decoration: boxDecorationDefault(borderRadius: radius(), color: context.cardColor),
+            decoration: boxDecorationDefault(
+                borderRadius: radius(), color: context.cardColor),
             child: Column(
               children: [
                 Row(
@@ -32,39 +34,51 @@ class TotalAmountsComponent extends StatelessWidget {
                   children: [
                     Text(languages.totalAmount, style: boldTextStyle()),
                     16.width,
-                    PriceWidget(price: totalEarning.toDouble(), color: primaryColor),
+                    PriceWidget(
+                        price: totalEarning.toDouble(), color: primaryColor),
                   ],
                 ),
               ],
             ).paddingSymmetric(vertical: 6),
           ).paddingTop(16),
           30.height,
-          Text(languages.paymentBreakdown, style: boldTextStyle()).paddingSymmetric(horizontal: 16),
+          Text(languages.paymentBreakdown, style: boldTextStyle())
+              .paddingSymmetric(horizontal: 16),
           16.height,
           if (isUserTypeProvider)
             Container(
               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
               margin: EdgeInsets.symmetric(horizontal: 16),
-              decoration: boxDecorationDefault(borderRadius: radius(), color: context.cardColor),
+              decoration: boxDecorationDefault(
+                  borderRadius: radius(), color: context.cardColor),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(languages.provider, style: boldTextStyle(size: 12)).expand(),
+                  Text(languages.provider, style: boldTextStyle(size: 12))
+                      .expand(),
                   4.width,
-                  PriceWidget(price: paymentBreakdown.providerEarned.toDouble(), color: darkOrange, size: 14),
+                  PriceWidget(
+                      price: paymentBreakdown.providerEarned.toDouble(),
+                      color: darkOrange,
+                      size: 14),
                 ],
               ),
             ).paddingOnly(bottom: 16),
           Container(
             padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             margin: EdgeInsets.symmetric(horizontal: 16),
-            decoration: boxDecorationDefault(borderRadius: radius(), color: context.cardColor),
+            decoration: boxDecorationDefault(
+                borderRadius: radius(), color: context.cardColor),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(languages.handyman, style: boldTextStyle(size: 12)).expand(),
-                4.width,
-                PriceWidget(price: paymentBreakdown.handymanEarned.toDouble(), color: royalBlue, size: 14),
+                Text(languages.taxAmount, style: boldTextStyle(size: 12))
+                    .expand(),
+                16.width,
+                PriceWidget(
+                    price: paymentBreakdown.tax.toDouble(),
+                    color: redColor,
+                    size: 14),
               ],
             ),
           ),
@@ -72,27 +86,18 @@ class TotalAmountsComponent extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             margin: EdgeInsets.symmetric(horizontal: 16),
-            decoration: boxDecorationDefault(borderRadius: radius(), color: context.cardColor),
+            decoration: boxDecorationDefault(
+                borderRadius: radius(), color: context.cardColor),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(languages.taxAmount, style: boldTextStyle(size: 12)).expand(),
+                Text(languages.hintDiscount, style: boldTextStyle(size: 12))
+                    .expand(),
                 16.width,
-                PriceWidget(price: paymentBreakdown.tax.toDouble(), color: redColor, size: 14),
-              ],
-            ),
-          ),
-          16.height,
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-            margin: EdgeInsets.symmetric(horizontal: 16),
-            decoration: boxDecorationDefault(borderRadius: radius(), color: context.cardColor),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(languages.hintDiscount, style: boldTextStyle(size: 12)).expand(),
-                16.width,
-                PriceWidget(price: paymentBreakdown.discount.toDouble(), color: greenColor, size: 14),
+                PriceWidget(
+                    price: paymentBreakdown.discount.toDouble(),
+                    color: greenColor,
+                    size: 14),
               ],
             ),
           ),

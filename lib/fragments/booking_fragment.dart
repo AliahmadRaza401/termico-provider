@@ -23,7 +23,8 @@ class BookingFragment extends StatefulWidget {
   BookingFragmentState createState() => BookingFragmentState();
 }
 
-class BookingFragmentState extends State<BookingFragment> with SingleTickerProviderStateMixin {
+class BookingFragmentState extends State<BookingFragment>
+    with SingleTickerProviderStateMixin {
   ScrollController scrollController = ScrollController();
 
   int page = 1;
@@ -92,7 +93,6 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
       dateTo: filterStore.endDate,
       customerId: filterStore.customerId.join(","),
       providerId: filterStore.providerId.join(","),
-      handymanId: filterStore.handymanId.join(","),
       bookingStatus: filterStore.bookingStatus.join(","),
       paymentStatus: filterStore.paymentStatus.join(","),
       paymentType: filterStore.paymentType.join(","),
@@ -158,34 +158,47 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
                 },
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 16, right: 16, top: 24, bottom: 8),
+                    padding: EdgeInsets.only(
+                        left: 16, right: 16, top: 24, bottom: 8),
                     child: Column(
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 12),
                           decoration: boxDecorationWithRoundedCorners(
                             borderRadius: radius(),
-                            backgroundColor: appStore.isDarkMode ? context.cardColor : cardLightColor,
+                            backgroundColor: appStore.isDarkMode
+                                ? context.cardColor
+                                : cardLightColor,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
                                 children: [
-                                  Text(languages.totalAmount, style: boldTextStyle()).expand(),
+                                  Text(languages.totalAmount,
+                                          style: boldTextStyle())
+                                      .expand(),
                                   TextButton(
-                                    style: ButtonStyle(padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 2, horizontal: 0))),
+                                    style: ButtonStyle(
+                                        padding: WidgetStatePropertyAll(
+                                            EdgeInsets.symmetric(
+                                                vertical: 2, horizontal: 0))),
                                     onPressed: () {
                                       TotalAmountsComponent(
                                         totalEarning: totalEarnings,
                                         paymentBreakdown: paymentBreakdownData,
                                       ).launch(context);
                                     },
-                                    child: Text(languages.viewBreakdown, style: boldTextStyle(color: defaultStatus, size: 13)),
+                                    child: Text(languages.viewBreakdown,
+                                        style: boldTextStyle(
+                                            color: defaultStatus, size: 13)),
                                   ).withHeight(25),
                                 ],
                               ),
-                              PriceWidget(price: totalEarnings.toDouble(), color: primaryColor),
+                              PriceWidget(
+                                  price: totalEarnings.toDouble(),
+                                  color: primaryColor),
                             ],
                           ),
                         ),
@@ -196,7 +209,8 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
                     key: keyForList,
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     listAnimationType: ListAnimationType.FadeIn,
-                    fadeInConfiguration: FadeInConfiguration(duration: 2.seconds),
+                    fadeInConfiguration:
+                        FadeInConfiguration(duration: 2.seconds),
                     itemCount: list.length,
                     shrinkWrap: true,
                     disposeScrollController: true,
@@ -210,7 +224,8 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
                         imageWidget: EmptyStateWidget(),
                       ),
                     ),
-                    itemBuilder: (_, index) => BookingItemComponent(bookingData: list[index], index: index),
+                    itemBuilder: (_, index) => BookingItemComponent(
+                        bookingData: list[index], index: index),
                   ),
                 ],
               );

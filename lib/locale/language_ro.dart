@@ -2,7 +2,8 @@ import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguageRo extends Languages {
   @override
-  String planAboutToExpire(int days) => 'Planul tău este pe cale să expire în $days zile';
+  String planAboutToExpire(int days) =>
+      'Planul tău este pe cale să expire în $days zile';
 
   @override
   String get appName => 'Furnizor';
@@ -11,16 +12,16 @@ class LanguageRo extends Languages {
   String get provider => 'Furnizor';
 
   @override
-  String get lblShowingOnly4Handyman => 'Se afișează doar 4 meșteri';
+  String get lblShowingOnly4Handyman => 'Se afișează doar 4 furnizori';
 
   @override
-  String get lblRecentlyOnlineHandyman => 'Meșteri online recent';
+  String get lblRecentlyOnlineHandyman => 'Furnizori online recent';
 
   @override
   String get lblStartDrive => 'Începe deplasarea';
 
   @override
-  String get handyman => 'Meșter';
+  String get handyman => 'Furnizor';
 
   @override
   String get signIn => 'Autentificare';
@@ -86,7 +87,8 @@ class LanguageRo extends Languages {
   String get logout => 'Deconectare';
 
   @override
-  String get afterLogoutTxt => 'Vrei să te deconectezi din aplicație? Te poți autentifica oricând din nou!';
+  String get afterLogoutTxt =>
+      'Vrei să te deconectezi din aplicație? Te poți autentifica oricând din nou!';
 
   @override
   String get chooseTheme => 'Alege tema aplicației';
@@ -146,7 +148,8 @@ class LanguageRo extends Languages {
   String get systemDefault => 'Mod sistem';
 
   @override
-  String get confirmationRequestTxt => 'Ești sigur că vrei să efectuezi această acțiune?';
+  String get confirmationRequestTxt =>
+      'Ești sigur că vrei să efectuezi această acțiune?';
 
   @override
   String get notAvailable => 'Indisponibil';
@@ -185,7 +188,7 @@ class LanguageRo extends Languages {
   String get lblReason => 'Motiv';
 
   @override
-  String get lblSelectHandyman => 'Te rugăm să selectezi un meșter';
+  String get lblSelectHandyman => 'Te rugăm să selectezi un furnizor';
 
   @override
   String get lblAssign => 'Atribuie';
@@ -194,7 +197,7 @@ class LanguageRo extends Languages {
   String get lblCall => 'Apelează';
 
   @override
-  String get lblAssignHandyman => 'Atribuie meșter';
+  String get lblAssignHandyman => 'Atribuie furnizor';
 
   @override
   String get lblAssigned => 'Atribuit';
@@ -209,7 +212,7 @@ class LanguageRo extends Languages {
   String get lblRevenue => 'Venit';
 
   @override
-  String get lblAddHandyman => "Adaugă meșter";
+  String get lblAddHandyman => "Adaugă furnizor";
 
   @override
   String get lblBooking => 'Rezervări';
@@ -221,7 +224,7 @@ class LanguageRo extends Languages {
   String get lblTotalService => 'Total servicii';
 
   @override
-  String get lblTotalHandyman => 'Total meșteri';
+  String get lblTotalHandyman => 'Total furnizori';
 
   @override
   String get monthlyEarnings => 'Câștig lunar';
@@ -281,7 +284,7 @@ class LanguageRo extends Languages {
   String get lblProfile => 'Profil';
 
   @override
-  String get lblAllHandyman => "Lista meșterilor";
+  String get lblAllHandyman => "Lista furnizorilor";
 
   @override
   String get lblTime => 'Ora';
@@ -333,13 +336,15 @@ class LanguageRo extends Languages {
   String get lblDurationMin => 'Durată: Minute';
 
   @override
-  String get lblWaitForAcceptReq => 'Te rugăm să aștepți ca administratorul să accepte cererea ta';
+  String get lblWaitForAcceptReq =>
+      'Te rugăm să aștepți ca administratorul să accepte cererea ta';
 
   @override
   String get lblAddServiceAddress => 'Adaugă adresă de serviciu';
 
   @override
-  String get errorPasswordLength => 'Lungimea parolei trebuie să fie mai mare de';
+  String get errorPasswordLength =>
+      'Lungimea parolei trebuie să fie mai mare de';
 
   @override
   String get hintPassword => 'Parolă';
@@ -348,13 +353,15 @@ class LanguageRo extends Languages {
   String get hintRequired => 'Acest câmp este obligatoriu';
 
   @override
-  String get lblUnAuthorized => "Utilizatorul demo nu are permisiune pentru această acțiune";
+  String get lblUnAuthorized =>
+      "Utilizatorul demo nu are permisiune pentru această acțiune";
 
   @override
   String get btnVerifyId => "Verifică-ți identitatea";
 
   @override
-  String get confirmationUpload => "Ești sigur că vrei să încarci acest document?";
+  String get confirmationUpload =>
+      "Ești sigur că vrei să încarci acest document?";
 
   @override
   String get toastSuccess => "Documentul furnizorului a fost salvat cu succes";
@@ -405,7 +412,8 @@ class LanguageRo extends Languages {
   String get lblSignupTitle => "Salut, utilizator!";
 
   @override
-  String get lblSignupSubtitle => "Creează-ți contul pentru o experiență mai bună";
+  String get lblSignupSubtitle =>
+      "Creează-ți contul pentru o experiență mai bună";
 
   @override
   String get lblSignup => "Înregistrare";
@@ -429,7 +437,7 @@ class LanguageRo extends Languages {
   String get lblDate => "Data";
 
   @override
-  String get lblAboutHandyman => "Despre meșter";
+  String get lblAboutHandyman => "Despre furnizor";
 
   @override
   String get lblAboutCustomer => "Despre client";
@@ -477,7 +485,8 @@ class LanguageRo extends Languages {
   String get lblMarkAllAsRead => "Marchează toate ca citite";
 
   @override
-  String get lblCloseAppMsg => "Apasă încă o dată Înapoi pentru a ieși din aplicație";
+  String get lblCloseAppMsg =>
+      "Apasă încă o dată Înapoi pentru a ieși din aplicație";
 
   @override
   String get lblAddress => "Adresă";
@@ -486,7 +495,7 @@ class LanguageRo extends Languages {
   String get lblType => "Tip";
 
   @override
-  String get lblHandymanType => "Tip meșter";
+  String get lblHandymanType => "Tip furnizor";
 
   @override
   String get lblFixed => "Fix";
@@ -528,7 +537,8 @@ class LanguageRo extends Languages {
   String get lblOppS => "Ups";
 
   @override
-  String get lblNoInternet => "Este o problemă cu conexiunea ta. Te rugăm să încerci din nou.";
+  String get lblNoInternet =>
+      "Este o problemă cu conexiunea ta. Te rugăm să încerci din nou.";
 
   @override
   String get lblRetry => "REÎNCEARCĂ";
@@ -612,7 +622,8 @@ class LanguageRo extends Languages {
   String get lblChooseYourPlan => "Alege planul tău";
 
   @override
-  String get lblRenewSubTitle => "Cumpără un plan nou pentru a primi rezervări noi";
+  String get lblRenewSubTitle =>
+      "Cumpără un plan nou pentru a primi rezervări noi";
 
   @override
   String get lblReminder => "Memento";
@@ -645,7 +656,7 @@ class LanguageRo extends Languages {
   String get lblSubscriptionHistory => "Istoric abonamente";
 
   @override
-  String get lblTrashHandyman => "Meșterul a fost mutat la coș cu succes";
+  String get lblTrashHandyman => "Furnizorul a fost mutat la coș cu succes";
 
   @override
   String get lblPlsSelectAddress => "Te rugăm să selectezi adresa";
@@ -717,7 +728,7 @@ class LanguageRo extends Languages {
   String get lblDesignation => "Funcție";
 
   @override
-  String get lblHandymanIsOffline => "Meșterul este offline";
+  String get lblHandymanIsOffline => "Furnizorul este offline";
 
   @override
   String get lblDoYouWantToRestore => "Vrei să restaurezi?";
@@ -729,7 +740,8 @@ class LanguageRo extends Languages {
   String get lblDoYouWantToDelete => "Vrei să ștergi?";
 
   @override
-  String get lblPleaseEnterMobileNumber => "Te rugăm să introduci numărul de telefon";
+  String get lblPleaseEnterMobileNumber =>
+      "Te rugăm să introduci numărul de telefon";
 
   @override
   String get lblDangerZone => "Zonă periculoasă";
@@ -775,14 +787,16 @@ class LanguageRo extends Languages {
   String get lblAnUpdateTo => "O actualizare pentru ";
 
   @override
-  String get lblIsAvailableWouldYouLike => "este disponibilă. Vrei să actualizezi?";
+  String get lblIsAvailableWouldYouLike =>
+      "este disponibilă. Vrei să actualizezi?";
 
   @override
   String lblAreYouSureYouWantToAssignThisServiceTo(String name) =>
       "Vrei să atribui acest serviciu lui $name?";
 
   @override
-  String get lblAreYouSureYouWantToAssignToYourself => "Vrei să ți-l atribui ție?";
+  String get lblAreYouSureYouWantToAssignToYourself =>
+      "Vrei să ți-l atribui ție?";
 
   @override
   String get lblAssignToMyself => "Atribuie-mi mie";
@@ -833,7 +847,8 @@ class LanguageRo extends Languages {
   String get lblTotalCharges => "Total costuri suplimentare";
 
   @override
-  String get lblSuccessFullyAddExtraCharges => "Costurile suplimentare au fost adăugate cu succes";
+  String get lblSuccessFullyAddExtraCharges =>
+      "Costurile suplimentare au fost adăugate cu succes";
 
   @override
   String get lblChargeName => "Detaliu cost";
@@ -851,34 +866,39 @@ class LanguageRo extends Languages {
   String get noBookingTitle => "Nu s-a găsit nicio rezervare";
 
   @override
-  String get noBookingSubTitle => "Se pare că clienții încă nu ți-au rezervat serviciile";
+  String get noBookingSubTitle =>
+      "Se pare că clienții încă nu ți-au rezervat serviciile";
 
   @override
   String get noNotificationTitle => "Pare cam gol aici";
 
   @override
-  String get noNotificationSubTitle => "Te vom anunța când avem ceva pentru tine";
+  String get noNotificationSubTitle =>
+      "Te vom anunța când avem ceva pentru tine";
 
   @override
-  String get noHandymanAvailable => "Niciun meșter disponibil";
+  String get noHandymanAvailable => "Niciun furnizor disponibil";
 
   @override
-  String get noHandymanYet => "Încă nu există meșteri";
+  String get noHandymanYet => "Încă nu există furnizori";
 
   @override
-  String get noHandymanSubTitle => "Te rugăm să verifici mai întâi dacă statusul meșterului este activ";
+  String get noHandymanSubTitle =>
+      "Te rugăm să verifici mai întâi dacă statusul furnizorului este activ";
 
   @override
   String get noServiceFound => "Nu s-a găsit niciun serviciu";
 
   @override
-  String get noServiceSubTitle => "Grăbește-te! Adaugă servicii pentru clienți și extinde-ți activitatea";
+  String get noServiceSubTitle =>
+      "Grăbește-te! Adaugă servicii pentru clienți și extinde-ți activitatea";
 
   @override
   String get noServiceAddressTitle => "Nu s-a găsit nicio adresă de serviciu";
 
   @override
-  String get noServiceAddressSubTitle => "Adaugă mai întâi adresa de serviciu și va apărea aici";
+  String get noServiceAddressSubTitle =>
+      "Adaugă mai întâi adresa de serviciu și va apărea aici";
 
   @override
   String get noSubscriptionPlan => "Nu există niciun plan de abonament aici";
@@ -896,7 +916,8 @@ class LanguageRo extends Languages {
   String get noWalletHistoryTitle => "Nu s-a găsit istoric de portofel";
 
   @override
-  String get noWalletHistorySubTitle => "Nu ai alimentat încă. Încarcă portofelul ca să vezi aici";
+  String get noWalletHistorySubTitle =>
+      "Nu ai alimentat încă. Încarcă portofelul ca să vezi aici";
 
   @override
   String get noExtraChargesHere => "Nu există costuri suplimentare aici";
@@ -905,7 +926,8 @@ class LanguageRo extends Languages {
   String get getYourFirstReview => "Obține prima ta recenzie";
 
   @override
-  String get ratingViewAllSubtitle => "Colectează recenzii de calitate pentru serviciul tău";
+  String get ratingViewAllSubtitle =>
+      "Colectează recenzii de calitate pentru serviciul tău";
 
   @override
   String get noDocumentFound => "Nu s-a găsit niciun document";
@@ -944,10 +966,12 @@ class LanguageRo extends Languages {
   String get giveYourEstimatePriceHere => 'Introdu aici prețul estimat';
 
   @override
-  String get pleaseEnterValidBidPrice => 'Te rugăm să introduci un preț de ofertă valid';
+  String get pleaseEnterValidBidPrice =>
+      'Te rugăm să introduci un preț de ofertă valid';
 
   @override
-  String get yourPriceShouldNotBeLessThan => 'Prețul tău nu trebuie să fie mai mic decât';
+  String get yourPriceShouldNotBeLessThan =>
+      'Prețul tău nu trebuie să fie mai mic decât';
 
   @override
   String get enterBidPrice => 'Introdu prețul ofertei';
@@ -962,22 +986,27 @@ class LanguageRo extends Languages {
   String lblDaysLeft(int days) => '$days ${days == 1 ? 'zi' : 'zile'} rămase';
 
   @override
-  String lblDaysRemaining(int days) => '$days ${days == 1 ? 'zi' : 'zile'} rămase';
+  String lblDaysRemaining(int days) =>
+      '$days ${days == 1 ? 'zi' : 'zile'} rămase';
 
   @override
   String get lblExpiryDays => 'Zile de expirare';
 
   @override
-  String lblExpiryDaysFormat(int days) => 'Expirare: $days ${days == 1 ? 'zi' : 'zile'}';
+  String lblExpiryDaysFormat(int days) =>
+      'Expirare: $days ${days == 1 ? 'zi' : 'zile'}';
 
   @override
-  String get lblJobExpiredMessage => 'Această cerere de job a expirat și nu mai este disponibilă pentru ofertare.';
+  String get lblJobExpiredMessage =>
+      'Această cerere de job a expirat și nu mai este disponibilă pentru ofertare.';
 
   @override
-  String get lblBiddingNotAvailable => 'Oferta nu este disponibilă pentru această cerere de job.';
+  String get lblBiddingNotAvailable =>
+      'Oferta nu este disponibilă pentru această cerere de job.';
 
   @override
-  String get inputMustBeNumberOrDigit => 'Introducerea trebuie să fie număr sau cifră';
+  String get inputMustBeNumberOrDigit =>
+      'Introducerea trebuie să fie număr sau cifră';
 
   @override
   String get requiredAfterCountryCode => 'obligatoriu după prefixul țării';
@@ -992,7 +1021,8 @@ class LanguageRo extends Languages {
   String get timeSlotsNotes1 => 'Intervalele orare sunt doar pentru furnizori.';
 
   @override
-  String get timeSlotsNotes2 => 'Poți seta disponibilitatea intervalelor orare pentru fiecare serviciu.';
+  String get timeSlotsNotes2 =>
+      'Poți seta disponibilitatea intervalelor orare pentru fiecare serviciu.';
 
   @override
   String get timeSlotsNotes3 =>
@@ -1014,7 +1044,8 @@ class LanguageRo extends Languages {
   String get copyTo => 'Copiază în';
 
   @override
-  String get pleaseWaitWhileWeChangeTheStatus => 'Te rugăm să aștepți în timp ce schimbăm statusul';
+  String get pleaseWaitWhileWeChangeTheStatus =>
+      'Te rugăm să aștepți în timp ce schimbăm statusul';
 
   @override
   String get myTimeSlots => 'Intervalele mele orare';
@@ -1023,7 +1054,8 @@ class LanguageRo extends Languages {
   String get day => 'Zi';
 
   @override
-  String get pleaseSelectServiceAddresses => 'Te rugăm să selectezi adresele de serviciu';
+  String get pleaseSelectServiceAddresses =>
+      'Te rugăm să selectezi adresele de serviciu';
 
   @override
   String get pleaseSelectImages => 'Te rugăm să selectezi imagini';
@@ -1032,10 +1064,12 @@ class LanguageRo extends Languages {
   String get timeSlotAvailable => 'Interval disponibil';
 
   @override
-  String get doesThisServicesContainsTimeslot => 'Acest serviciu include intervale orare?';
+  String get doesThisServicesContainsTimeslot =>
+      'Acest serviciu include intervale orare?';
 
   @override
-  String get pleaseEnterTheDefaultTimeslotsFirst => 'Te rugăm să introduci mai întâi intervalele implicite';
+  String get pleaseEnterTheDefaultTimeslotsFirst =>
+      'Te rugăm să introduci mai întâi intervalele implicite';
 
   @override
   String get chooseAction => 'Alege acțiunea';
@@ -1099,7 +1133,8 @@ class LanguageRo extends Languages {
   String get packageService => 'Serviciu pachet';
 
   @override
-  String get confirmationRemovePackage => 'Vrei să elimini acest serviciu din pachet?';
+  String get confirmationRemovePackage =>
+      'Vrei să elimini acest serviciu din pachet?';
 
   @override
   String get packageName => 'Nume pachet';
@@ -1141,7 +1176,8 @@ class LanguageRo extends Languages {
   String get includedInThisPackage => 'Inclus în acest pachet';
 
   @override
-  String get packageServicesWillAppearHere => 'Serviciile pachetului vor apărea aici';
+  String get packageServicesWillAppearHere =>
+      'Serviciile pachetului vor apărea aici';
 
   @override
   String get showingFixPriceServices =>
@@ -1154,7 +1190,8 @@ class LanguageRo extends Languages {
   String get lblInvalidTransaction => 'Tranzacție invalidă';
 
   @override
-  String get youWillGetTheseServicesWithThisPackage => 'Vei primi aceste servicii cu acest pachet';
+  String get youWillGetTheseServicesWithThisPackage =>
+      'Vei primi aceste servicii cu acest pachet';
 
   @override
   String get lblSearchFullAddress => 'Caută adresa completă';
@@ -1176,10 +1213,12 @@ class LanguageRo extends Languages {
   String get lblCheckOutWithCinetPay => 'Plătește cu CinetPay';
 
   @override
-  String get yourPaymentFailedPleaseTryAgain => 'Plata a eșuat. Te rugăm să încerci din nou';
+  String get yourPaymentFailedPleaseTryAgain =>
+      'Plata a eșuat. Te rugăm să încerci din nou';
 
   @override
-  String get yourPaymentHasBeenMadeSuccessfully => 'Plata a fost efectuată cu succes';
+  String get yourPaymentHasBeenMadeSuccessfully =>
+      'Plata a fost efectuată cu succes';
 
   @override
   String get lblTransactionFailed => 'Tranzacție eșuată';
@@ -1188,7 +1227,8 @@ class LanguageRo extends Languages {
   String get lblTransactionCancelled => 'Tranzacție anulată';
 
   @override
-  String get lblStripeTestCredential => 'Credențialele de test nu pot plăti mai mult de 500';
+  String get lblStripeTestCredential =>
+      'Credențialele de test nu pot plăti mai mult de 500';
 
   @override
   String get lblSuccessFullyActivated => 'este activat cu succes';
@@ -1272,7 +1312,8 @@ class LanguageRo extends Languages {
   String get pleaseAddKnownLanguage => 'Te rugăm să adaugi limbi cunoscute';
 
   @override
-  String get pleaseAddEssentialSkill => 'Te rugăm să adaugi abilități esențiale';
+  String get pleaseAddEssentialSkill =>
+      'Te rugăm să adaugi abilități esențiale';
 
   @override
   String get published => 'Publicat';
@@ -1326,7 +1367,8 @@ class LanguageRo extends Languages {
   String get enablePrePayment => 'Activează plata în avans';
 
   @override
-  String get enablePrePaymentMessage => 'Aceasta permite plata serviciului în avans';
+  String get enablePrePaymentMessage =>
+      'Aceasta permite plata serviciului în avans';
 
   @override
   String get invalidInput => 'Introducere invalidă';
@@ -1341,7 +1383,8 @@ class LanguageRo extends Languages {
   String get valueConditionMessage => 'Valoarea trebuie să fie între 0 și 99';
 
   @override
-  String get withExtraAndAdvanceCharge => 'Cu cost suplimentar și plată în avans';
+  String get withExtraAndAdvanceCharge =>
+      'Cu cost suplimentar și plată în avans';
 
   @override
   String get withExtraCharge => 'Cu cost suplimentar';
@@ -1374,7 +1417,7 @@ class LanguageRo extends Languages {
   String get providerHome => 'Acasă (Furnizor)';
 
   @override
-  String get handymanHome => 'Acasă (Meșter)';
+  String get handymanHome => 'Acasă (Furnizor)';
 
   @override
   String get home => 'Acasă';
@@ -1388,19 +1431,23 @@ class LanguageRo extends Languages {
   @override
   String get onboardingTitle1 => 'Creează-ți contul';
   @override
-  String get onboardingText1 => 'Înregistrează-te sau autentifică-te rapid. Completează profilul ca să poți posta cereri și comunica ușor cu prestatorii.';
+  String get onboardingText1 =>
+      'Înregistrează-te sau autentifică-te rapid. Completează profilul ca să poți posta cereri și comunica ușor cu prestatorii.';
   @override
   String get onboardingTitle2 => 'Solicită un job și primește oferte';
   @override
-  String get onboardingText2 => 'Spune ce ai nevoie, adaugă adresa și prețul estimat. Prestatorii din apropiere îți trimit oferte, iar tu alegi varianta potrivită.';
+  String get onboardingText2 =>
+      'Spune ce ai nevoie, adaugă adresa și prețul estimat. Prestatorii din apropiere îți trimit oferte, iar tu alegi varianta potrivită.';
   @override
   String get onboardingTitle3 => 'Alege prestatorul și urmărește rezervarea';
   @override
-  String get onboardingText3 => 'Compară ofertele, selectează prestatorul și confirmă data și ora. Urmărește statusul jobului în timp real și discută direct în chat sau prin apel.';
+  String get onboardingText3 =>
+      'Compară ofertele, selectează prestatorul și confirmă data și ora. Urmărește statusul jobului în timp real și discută direct în chat sau prin apel.';
   @override
   String get providerInstructionsTitle => 'Instrucțiuni pentru prestatori';
   @override
-  String get providerInstructionsText => 'Vezi cererile din apropiere, trimite oferta ta și gestionează rezervarea până la finalizare. Citește ghidul rapid ca să lucrezi eficient în aplicație.';
+  String get providerInstructionsText =>
+      'Vezi cererile din apropiere, trimite oferta ta și gestionează rezervarea până la finalizare. Citește ghidul rapid ca să lucrezi eficient în aplicație.';
   @override
   String get readInstructions => 'Citește instrucțiunea';
   @override
@@ -1427,13 +1474,15 @@ class LanguageRo extends Languages {
   String get thisServiceMayTake => 'Acest serviciu poate dura';
 
   @override
-  String get priceAmountValidationMessage => 'Suma prețului trebuie să fie mai mare decât 0';
+  String get priceAmountValidationMessage =>
+      'Suma prețului trebuie să fie mai mare decât 0';
 
   @override
   String get lblFeatureBlog => 'Acesta este un blog evidențiat';
 
   @override
-  String get changePasswordTitle => 'Noua parolă trebuie să fie diferită de parola folosită anterior';
+  String get changePasswordTitle =>
+      'Noua parolă trebuie să fie diferită de parola folosită anterior';
 
   @override
   String get forgotPasswordSubtitle =>
@@ -1508,7 +1557,7 @@ class LanguageRo extends Languages {
   String get cashPaymentApproval => "Aprobare plată cash";
 
   @override
-  String get approvedByHandyman => "Aprobat de meșter";
+  String get approvedByHandyman => "Aprobat de furnizor";
 
   @override
   String get sentToProvider => "Trimis către furnizor";
@@ -1544,13 +1593,14 @@ class LanguageRo extends Languages {
   String get bank => "Bancă";
 
   @override
-  String get handymanApprovedTheRequest => "Meșterul a aprobat cererea";
+  String get handymanApprovedTheRequest => "Furnizorul a aprobat cererea";
 
   @override
   String get requestSentToTheProvider => "Cererea a fost trimisă furnizorului";
 
   @override
-  String get requestSentToTheAdmin => "Cererea a fost trimisă administratorului";
+  String get requestSentToTheAdmin =>
+      "Cererea a fost trimisă administratorului";
 
   @override
   String get requestPendingWithTheProvider => "Cerere în așteptare la furnizor";
@@ -1642,7 +1692,8 @@ class LanguageRo extends Languages {
   String get bankAddress => "Adresa băncii";
 
   @override
-  String get pleaseWaitWhileWeLoadBankDetails => "Te rugăm să aștepți în timp ce încărcăm detaliile bancare...";
+  String get pleaseWaitWhileWeLoadBankDetails =>
+      "Te rugăm să aștepți în timp ce încărcăm detaliile bancare...";
 
   @override
   String get cashPaymentConfirmation => "Confirmare plată cash";
@@ -1651,13 +1702,15 @@ class LanguageRo extends Languages {
   String get remark => "Observație";
 
   @override
-  String get pleaseWaitWhileWeLoadChatDetails => "Te rugăm să aștepți în timp ce încărcăm detaliile chatului...";
+  String get pleaseWaitWhileWeLoadChatDetails =>
+      "Te rugăm să aștepți în timp ce încărcăm detaliile chatului...";
 
   @override
   String get isNotAvailableForChat => "nu este disponibil pentru chat";
 
   @override
-  String get connectWithFirebaseForChat => "Conectează-te cu Firebase pentru chat";
+  String get connectWithFirebaseForChat =>
+      "Conectează-te cu Firebase pentru chat";
 
   @override
   String get admin => 'Admin';
@@ -1669,7 +1722,8 @@ class LanguageRo extends Languages {
   String get closeApp => 'Închide aplicația';
 
   @override
-  String get youMustProvideValidCurrentPassword => 'Trebuie să introduci o parolă curentă validă';
+  String get youMustProvideValidCurrentPassword =>
+      'Trebuie să introduci o parolă curentă validă';
 
   @override
   String get selectUserType => 'Selectează tipul utilizatorului';
@@ -1688,13 +1742,15 @@ class LanguageRo extends Languages {
   String get search => 'Caută';
 
   @override
-  String get wouldYouLikeToAssignThisBooking => 'Vrei să atribui această rezervare?';
+  String get wouldYouLikeToAssignThisBooking =>
+      'Vrei să atribui această rezervare?';
 
   @override
   String get connect => 'Conectează';
 
   @override
-  String get youAreNotConnectedWithChatServer => 'Conectează-te la serverul de chat';
+  String get youAreNotConnectedWithChatServer =>
+      'Conectează-te la serverul de chat';
 
   @override
   String get tapBelowButtonToConnectWithOurChatServer =>
@@ -1747,10 +1803,12 @@ class LanguageRo extends Languages {
       "CinetPay nu este suportat pentru monedele tale";
 
   @override
-  String get totalAmountShouldBeMoreThan => 'Suma totală trebuie să fie mai mare decât';
+  String get totalAmountShouldBeMoreThan =>
+      'Suma totală trebuie să fie mai mare decât';
 
   @override
-  String get totalAmountShouldBeLessThan => 'Suma totală trebuie să fie mai mică decât';
+  String get totalAmountShouldBeLessThan =>
+      'Suma totală trebuie să fie mai mică decât';
 
   @override
   String get pleaseNoteThatAllServiceMarkedCompleted =>
@@ -1760,7 +1818,8 @@ class LanguageRo extends Languages {
   String get serviceVisitType => 'Tip vizită serviciu';
 
   @override
-  String get thisServiceIsOnlineRemote => 'Acest serviciu va fi realizat online/la distanță.';
+  String get thisServiceIsOnlineRemote =>
+      'Acest serviciu va fi realizat online/la distanță.';
 
   @override
   String get visitOption => 'Opțiune vizită';
@@ -1781,7 +1840,8 @@ class LanguageRo extends Languages {
   String get writeHere => 'Scrie aici';
 
   @override
-  String get writeShortLineAbout => 'Scrie o scurtă frază despre: De ce să mă alegi?';
+  String get writeShortLineAbout =>
+      'Scrie o scurtă frază despre: De ce să mă alegi?';
 
   @override
   String get reasonsToChooseYour => 'Motive să alegi serviciul tău';
@@ -1818,7 +1878,8 @@ class LanguageRo extends Languages {
   String get transactionIsInProcess => 'Tranzacția este în proces...';
 
   @override
-  String get pleaseCheckThePayment => 'Te rugăm să verifici cererea de plată trimisă la numărul tău';
+  String get pleaseCheckThePayment =>
+      'Te rugăm să verifici cererea de plată trimisă la numărul tău';
 
   @override
   String get enterYourMsisdnHere => 'Introdu MSISDN-ul aici';
@@ -1870,10 +1931,12 @@ class LanguageRo extends Languages {
   String get theTransactionWasNot => 'Tranzacția nu a fost găsită.';
 
   @override
-  String get xSignatureAndPayloadDid => 'x-signature și payload nu s-au potrivit';
+  String get xSignatureAndPayloadDid =>
+      'x-signature și payload nu s-au potrivit';
 
   @override
-  String get encryptionKeyHasBeen => 'Cheia de criptare a fost obținută cu succes';
+  String get encryptionKeyHasBeen =>
+      'Cheia de criptare a fost obținută cu succes';
 
   @override
   String get couldNotFetchEncryption => 'Nu s-a putut obține cheia de criptare';
@@ -1898,7 +1961,8 @@ class LanguageRo extends Languages {
       'Notă: Poți încărca imagini cu extensiile \'jpg\', \'png\', \'jpeg\' și poți selecta doar o singură imagine';
 
   @override
-  String get oppsLooksLikeYou => 'Ups! Se pare că nu ai adăugat încă servicii add-on.';
+  String get oppsLooksLikeYou =>
+      'Ups! Se pare că nu ai adăugat încă servicii add-on.';
 
   @override
   String get ambiguous => 'Ambiguu';
@@ -1932,7 +1996,8 @@ class LanguageRo extends Languages {
   String get doNotHonor => 'Nu onora';
 
   @override
-  String get transactionNotPermittedTo => 'Tranzacție nepermisă pentru beneficiar';
+  String get transactionNotPermittedTo =>
+      'Tranzacție nepermisă pentru beneficiar';
 
   @override
   String get transactionTimedOut => 'Tranzacție expirată (timeout)';
@@ -1944,10 +2009,12 @@ class LanguageRo extends Languages {
   String get forBidden => 'Interzis';
 
   @override
-  String get successfullyFetchedEncryptionKey => 'Cheia de criptare a fost obținută cu succes';
+  String get successfullyFetchedEncryptionKey =>
+      'Cheia de criptare a fost obținută cu succes';
 
   @override
-  String get errorWhileFetchingEncryption => 'Eroare la obținerea cheii de criptare';
+  String get errorWhileFetchingEncryption =>
+      'Eroare la obținerea cheii de criptare';
 
   @override
   String get transactionExpired => 'Tranzacție expirată';
@@ -2040,19 +2107,20 @@ class LanguageRo extends Languages {
   String get removeThisFile => 'Elimină acest fișier';
 
   @override
-  String get areYouSureWantToRemoveThisFile => 'Ești sigur că vrei să elimini acest fișier?';
+  String get areYouSureWantToRemoveThisFile =>
+      'Ești sigur că vrei să elimini acest fișier?';
 
   @override
   String get sendMessage => 'Trimite mesaj';
 
   @override
-  String get handymanLocation => 'Locația meșterului';
+  String get handymanLocation => 'Locația furnizorului';
 
   @override
   String get track => 'Urmărește';
 
   @override
-  String get trackHandymanLocation => 'Urmărește locația meșterului';
+  String get trackHandymanLocation => 'Urmărește locația furnizorului';
 
   @override
   String get lastUpdatedAt => 'Ultima actualizare la:';
@@ -2110,10 +2178,12 @@ class LanguageRo extends Languages {
   String get branchName => "Nume sucursală";
 
   @override
-  String get lblPleaseEnterAccountNumber => "Te rugăm să introduci numărul contului";
+  String get lblPleaseEnterAccountNumber =>
+      "Te rugăm să introduci numărul contului";
 
   @override
-  String get lblAccountNumberMustContainOnlyDigits => "Numărul contului trebuie să conțină doar cifre";
+  String get lblAccountNumberMustContainOnlyDigits =>
+      "Numărul contului trebuie să conțină doar cifre";
 
   @override
   String get lblAccountNumberMustBetween11And16Digits =>
@@ -2129,7 +2199,8 @@ class LanguageRo extends Languages {
   String get eg3000 => 'ex: "3000"';
 
   @override
-  String get pleaseAddLessThanOrEqualTo => "Te rugăm să adaugi mai mic sau egal cu";
+  String get pleaseAddLessThanOrEqualTo =>
+      "Te rugăm să adaugi mai mic sau egal cu";
 
   @override
   String get deleteBankTitle => 'Ești sigur că vrei să ștergi această bancă?';
@@ -2153,25 +2224,27 @@ class LanguageRo extends Languages {
   String get lbMinutes => "Minute";
 
   @override
-  String get handymanCommission => 'Comision meșter';
+  String get handymanCommission => 'Comision furnizor';
 
   @override
   String get commission => 'Comision';
 
   @override
-  String get noCommissionTypeListFound => 'Nu s-a găsit lista tipurilor de comision';
+  String get noCommissionTypeListFound =>
+      'Nu s-a găsit lista tipurilor de comision';
 
   @override
   String get typeName => 'Nume tip';
 
   @override
-  String get addHandymanCommission => 'Adaugă comision meșter';
+  String get addHandymanCommission => 'Adaugă comision furnizor';
 
   @override
-  String get editHandymanCommission => 'Editează comisionul meșterului';
+  String get editHandymanCommission => 'Editează comisionul furnizorului';
 
   @override
-  String get enterValidCommissionValue => 'Introdu o valoare validă pentru comision';
+  String get enterValidCommissionValue =>
+      'Introdu o valoare validă pentru comision';
 
   @override
   String get percentage => 'Procent';
@@ -2282,7 +2355,8 @@ class LanguageRo extends Languages {
   String get markAsClosed => 'Marchează ca închis';
 
   @override
-  String get youCanMarkThis => 'Poți marca acest lucru ca închis dacă ești mulțumit de răspunsul nostru';
+  String get youCanMarkThis =>
+      'Poți marca acest lucru ca închis dacă ești mulțumit de răspunsul nostru';
 
   @override
   String get subject => 'Subiect';
@@ -2355,10 +2429,11 @@ class LanguageRo extends Languages {
   String get noPaymentMethodsFound => 'Nu s-au găsit metode de plată';
 
   @override
-  String get handymanNotFound => 'Meșter negăsit';
+  String get handymanNotFound => 'Furnizor negăsit';
 
   @override
-  String get selectStartDateEndDate => 'Selectează data de început și data de sfârșit';
+  String get selectStartDateEndDate =>
+      'Selectează data de început și data de sfârșit';
 
   @override
   String get customerNotFound => 'Client negăsit';
@@ -2379,7 +2454,7 @@ class LanguageRo extends Languages {
   String get lblReassign => 'Reatribuie';
 
   @override
-  String get handymanPayoutList => 'Listă plăți către meșteri';
+  String get handymanPayoutList => 'Listă plăți către furnizori';
 
   @override
   String get earningDetails => 'Detalii câștig';
@@ -2388,7 +2463,7 @@ class LanguageRo extends Languages {
   String get adminEarning => 'Câștig admin';
 
   @override
-  String get handymanName => 'Nume meșter';
+  String get handymanName => 'Nume furnizor';
 
   @override
   String get totalEarning => 'Câștig total';
@@ -2397,37 +2472,39 @@ class LanguageRo extends Languages {
   String get myEarning => 'Câștigul meu';
 
   @override
-  String get handymanPayDue => 'Plată datorată meșterului';
+  String get handymanPayDue => 'Plată datorată furnizorului';
 
   @override
-  String get handymanPaidAmount => 'Sumă plătită meșterului';
+  String get handymanPaidAmount => 'Sumă plătită furnizorului';
 
   @override
   String get payout => 'Plată';
 
   @override
-  String get addHandymanPayout => 'Adaugă plată pentru meșter';
+  String get addHandymanPayout => 'Adaugă plată pentru furnizor';
 
   @override
   String get selectMethod => 'Selectează metoda';
 
   @override
-  String get handymanEarning => 'Câștig meșter';
+  String get handymanEarning => 'Câștig furnizor';
 
   @override
-  String get handymanEarnings => 'Câștiguri meșter';
+  String get handymanEarnings => 'Câștiguri furnizor';
 
   @override
   String get noPayoutFound => 'Nu s-au găsit plăți';
 
   @override
-  String get handymanEarningList => 'Listă câștiguri meșter';
+  String get handymanEarningList => 'Listă câștiguri furnizor';
 
   @override
-  String get permissionDeniedUnableTo => 'Permisiune refuzată! Nu se poate edita meșterul';
+  String get permissionDeniedUnableTo =>
+      'Permisiune refuzată! Nu se poate edita furnizorul';
 
   @override
-  String get passwordLengthShouldBe => 'Lungimea parolei trebuie să fie între 8 și 12 caractere.';
+  String get passwordLengthShouldBe =>
+      'Lungimea parolei trebuie să fie între 8 și 12 caractere.';
 
   @override
   String get promotionalBanners => 'Bannere promoționale';
@@ -2436,7 +2513,8 @@ class LanguageRo extends Languages {
   String get chooseAnyOnePayment => 'Alege mai întâi o metodă de plată';
 
   @override
-  String get thisBannerIsCurrently => 'Acest banner este în prezent în revizuire la admin.';
+  String get thisBannerIsCurrently =>
+      'Acest banner este în prezent în revizuire la admin.';
 
   @override
   String get doYouWantToDeleteBanner => 'Vrei să ștergi acest banner';
@@ -2475,7 +2553,8 @@ class LanguageRo extends Languages {
   String get eGHttpsWwwYourlinkCom => 'ex: https://www.yourlink.com';
 
   @override
-  String daysSelected(String totalDaysCount) => '$totalDaysCount zile selectate';
+  String daysSelected(String totalDaysCount) =>
+      '$totalDaysCount zile selectate';
 
   @override
   String get promotionalBannerDetail => 'Detalii banner promoțional';
@@ -2484,7 +2563,8 @@ class LanguageRo extends Languages {
   String get promotionalBanner => 'Banner promoțional';
 
   @override
-  String promotionalBannerYet(String name) => 'Încă nu există bannere promoționale $name';
+  String promotionalBannerYet(String name) =>
+      'Încă nu există bannere promoționale $name';
 
   @override
   String get toSubmitYourBanner =>
@@ -2503,13 +2583,15 @@ class LanguageRo extends Languages {
   String get type => 'Tip:';
 
   @override
-  String noRecordsFoundForBanner(String status) => 'Nu s-au găsit înregistrări pentru bannere promoționale $status';
+  String noRecordsFoundForBanner(String status) =>
+      'Nu s-au găsit înregistrări pentru bannere promoționale $status';
 
   @override
   String get note => 'Notă:';
 
   @override
-  String get thisServiceIsCurrently => 'Acest serviciu este în prezent în revizuire la admin.';
+  String get thisServiceIsCurrently =>
+      'Acest serviciu este în prezent în revizuire la admin.';
 
   @override
   String get approved => 'Aprobat';
@@ -2608,7 +2690,8 @@ class LanguageRo extends Languages {
   String get uploadRequiredDocuments => 'Încarcă documentele obligatorii';
 
   @override
-  String get pleaseUploadAllRequired => 'Te rugăm să încarci toate documentele obligatorii';
+  String get pleaseUploadAllRequired =>
+      'Te rugăm să încarci toate documentele obligatorii';
 
   @override
   String get viewPDF => 'Vezi PDF';

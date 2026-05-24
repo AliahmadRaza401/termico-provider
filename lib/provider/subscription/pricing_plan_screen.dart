@@ -411,23 +411,6 @@ class _PricingPlanScreenState extends State<PricingPlanScreen> {
                                                 getPlanStatusImage(
                                                     limitData: data
                                                         .planLimitation!
-                                                        .handyman!),
-                                                width: 14,
-                                                height: 14),
-                                            8.width,
-                                            getPlanStatus(
-                                                limitData: data
-                                                    .planLimitation!.handyman!,
-                                                name: 'Handyman'),
-                                          ],
-                                        ),
-                                        8.height,
-                                        Row(
-                                          children: [
-                                            Image.asset(
-                                                getPlanStatusImage(
-                                                    limitData: data
-                                                        .planLimitation!
                                                         .featuredService!),
                                                 width: 14,
                                                 height: 14),

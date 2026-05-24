@@ -15,9 +15,6 @@ abstract class FilterStoreBase with Store {
   List<int> providerId = ObservableList();
 
   @observable
-  List<int> handymanId = ObservableList();
-
-  @observable
   List<String> bookingStatus = ObservableList();
 
   @observable
@@ -94,35 +91,28 @@ abstract class FilterStoreBase with Store {
   }
 
   @action
-  Future<void> addToHandymanList({required int handyId}) async {
-    handymanId.add(handyId);
-    updateFilterFlag();
-  }
-
-  @action
-  Future<void> removeFromHandymanList({required int handyId}) async {
-    handymanId.removeWhere((element) => element == handyId);
-  }
-
-  @action
-  Future<void> addToBookingStatusList({required String bookingStatusList}) async {
+  Future<void> addToBookingStatusList(
+      {required String bookingStatusList}) async {
     bookingStatus.add(bookingStatusList);
     updateFilterFlag();
   }
 
   @action
-  Future<void> removeFromBookingStatusList({required String bookingStatusList}) async {
+  Future<void> removeFromBookingStatusList(
+      {required String bookingStatusList}) async {
     bookingStatus.removeWhere((element) => element == bookingStatusList);
   }
 
   @action
-  Future<void> addToPaymentStatusList({required String paymentStatusList}) async {
+  Future<void> addToPaymentStatusList(
+      {required String paymentStatusList}) async {
     paymentStatus.add(paymentStatusList);
     updateFilterFlag();
   }
 
   @action
-  Future<void> removeFromPaymentStatusList({required String paymentStatusList}) async {
+  Future<void> removeFromPaymentStatusList(
+      {required String paymentStatusList}) async {
     paymentStatus.removeWhere((element) => element == paymentStatusList);
   }
 
@@ -133,7 +123,8 @@ abstract class FilterStoreBase with Store {
   }
 
   @action
-  Future<void> removeFromPaymentTypeList({required String paymentTypeList}) async {
+  Future<void> removeFromPaymentTypeList(
+      {required String paymentTypeList}) async {
     paymentType.removeWhere((element) => element == paymentTypeList);
   }
 
@@ -184,7 +175,6 @@ abstract class FilterStoreBase with Store {
     customerId.clear();
     serviceId.clear();
     providerId.clear();
-    handymanId.clear();
     bookingStatus.clear();
     paymentType.clear();
     paymentStatus.clear();
@@ -200,19 +190,17 @@ abstract class FilterStoreBase with Store {
 
   @action
   void updateFilterFlag() {
-    isAnyFilterApplied =
-        serviceId.isNotEmpty ||
-            customerId.isNotEmpty ||
-            providerId.isNotEmpty ||
-            handymanId.isNotEmpty ||
-            bookingStatus.isNotEmpty ||
-            paymentStatus.isNotEmpty ||
-            paymentType.isNotEmpty ||
-            categoryId.isNotEmpty ||
-            requestTypeList.isNotEmpty ||
-            isPriceFilterApplied ||
-            startDate.isNotEmpty ||
-            endDate.isNotEmpty;
+    isAnyFilterApplied = serviceId.isNotEmpty ||
+        customerId.isNotEmpty ||
+        providerId.isNotEmpty ||
+        bookingStatus.isNotEmpty ||
+        paymentStatus.isNotEmpty ||
+        paymentType.isNotEmpty ||
+        categoryId.isNotEmpty ||
+        requestTypeList.isNotEmpty ||
+        isPriceFilterApplied ||
+        startDate.isNotEmpty ||
+        endDate.isNotEmpty;
   }
 
   int getActiveFilterCount() {
@@ -223,7 +211,6 @@ abstract class FilterStoreBase with Store {
     if (isPriceFilterApplied) count++;
     count += serviceId.length;
     count += providerId.length;
-    count += handymanId.length;
     count += bookingStatus.length;
     count += paymentStatus.length;
     count += paymentType.length;

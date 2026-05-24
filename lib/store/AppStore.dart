@@ -55,7 +55,8 @@ abstract class _AppStore with Store {
   String userProfileImage = getStringAsync(PROFILE_IMAGE);
 
   @observable
-  bool isCategoryWisePackageService = getBoolAsync(CATEGORY_BASED_SELECT_PACKAGE_SERVICE);
+  bool isCategoryWisePackageService =
+      getBoolAsync(CATEGORY_BASED_SELECT_PACKAGE_SERVICE);
 
   @observable
   String selectedLanguageCode = _initialLanguageCode();
@@ -136,20 +137,14 @@ abstract class _AppStore with Store {
   String createdAt = getStringAsync(CREATED_AT);
 
   @observable
-  String earningType = getStringAsync(EARNING_TYPE, defaultValue: EARNING_TYPE_COMMISSION);
+  String earningType =
+      getStringAsync(EARNING_TYPE, defaultValue: EARNING_TYPE_COMMISSION);
 
   @computed
   bool get earningTypeCommission => earningType == EARNING_TYPE_COMMISSION;
 
   @computed
   bool get earningTypeSubscription => earningType == EARNING_TYPE_SUBSCRIPTION;
-
-  // Handyman availability removed - only provider role supported
-  @observable
-  int handymanAvailability = 0; // Deprecated - kept for compatibility with generated code
-
-  @observable
-  int totalHandyman = 0;
 
   @observable
   List<ServiceData> selectedServiceList = ObservableList.of([]);
@@ -170,10 +165,12 @@ abstract class _AppStore with Store {
   LanguageDataModel selectedLanguage = languageList().first;
 
   @observable
-  bool isHelpDeskFirstTime = getBoolAsync(IS_HELP_DESK_FIRST_TIME, defaultValue: true);
+  bool isHelpDeskFirstTime =
+      getBoolAsync(IS_HELP_DESK_FIRST_TIME, defaultValue: true);
 
   @observable
-  String activeRevenueCatIdentifier = getStringAsync(ACTIVE_IN_APP_PURCHASE_IDENTIFIER);
+  String activeRevenueCatIdentifier =
+      getStringAsync(ACTIVE_IN_APP_PURCHASE_IDENTIFIER);
 
   @observable
   ProviderSubscriptionModel? providerCurrentSubscription;
@@ -183,11 +180,11 @@ abstract class _AppStore with Store {
     selectedLanguage = val;
   }
 
-
- @action
+  @action
   void setExpansionDynamicHeight(double val) {
     expansionDynamicHeight = val;
   }
+
   @action
   Future<void> setIsHelpDeskFirstTime(bool val) async {
     isHelpDeskFirstTime = val;
@@ -204,17 +201,13 @@ abstract class _AppStore with Store {
   }
 
   @action
-  void setTotalHandyman(int val) {
-    totalHandyman = val;
-  }
-
-  @action
   void setSelectedServiceData(ServiceData data) {
     selectedServiceData = data;
   }
 
   @action
-  Future<void> removeSelectedService(ServiceData val, {int selectedIndex = -1}) async {
+  Future<void> removeSelectedService(ServiceData val,
+      {int selectedIndex = -1}) async {
     if (selectedIndex == val.id) {
       selectedServiceData = ServiceData();
     }
@@ -246,14 +239,16 @@ abstract class _AppStore with Store {
 
   @action
   Future<void> removeSelectedPackageService(ServiceData val) async {
-    selectedServiceList.remove(selectedServiceList.firstWhere((element) => element.id == val.id));
+    selectedServiceList.remove(
+        selectedServiceList.firstWhere((element) => element.id == val.id));
     log('After remove Selected Service length: ${selectedServiceList.length}');
   }
 
   @action
   Future<void> setCategoryBasedPackageService(bool val) async {
     isCategoryWisePackageService = val;
-    await setValue(CATEGORY_BASED_SELECT_PACKAGE_SERVICE, isCategoryWisePackageService);
+    await setValue(
+        CATEGORY_BASED_SELECT_PACKAGE_SERVICE, isCategoryWisePackageService);
   }
 
   @action
@@ -503,20 +498,15 @@ abstract class _AppStore with Store {
     errorInternetNotAvailable = languages.internetNotAvailable;
   }
 
-  // Handyman availability methods removed - only provider role supported
-  @action
-  Future<void> setHandymanAvailability(int val) async {
-    handymanAvailability = val; // Deprecated - kept for compatibility with generated code
-    // await setValue(HANDYMAN_AVAILABLE_STATUS, val);
-  }
-
   @action
   Future<void> setActiveRevenueCatIdentifier(String val) async {
     activeRevenueCatIdentifier = val;
     await setValue(ACTIVE_IN_APP_PURCHASE_IDENTIFIER, val);
   }
+
   @action
-  Future<void> setProviderCurrentSubscriptionPlan(ProviderSubscriptionModel val) async {
+  Future<void> setProviderCurrentSubscriptionPlan(
+      ProviderSubscriptionModel val) async {
     providerCurrentSubscription = val;
     await setValue(ACTIVE_SUBSCRIPTION_PLAN, val.toJson());
   }

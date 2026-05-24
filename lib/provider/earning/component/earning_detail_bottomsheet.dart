@@ -17,7 +17,8 @@ class EarningDetailBottomSheet extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         decoration: boxDecorationWithRoundedCorners(
-          borderRadius: radiusOnly(topLeft: defaultRadius, topRight: defaultRadius),
+          borderRadius:
+              radiusOnly(topLeft: defaultRadius, topRight: defaultRadius),
           backgroundColor: context.cardColor,
         ),
         padding: EdgeInsets.all(16),
@@ -32,12 +33,14 @@ class EarningDetailBottomSheet extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(languages.earningDetails, style: boldTextStyle()).paddingAll(16),
+              Text(languages.earningDetails, style: boldTextStyle())
+                  .paddingAll(16),
               if (earningModel.adminEarning != null)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(languages.adminEarning, style: secondaryTextStyle()).expand(),
+                    Text(languages.adminEarning, style: secondaryTextStyle())
+                        .expand(),
                     8.width,
                     PriceWidget(
                       price: earningModel.adminEarning.validate(),
@@ -50,7 +53,10 @@ class EarningDetailBottomSheet extends StatelessWidget {
               if (earningModel.handymanName != null)
                 Row(
                   children: [
-                    Text(languages.handymanName, style: secondaryTextStyle(), textAlign: TextAlign.left).expand(),
+                    Text('Provider Name',
+                            style: secondaryTextStyle(),
+                            textAlign: TextAlign.left)
+                        .expand(),
                     8.width,
                     Text(
                       earningModel.handymanName.validate(),
@@ -63,15 +69,20 @@ class EarningDetailBottomSheet extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(languages.commission, style: secondaryTextStyle()).expand(),
+                    Text(languages.commission, style: secondaryTextStyle())
+                        .expand(),
                     8.width,
-                    if (earningModel.commissionType.validate().toLowerCase() == COMMISSION_TYPE_PERCENTAGE.toLowerCase() || earningModel.commissionType.validate().toLowerCase() == TAX_TYPE_PERCENT.toLowerCase())
+                    if (earningModel.commissionType.validate().toLowerCase() ==
+                            COMMISSION_TYPE_PERCENTAGE.toLowerCase() ||
+                        earningModel.commissionType.validate().toLowerCase() ==
+                            TAX_TYPE_PERCENT.toLowerCase())
                       Text(
                         '${earningModel.commission}%',
                         style: boldTextStyle(size: 12),
                         textAlign: TextAlign.right,
                       ).expand(),
-                    if (earningModel.commissionType.validate().toLowerCase() == COMMISSION_TYPE_FIXED.toLowerCase())
+                    if (earningModel.commissionType.validate().toLowerCase() ==
+                        COMMISSION_TYPE_FIXED.toLowerCase())
                       Text(
                         earningModel.commission.validate().toPriceFormat(),
                         style: boldTextStyle(size: 12),
@@ -83,16 +94,21 @@ class EarningDetailBottomSheet extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(languages.lblTotalBooking, style: secondaryTextStyle()).expand(),
+                    Text(languages.lblTotalBooking, style: secondaryTextStyle())
+                        .expand(),
                     8.width,
-                    Text(earningModel.totalBookings.validate().toString(), style: boldTextStyle(size: 12), textAlign: TextAlign.right).expand(),
+                    Text(earningModel.totalBookings.validate().toString(),
+                            style: boldTextStyle(size: 12),
+                            textAlign: TextAlign.right)
+                        .expand(),
                   ],
                 ).paddingSymmetric(vertical: 8, horizontal: 16),
               if (earningModel.totalEarning != null)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(languages.totalEarning, style: secondaryTextStyle()).expand(),
+                    Text(languages.totalEarning, style: secondaryTextStyle())
+                        .expand(),
                     8.width,
                     PriceWidget(
                       price: earningModel.totalEarning.validate(),
@@ -106,7 +122,8 @@ class EarningDetailBottomSheet extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(languages.lblTaxes, style: secondaryTextStyle()).expand(),
+                    Text(languages.lblTaxes, style: secondaryTextStyle())
+                        .expand(),
                     8.width,
                     PriceWidget(
                       price: earningModel.taxes.validate(),

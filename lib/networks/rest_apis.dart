@@ -457,8 +457,6 @@ Future<DashboardResponse> providerDashboard(
 
     cachedProviderDashboardResponse = data;
 
-    appStore.setTotalHandyman(data.totalActiveHandyman.validate());
-
     setValue(IS_EMAIL_VERIFIED, data.isEmailVerified.getBoolInt());
 
     if (data.commission != null) {
@@ -656,13 +654,6 @@ Future<UpdateLocationResponse> updateLocation(
           .timeout(Duration(seconds: GET_LOCATION_API_TIMEOUT_SECOND))));
 }
 
-Future<UpdateLocationResponse> getHandymanLocation(int bookingId) async {
-  return UpdateLocationResponse.fromJson(await handleResponse(
-      await buildHttpResponse("get-location?booking_id=$bookingId",
-              method: HttpMethodType.GET)
-          .timeout(Duration(seconds: GET_LOCATION_API_TIMEOUT_SECOND))));
-}
-
 Future<num> getUserWalletBalance() async {
   try {
     var res = WalletResponse.fromJson(await handleResponse(
@@ -685,7 +676,6 @@ Future<List<BookingData>> getBookingList(
   String dateTo = '',
   String customerId = '',
   String providerId = '',
-  String handymanId = '',
   String bookingStatus = '',
   String paymentStatus = '',
   String paymentType = '',
@@ -704,8 +694,6 @@ Future<List<BookingData>> getBookingList(
         customerId.isNotEmpty ? 'customer_id=$customerId&' : '';
     String providerIds =
         providerId.isNotEmpty ? 'provider_id=$providerId&' : '';
-    String handymanIds =
-        handymanId.isNotEmpty ? 'handyman_id=$handymanId&' : '';
     String status = bookingStatus.isNotEmpty ? 'status=$bookingStatus&' : '';
     String paymentStatuss =
         paymentStatus.isNotEmpty ? 'payment_status=$paymentStatus&' : '';
@@ -724,7 +712,7 @@ Future<List<BookingData>> getBookingList(
     } else {
       res = BookingListResponse.fromJson(await handleResponse(
           await buildHttpResponse(
-              'booking-list?$serviceIds$dateStart$dateEnd$customerIds$providerIds$handymanIds$status$paymentStatuss$paymentTypes$perPageItem$pageCount$searchParam',
+              'booking-list?$serviceIds$dateStart$dateEnd$customerIds$providerIds$status$paymentStatuss$paymentTypes$perPageItem$pageCount$searchParam',
               method: HttpMethodType.GET)));
     }
 
@@ -850,9 +838,7 @@ Future<BookingDetailResponse> bookingDetail(Map request,
   );
   callbackForStatus?.call(
       bookingDetailResponse.bookingDetail!.status.validate(),
-      bookingDetailResponse.handymanData?.isNotEmpty ?? false
-          ? bookingDetailResponse.handymanData!.firstOrNull!.id.validate()
-          : bookingDetailResponse.providerData!.id.validate());
+      bookingDetailResponse.providerData!.id.validate());
   appStore.setLoading(false);
   if (cachedBookingDetailList.any((element) =>
       element.bookingDetail!.id == bookingDetailResponse.bookingDetail!.id)) {
@@ -874,11 +860,6 @@ Future<BaseResponseModel> bookingUpdate(Map request) async {
   return res;
 }
 
-Future<BaseResponseModel> assignBooking(Map request) async {
-  return BaseResponseModel.fromJson(await handleResponse(
-      await buildHttpResponse('booking-assigned',
-          request: request, method: HttpMethodType.POST)));
-}
 //endregion
 
 //region Address API
@@ -948,14 +929,6 @@ Future<List<RatingData>> serviceReviews(Map request) async {
   return res.data.validate();
 }
 
-Future<List<RatingData>> handymanReviews(Map request) async {
-  ServiceReviewResponse res = ServiceReviewResponse.fromJson(
-      await handleResponse(await buildHttpResponse(
-          'handyman-reviews?per_page=$PER_PAGE_ITEM_ALL',
-          request: request,
-          method: HttpMethodType.POST)));
-  return res.data.validate();
-}
 //endregion
 
 //region Subscription API
@@ -1114,13 +1087,6 @@ Future<BaseResponseModel> deleteBank({int? bankId}) async {
   return BaseResponseModel.fromJson(await handleResponse(
       await buildHttpResponse('delete-bank/$bankId',
           request: {}, method: HttpMethodType.POST)));
-}
-
-Future<BaseResponseModel> updateHandymanAvailabilityApi(
-    {required Map request}) async {
-  return BaseResponseModel.fromJson(await handleResponse(
-      await buildHttpResponse('handyman-update-available-status',
-          request: request, method: HttpMethodType.POST)));
 }
 
 Future<BaseResponseModel> walletMoneyWithdrawal({required Map request}) async {
@@ -1807,24 +1773,3 @@ Future<BaseResponseModel> withdrawRequest(Map request) async {
       await buildHttpResponse('save-provideraddress',
           request: request, method: HttpMethodType.POST)));
 }
-
-//region Add Handyman Commission
-Future<BaseResponseModel> saveProviderHandymanTypeList(
-    {required Map request}) async {
-  return BaseResponseModel.fromJson(await handleResponse(
-      await buildHttpResponse('handymantype-save',
-          method: HttpMethodType.POST, request: request)));
-}
-
-Future<BaseResponseModel> deleteProviderHandymanTypeList(int id) async {
-  return BaseResponseModel.fromJson(await handleResponse(
-      await buildHttpResponse('handymantype-delete/$id',
-          method: HttpMethodType.POST)));
-}
-
-Future<BaseResponseModel> restoreProviderHandymanType(Map request) async {
-  return BaseResponseModel.fromJson(await handleResponse(
-      await buildHttpResponse('handymantype-action',
-          request: request, method: HttpMethodType.POST)));
-}
-//end region Add Handyman Commission

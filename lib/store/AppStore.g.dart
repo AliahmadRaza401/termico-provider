@@ -620,39 +620,6 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$handymanAvailabilityAtom =
-      Atom(name: '_AppStore.handymanAvailability', context: context);
-
-  @override
-  int get handymanAvailability {
-    _$handymanAvailabilityAtom.reportRead();
-    return super.handymanAvailability;
-  }
-
-  @override
-  set handymanAvailability(int value) {
-    _$handymanAvailabilityAtom.reportWrite(value, super.handymanAvailability,
-        () {
-      super.handymanAvailability = value;
-    });
-  }
-
-  late final _$totalHandymanAtom =
-      Atom(name: '_AppStore.totalHandyman', context: context);
-
-  @override
-  int get totalHandyman {
-    _$totalHandymanAtom.reportRead();
-    return super.totalHandyman;
-  }
-
-  @override
-  set totalHandyman(int value) {
-    _$totalHandymanAtom.reportWrite(value, super.totalHandyman, () {
-      super.totalHandyman = value;
-    });
-  }
-
   late final _$selectedServiceListAtom =
       Atom(name: '_AppStore.selectedServiceList', context: context);
 
@@ -1180,15 +1147,6 @@ mixin _$AppStore on _AppStore, Store {
         .run(() => super.setLanguage(val, context: context));
   }
 
-  late final _$setHandymanAvailabilityAsyncAction =
-      AsyncAction('_AppStore.setHandymanAvailability', context: context);
-
-  @override
-  Future<void> setHandymanAvailability(int val) {
-    return _$setHandymanAvailabilityAsyncAction
-        .run(() => super.setHandymanAvailability(val));
-  }
-
   late final _$setActiveRevenueCatIdentifierAsyncAction =
       AsyncAction('_AppStore.setActiveRevenueCatIdentifier', context: context);
 
@@ -1229,17 +1187,6 @@ mixin _$AppStore on _AppStore, Store {
         name: '_AppStore.setExpansionDynamicHeight');
     try {
       return super.setExpansionDynamicHeight(val);
-    } finally {
-      _$_AppStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setTotalHandyman(int val) {
-    final _$actionInfo = _$_AppStoreActionController.startAction(
-        name: '_AppStore.setTotalHandyman');
-    try {
-      return super.setTotalHandyman(val);
     } finally {
       _$_AppStoreActionController.endAction(_$actionInfo);
     }
@@ -1307,8 +1254,6 @@ totalBooking: ${totalBooking},
 completedBooking: ${completedBooking},
 createdAt: ${createdAt},
 earningType: ${earningType},
-handymanAvailability: ${handymanAvailability},
-totalHandyman: ${totalHandyman},
 selectedServiceList: ${selectedServiceList},
 selectedServiceData: ${selectedServiceData},
 is24HourFormat: ${is24HourFormat},

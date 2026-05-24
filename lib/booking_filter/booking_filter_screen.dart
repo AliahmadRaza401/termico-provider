@@ -13,7 +13,6 @@ import '../utils/constant.dart';
 import 'components/filter_booking_status_component.dart';
 import 'components/filter_customer_list_component.dart';
 import 'components/filter_date_range_component.dart';
-// Handyman filter component removed - only provider role supported
 import 'components/filter_payment_status_component.dart';
 import 'components/filter_payment_type_component.dart';
 import 'components/filter_provider_list_component.dart';
@@ -103,7 +102,8 @@ class _BookingFilterScreenState extends State<BookingFilterScreen> {
     setState(() {
       filteredSectionList = sectionList.where((section) {
         // Only provider role supported - filter out provider section if needed
-        if (section.toLowerCase() == PROVIDER.toLowerCase() && appStore.userType == USER_TYPE_PROVIDER) {
+        if (section.toLowerCase() == PROVIDER.toLowerCase() &&
+            appStore.userType == USER_TYPE_PROVIDER) {
           return false;
         }
         return true;
@@ -134,7 +134,8 @@ class _BookingFilterScreenState extends State<BookingFilterScreen> {
               onPressed: () {
                 clearFilter();
               },
-              child: Text(languages.reset, style: boldTextStyle(color: Colors.white)),
+              child: Text(languages.reset,
+                  style: boldTextStyle(color: Colors.white)),
             ).visible(filterStore.isAnyFilterApplied);
           },
         ),
@@ -143,7 +144,8 @@ class _BookingFilterScreenState extends State<BookingFilterScreen> {
         children: [
           DefaultTabController(
             length: filteredSectionList.length,
-            initialIndex: selectedIndex < filteredSectionList.length ? selectedIndex : 0,
+            initialIndex:
+                selectedIndex < filteredSectionList.length ? selectedIndex : 0,
             child: Column(
               children: [
                 16.height,
@@ -155,7 +157,8 @@ class _BookingFilterScreenState extends State<BookingFilterScreen> {
                     tabAlignment: TabAlignment.start,
                     padding: EdgeInsets.only(left: 16),
                     labelPadding: EdgeInsets.only(right: 16),
-                    overlayColor: WidgetStatePropertyAll(WidgetStateColor.transparent),
+                    overlayColor:
+                        WidgetStatePropertyAll(WidgetStateColor.transparent),
                     onTap: (i) {
                       selectedIndex = i;
                       setState(() {});
@@ -165,11 +168,17 @@ class _BookingFilterScreenState extends State<BookingFilterScreen> {
                       return Tab(
                         height: 30,
                         child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                           decoration: boxDecorationWithRoundedCorners(
                             borderRadius: radius(18),
-                            border: Border.all(color: index == selectedIndex ? primaryColor : Colors.transparent),
-                            backgroundColor: index == selectedIndex ? lightPrimaryColor : context.cardColor,
+                            border: Border.all(
+                                color: index == selectedIndex
+                                    ? primaryColor
+                                    : Colors.transparent),
+                            backgroundColor: index == selectedIndex
+                                ? lightPrimaryColor
+                                : context.cardColor,
                           ),
                           child: Text(
                             e.toBookingFilterSectionType(),
@@ -198,13 +207,15 @@ class _BookingFilterScreenState extends State<BookingFilterScreen> {
                       return FilterCustomerListComponent();
                     } else if (e == PROVIDER.toLowerCase()) {
                       return FilterProviderListComponent();
-                    // Handyman filter removed - only provider role supported
                     } else if (e == BOOKING_STATUS) {
-                      return FilterBookingStatusComponent(bookingStatusList: bookingStatusList);
+                      return FilterBookingStatusComponent(
+                          bookingStatusList: bookingStatusList);
                     } else if (e == PAYMENT_TYPE) {
-                      return PaymentTypeFilter(paymentTypeList: paymentTypeList);
+                      return PaymentTypeFilter(
+                          paymentTypeList: paymentTypeList);
                     } else if (e == PAYMENT_STATUS) {
-                      return PaymentStatusFilter(paymentStatusList: paymentStatusList);
+                      return PaymentStatusFilter(
+                          paymentStatusList: paymentStatusList);
                     } else {
                       return Offstage();
                     }
@@ -219,7 +230,8 @@ class _BookingFilterScreenState extends State<BookingFilterScreen> {
             right: 0,
             child: Observer(
               builder: (_) => Container(
-                decoration: boxDecorationDefault(color: context.scaffoldBackgroundColor),
+                decoration: boxDecorationDefault(
+                    color: context.scaffoldBackgroundColor),
                 width: context.width(),
                 padding: EdgeInsets.all(16),
                 child: AppButton(
@@ -231,7 +243,8 @@ class _BookingFilterScreenState extends State<BookingFilterScreen> {
 
                     bookingStatusList.forEach((element) {
                       if (element.isSelected.validate()) {
-                        filterStore.addToBookingStatusList(bookingStatusList: element.value.validate());
+                        filterStore.addToBookingStatusList(
+                            bookingStatusList: element.value.validate());
                       }
                     });
 
@@ -239,14 +252,16 @@ class _BookingFilterScreenState extends State<BookingFilterScreen> {
 
                     paymentTypeList.forEach((element) {
                       if (element.isSelected.validate()) {
-                        filterStore.addToPaymentTypeList(paymentTypeList: element.type.validate());
+                        filterStore.addToPaymentTypeList(
+                            paymentTypeList: element.type.validate());
                       }
                     });
 
                     filterStore.paymentStatus = [];
                     paymentStatusList.forEach((element) {
                       if (element.isSelected.validate()) {
-                        filterStore.addToPaymentStatusList(paymentStatusList: element.status.validate());
+                        filterStore.addToPaymentStatusList(
+                            paymentStatusList: element.status.validate());
                       }
                     });
                     finish(context, true);
